@@ -24,7 +24,7 @@ const Field = {
     MARKETING: { name: "Marketing", class: "tag-marketing" },
     DEVELOPER: { name: "Developer", class: "tag-dev" },
     CLOUD: { name: "클라우드", class: "tag-dev" },
-    VENDOR_NEUTRAL: { name: "Vender-Neutral", class: "tag-neutral" },
+    VENDOR_NEUTRAL: { name: "무관", class: "tag-neutral" },
     DATA_ANALYSIS: { name: "데이터 분석", class: "tag-ai" },
     DATA_VIZ: { name: "데이터 시각화", class: "tag-ai" },
     DATA_ENGINEERING: { name: "데이터 엔지니어링", class: "tag-ai" },
