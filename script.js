@@ -157,7 +157,7 @@ function renderDeadlines() {
                 <span class="text-2xl">${club.icon}</span>
             </div>
             <h4 class="text-lg font-bold mb-1 text-slate-900 dark:text-slate-100">${club.name.split(' ')[0]}</h4>
-            <p class="text-sm font-bold text-slate-500">Recruitment Ends: ${club.recruitEnd}</p>
+            <p class="text-sm font-bold text-slate-500">${club.recruitStart} ~ ${club.recruitEnd}</p>
         </${Tag}>`;
     }).join('');
 }
