@@ -174,6 +174,50 @@ function renderTable(clubs = Object.values(Club)) {
     `}).join('');
 }
 
+function renderMobileCards(clubs = Object.values(Club)) {
+    const container = document.getElementById('club-list-mobile');
+    if (!container) return;
+
+    if (clubs.length === 0) {
+        container.innerHTML = `<div class="text-center py-12 text-slate-500">조건에 맞는 동아리가 없습니다.</div>`;
+        return;
+    }
+
+    container.innerHTML = clubs.map(club => {
+        const Tag = club.link ? 'a' : 'div';
+        const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
+        return `
+        <${Tag} ${hrefAttr} class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg">
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">${club.icon}</span>
+                    <span class="font-bold text-lg">${club.name}</span>
+                </div>
+                <span class="flex gap-0.5 text-sm">${club.dots}</span>
+            </div>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">${club.description}</p>
+            <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">모집 기간</span>
+                    <span class="font-medium">${club.recruitStart} → ${club.recruitEnd}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">활동 기간</span>
+                    <div class="flex gap-1 flex-wrap">${club.activity.map(m => `<span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">${m}</span>`).join('')}</div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">신청 자격</span>
+                    <div class="flex gap-1 flex-wrap">${club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div>
+                </div>
+                <div class="flex items-start gap-2">
+                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0 pt-0.5">모집 분야</span>
+                    <div class="flex flex-wrap gap-1">${club.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
+                </div>
+            </div>
+        </${Tag}>
+    `}).join('');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- Filter Logic ---
     const activeFilters = {
@@ -253,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         renderTable(filteredClubs);
+        renderMobileCards(filteredClubs);
     }
 
     const filterButton = document.getElementById('filter-button');
@@ -309,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial render
     renderTable();
+    renderMobileCards();
     renderDeadlines();
 
     // Search logic
