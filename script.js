@@ -235,7 +235,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeFilters = {
         eligibility: new Set(),
         fields: new Set(),
-        tiers: new Set()
+        tiers: new Set(),
+        months: new Set()
     };
     let currentSortOrder = 'default';
 
@@ -255,6 +256,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" value="${tier}" data-filter-key="tiers" class="form-checkbox rounded text-primary focus:ring-primary/50">
                 <span>${tier}</span>
+            </label>
+        `).join('');
+
+        const monthsContainer = document.getElementById('filter-months');
+        const months = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+        monthsContainer.innerHTML = months.map(month => `
+            <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="${month}" data-filter-key="months" class="form-checkbox rounded text-primary focus:ring-primary/50">
+                <span>${month}</span>
             </label>
         `).join('');
     }
@@ -302,6 +312,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (activeFilters.tiers.size > 0) {
                 if (!activeFilters.tiers.has(club.dots)) return false;
+            }
+
+            if (activeFilters.months.size > 0) {
+                // recruitStart에서 월 추출 (예: "1월 20일 2025" -> "1월")
+                const monthMatch = club.recruitStart.match(/(\d+)월/);
+                if (!monthMatch) return false;
+                const recruitMonth = monthMatch[1] + '월';
+                if (!activeFilters.months.has(recruitMonth)) return false;
             }
 
             return true;
