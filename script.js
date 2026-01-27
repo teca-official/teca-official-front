@@ -93,6 +93,15 @@ function parseDate(str) {
     return new Date(parts[3], parts[1] - 1, parts[2]);
 }
 
+function calculateScore(dots) {
+    let score = 0;
+    for (const char of dots) {
+        if (char === '🌕') score += 1;
+        if (char === '🌗') score += 0.5;
+    }
+    return score;
+}
+
 function renderDeadlines() {
     const container = document.getElementById('upcoming-deadlines');
     if (!container) return;
@@ -172,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fields: new Set(),
         tiers: new Set()
     };
+    let currentSortOrder = 'default';
 
     function populateFilters() {
         const fieldsContainer = document.getElementById('filter-fields');
@@ -197,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.querySelector('input');
         const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
 
-        const filteredClubs = Object.values(Club).filter(club => {
+        let filteredClubs = Object.values(Club).filter(club => {
             // 0. Search Filter
             if (searchTerm) {
                 const searchableText = [
@@ -232,6 +242,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return true;
         });
+
+        if (currentSortOrder !== 'default') {
+            filteredClubs.sort((a, b) => {
+                const scoreA = calculateScore(a.dots);
+                const scoreB = calculateScore(b.dots);
+                if (currentSortOrder === 'desc') return scoreB - scoreA;
+                return scoreA - scoreB;
+            });
+        }
+
         renderTable(filteredClubs);
     }
 
@@ -240,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetFiltersButton = document.getElementById('reset-filters');
 
     filterButton.addEventListener('click', () => filterDropdown.classList.toggle('hidden'));
-
+    
     filterDropdown.addEventListener('change', (e) => {
         if (e.target.type === 'checkbox') {
             const key = e.target.dataset.filterKey;
