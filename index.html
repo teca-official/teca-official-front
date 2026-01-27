@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IT Club Database | IT 동아리 데이터베이스</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<script>
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3b82f6",
+                        "background-light": "#ffffff",
+                        "background-dark": "#0f172a",
+                        "card-dark": "rgba(30, 41, 59, 0.7)",
+                        "border-dark": "rgba(255, 255, 255, 0.1)",
+                        "neon-pink": "#ff2d55",
+                        "neon-blue": "#00f3ff",
+                        "neon-green": "#39ff14",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "Noto Sans KR", "sans-serif"],
+                        body: ["Inter", "Noto Sans KR", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="min-h-screen flex flex-col">
+<header class="pt-12 pb-4 px-6 md:px-12 max-w-7xl mx-auto w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-4xl">🚀</span>
+<h1 class="text-4xl md:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-400">
+                    IT Club Dashboard
+                </h1>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-lg">
+                국내 주요 연합 IT 동아리 모집 일정 및 정보를 한눈에 비교하세요.
+            </p>
+</header>
+<section class="px-6 md:px-12 max-w-7xl mx-auto w-full mb-12">
+<h2 class="text-2xl font-bold mb-6 flex items-center gap-2" id="upcoming-deadlines-title">
+<span class="material-symbols-outlined text-neon-pink">alarm</span>
+                다가오는 동아리 일정
+            </h2>
+<div class="space-y-8">
+<div>
+<div class="flex gap-4 overflow-x-auto pb-4 notion-scroll">
+<div class="flex gap-4 overflow-x-auto pb-4 notion-scroll" id="upcoming-deadlines">
+</div>
+</div>
+</div>
+</section>
+<div class="px-6 md:px-12 max-w-7xl mx-auto w-full mb-6">
+<div class="flex flex-col md:flex-row gap-4 items-center">
+<div class="relative w-full md:flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all backdrop-blur-xl bg-opacity-70" placeholder="동아리명, 기술 스택, 또는 모집 분야 검색..." type="text" />
+</div>
+<div class="flex gap-2 w-full md:w-auto">
+<div class="relative">
+<button class="flex items-center gap-2 px-4 py-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" id="filter-button">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span>필터링</span>
+</button>
+<div class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 border border-slate-200 dark:border-border-dark rounded-xl shadow-lg z-50 p-4" id="filter-dropdown">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold">필터</h3>
+<button class="text-sm text-primary hover:underline" id="reset-filters">초기화</button>
+</div>
+<div class="space-y-4">
+<div>
+<h4 class="font-semibold text-sm mb-2 text-slate-600 dark:text-slate-400">신청 자격</h4>
+<div class="space-y-1" id="filter-eligibility">
+<label class="flex items-center gap-2 cursor-pointer"><input class="form-checkbox rounded text-primary focus:ring-primary/50" data-filter-key="eligibility" type="checkbox" value="대학생"/> <span>대학생</span></label>
+<label class="flex items-center gap-2 cursor-pointer"><input class="form-checkbox rounded text-primary focus:ring-primary/50" data-filter-key="eligibility" type="checkbox" value="현직자"/> <span>현직자</span></label>
+</div>
+</div>
+<div>
+<h4 class="font-semibold text-sm mb-2 text-slate-600 dark:text-slate-400">모집 분야</h4>
+<div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm" id="filter-fields">
+</div>
+</div>
+<div>
+<h4 class="font-semibold text-sm mb-2 text-slate-600 dark:text-slate-400">티어</h4>
+<div class="grid grid-cols-3 gap-x-4 gap-y-1 text-sm" id="filter-tiers">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<main class="flex-1 px-6 md:px-12 pb-12 overflow-x-auto notion-scroll">
+<div class="max-w-7xl mx-auto min-w-[1000px]">
+<div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl overflow-hidden backdrop-blur-xl bg-opacity-70 shadow-2xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-200 dark:border-border-dark bg-slate-50/50 dark:bg-slate-900/50">
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-48">이름</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-44">서류 접수 기간</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-32">활동 기간</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-32">신청 자격</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-64">모집 분야</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-24 text-center">티어</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm">한 줄 설명</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-border-dark" id="club-list"></tbody>
+</table>
+</div>
+<div class="mt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 dark:text-slate-500 text-sm gap-4">
+<p>© 2025 IT Club DB. All information updated daily.</p>
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="https://docs.google.com/forms/d/1A7zV5F8fGpHuC7NPs3juTnIlfEuo8hlMfpoo_aKC7rs/edit" target="_blank">
+<span class="material-symbols-outlined text-base">feedback</span>
+                            정보 수정 요청
+                        </a>
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-base">help</span>
+                            사용 가이드
+                        </a>
+</div>
+</div>
+</div>
+</main>
+</div>
+<button class="fixed bottom-6 right-6 p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full shadow-lg hover:scale-110 transition-transform z-50" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined block dark:hidden text-yellow-500">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block text-yellow-400">light_mode</span>
+</button>
+<script src="script.js"></script>
+</body></html>
