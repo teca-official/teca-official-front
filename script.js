@@ -304,8 +304,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterDropdown = document.getElementById('filter-dropdown');
     const resetFiltersButton = document.getElementById('reset-filters');
 
-    filterButton.addEventListener('click', () => filterDropdown.classList.toggle('hidden'));
-    
+    filterButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        filterDropdown.classList.toggle('hidden');
+        sortDropdown.classList.add('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!filterButton.contains(e.target) && !filterDropdown.contains(e.target)) {
+            filterDropdown.classList.add('hidden');
+        }
+    });
+
     filterDropdown.addEventListener('change', (e) => {
         if (e.target.type === 'checkbox') {
             const key = e.target.dataset.filterKey;
@@ -327,6 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sortButton.addEventListener('click', (e) => {
             e.stopPropagation();
             sortDropdown.classList.toggle('hidden');
+            filterDropdown.classList.add('hidden');
         });
 
         document.addEventListener('click', (e) => {
