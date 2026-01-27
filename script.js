@@ -260,11 +260,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
 
         const monthsContainer = document.getElementById('filter-months');
-        const months = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
-        monthsContainer.innerHTML = months.map(month => `
-            <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" value="${month}" data-filter-key="months" class="form-checkbox rounded text-primary focus:ring-primary/50">
-                <span>${month}</span>
+        const quarters = ['1~3월', '4~6월', '7~9월', '10~12월'];
+        monthsContainer.innerHTML = quarters.map(quarter => `
+            <label class="flex items-center gap-2 cursor-pointer whitespace-nowrap">
+                <input type="checkbox" value="${quarter}" data-filter-key="months" class="form-checkbox rounded text-primary focus:ring-primary/50">
+                <span>${quarter}</span>
             </label>
         `).join('');
     }
@@ -315,11 +315,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (activeFilters.months.size > 0) {
-                // recruitStart에서 월 추출 (예: "1월 20일 2025" -> "1월")
+                // recruitStart에서 월 추출 (예: "1월 20일 2025" -> 1)
                 const monthMatch = club.recruitStart.match(/(\d+)월/);
                 if (!monthMatch) return false;
-                const recruitMonth = monthMatch[1] + '월';
-                if (!activeFilters.months.has(recruitMonth)) return false;
+                const recruitMonth = parseInt(monthMatch[1]);
+
+                // 분기별 매핑
+                const quarterMap = {
+                    '1~3월': [1, 2, 3],
+                    '4~6월': [4, 5, 6],
+                    '7~9월': [7, 8, 9],
+                    '10~12월': [10, 11, 12]
+                };
+
+                // 선택된 분기에 해당하는 월인지 확인
+                let hasMatch = false;
+                activeFilters.months.forEach(quarter => {
+                    if (quarterMap[quarter] && quarterMap[quarter].includes(recruitMonth)) {
+                        hasMatch = true;
+                    }
+                });
+                if (!hasMatch) return false;
             }
 
             return true;
