@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
 
         const tiersContainer = document.getElementById('filter-tiers');
-        const uniqueTiers = [...new Set(Object.values(Club).map(c => c.dots))].sort((a, b) => b.length - a.length);
+        const uniqueTiers = [...new Set(Object.values(Club).map(c => c.dots))].sort((a, b) => calculateScore(b) - calculateScore(a));
         tiersContainer.innerHTML = uniqueTiers.map(tier => `
             <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" value="${tier}" data-filter-key="tiers" class="form-checkbox rounded text-primary focus:ring-primary/50">
