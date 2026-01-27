@@ -36,6 +36,18 @@ const Field = {
     FLUTTER: { name: "Flutter", class: "tag-dev" }
 };
 
+// 필터 카테고리 매핑
+const FilterCategory = {
+    "PM": ["PM"],
+    "디자인": ["Design", "UX"],
+    "AI": ["AI", "머신러닝", "딥러닝", "LLM", "데이터 분석", "데이터 시각화", "데이터 엔지니어링"],
+    "웹": ["WEB", "Frontend"],
+    "모바일": ["Android", "iOS", "ReactNative", "Flutter", "앱"],
+    "백엔드": ["Backend", "SpringBoot", "Node.js", "Django"],
+    "무관": ["무관"],
+    "클라우드": ["클라우드"]
+};
+
 const Club = {
     GOORMTHON_UNIV: { name: "구름톤 유니브", link: "https://9oormthon.university/", dots: "🌕", icon: "☁️", themeColor: "slate-500", recruitStart: "1월 20일 2025", recruitEnd: "2월 12일 2025", activity: ["3월", "4월", "5월", "6월", "7월"], eligibility: [Eligibility.UNIVERSITY], description: "'함께 성장'이라는 핵심가치를 실현하며 전국의 대학생들과 자유롭게 교류하고 학습하며 성장하는 카카오와 구름이 함께하는 대학생 대상 해커톤", fields: [Field.PM, Field.DESIGN, Field.WEB, Field.SPRING, Field.REACT_NATIVE] },
     PROGRAPHY: {name: "프로그래피 Prography", link: "https://prography.org/", icon: "💻", themeColor: "neon-pink", dots: "🌕🌕🌗", recruitStart: "1월 27일 2025", recruitEnd: "2월 7일 2025", activity: ["1월", "2월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], description: "디자이너, 개발자, P.O, 마케터가 모여 하나의 프로덕트를 만들고 운영하며 함께 성장하는 IT 연합 동아리", fields: [Field.PM, Field.DESIGN, Field.IOS, Field.ANDROID, Field.WEB, Field.SPRING] },
@@ -229,11 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function populateFilters() {
         const fieldsContainer = document.getElementById('filter-fields');
-        const uniqueFields = [...new Set(Object.values(Club).flatMap(c => c.fields.map(f => f.name)))].sort();
-        fieldsContainer.innerHTML = uniqueFields.map(field => `
+        const categories = Object.keys(FilterCategory);
+        fieldsContainer.innerHTML = categories.map(category => `
             <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" value="${field}" data-filter-key="fields" class="form-checkbox rounded text-primary focus:ring-primary/50">
-                <span>${field}</span>
+                <input type="checkbox" value="${category}" data-filter-key="fields" class="form-checkbox rounded text-primary focus:ring-primary/50">
+                <span>${category}</span>
             </label>
         `).join('');
 
@@ -275,9 +287,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (activeFilters.fields.size > 0) {
-                const clubFields = new Set(club.fields.map(f => f.name));
-                const intersection = new Set([...clubFields].filter(x => activeFilters.fields.has(x)));
-                if (intersection.size === 0) return false;
+                const clubFields = club.fields.map(f => f.name);
+                // 선택된 카테고리들의 필드들을 합침
+                const selectedFields = new Set();
+                activeFilters.fields.forEach(category => {
+                    if (FilterCategory[category]) {
+                        FilterCategory[category].forEach(field => selectedFields.add(field));
+                    }
+                });
+                // 동아리의 필드 중 하나라도 선택된 필드에 포함되면 통과
+                const hasMatch = clubFields.some(field => selectedFields.has(field));
+                if (!hasMatch) return false;
             }
 
             if (activeFilters.tiers.size > 0) {
