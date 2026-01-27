@@ -274,6 +274,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Sort UI Logic
+    const sortButton = document.getElementById('sort-button');
+    const sortDropdown = document.getElementById('sort-dropdown');
+
+    if (sortButton && sortDropdown) {
+        sortButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sortDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!sortButton.contains(e.target) && !sortDropdown.contains(e.target)) {
+                sortDropdown.classList.add('hidden');
+            }
+        });
+
+        sortDropdown.addEventListener('change', (e) => {
+            if (e.target.name === 'sort') {
+                currentSortOrder = e.target.value;
+                applyFilters();
+                sortDropdown.classList.add('hidden');
+            }
+        });
+    }
+
     resetFiltersButton.addEventListener('click', () => {
         document.querySelectorAll('#filter-dropdown input[type="checkbox"]').forEach(cb => cb.checked = false);
         Object.values(activeFilters).forEach(set => set.clear());
