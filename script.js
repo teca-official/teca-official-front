@@ -139,7 +139,18 @@ function renderDeadlines() {
     }).map(club => {
         const endDate = parseDate(club.recruitEnd);
         return { ...club, endDate };
-    }).sort((a, b) => a.endDate - b.endDate);
+    }).sort((a, b) => {
+        const currentYear = new Date().getFullYear();
+        const aIsCurrentYear = a.endDate.getFullYear() === currentYear;
+        const bIsCurrentYear = b.endDate.getFullYear() === currentYear;
+
+        // 올해 날짜인 동아리 우선
+        if (aIsCurrentYear && !bIsCurrentYear) return -1;
+        if (!aIsCurrentYear && bIsCurrentYear) return 1;
+
+        // 같은 그룹 내에서는 마감일 순
+        return a.endDate - b.endDate;
+    });
 
     if (upcoming.length === 0) {
         container.innerHTML = `<div class="text-slate-500 text-sm p-4">이번 달과 다음 달에 마감되는 동아리가 없습니다.</div>`;
