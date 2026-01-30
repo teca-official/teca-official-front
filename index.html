@@ -198,4 +198,22 @@
 <span class="material-symbols-outlined hidden dark:block text-yellow-400">light_mode</span>
 </button>
 <script src="script.js"></script>
+<script>
+// 301 캐시 초기화 - 일정 기간 후 제거 가능
+(function() {
+  if (sessionStorage.getItem('301_reset')) return;
+  var iframe = document.createElement('iframe');
+  iframe.name = 'reset301';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://teca-official.co.kr';
+  form.target = 'reset301';
+  form.style.display = 'none';
+  document.body.appendChild(form);
+  form.submit();
+  sessionStorage.setItem('301_reset', '1');
+})();
+</script>
 </body></html>
