@@ -10,9 +10,18 @@
 <link href="https://cdn.jsdelivr.net/gh/catturtle123/og-image/favicon.ico" rel="icon"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
 <script>
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
+        const darkModeMatcher = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        function updateDarkMode(e) {
+            if (e.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
         }
+
+        updateDarkMode(darkModeMatcher);
+        darkModeMatcher.addEventListener('change', updateDarkMode);
 
         tailwind.config = {
             darkMode: "class",
@@ -39,6 +48,8 @@
             },
         };
     </script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_CLIENT_ID"
+     crossorigin="anonymous"></script>
 <link href="style.css" rel="stylesheet"/>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
@@ -193,9 +204,19 @@
 </div>
 </main>
 </div>
-<button class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 p-2.5 sm:p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full shadow-lg hover:scale-110 transition-transform z-50" onclick="document.documentElement.classList.toggle('dark')">
-<span class="material-symbols-outlined block dark:hidden text-yellow-500">dark_mode</span>
-<span class="material-symbols-outlined hidden dark:block text-yellow-400">light_mode</span>
-</button>
+
+
+<div class="ad-banner-container">
+    <!-- 아래 ca-pub-YOUR_CLIENT_ID 와 YOUR_AD_SLOT_ID 를 실제 값으로 교체해주세요. -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_CLIENT_ID"
+         data-ad-slot="YOUR_AD_SLOT_ID"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
 <script src="script.js"></script>
 </body></html>
