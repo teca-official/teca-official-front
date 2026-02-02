@@ -173,6 +173,41 @@ function renderDeadlines() {
     }).join('');
 }
 
+function createInFeedAdRow() {
+    return `
+        <tr class="in-feed-ad-row">
+            <td colspan="7" class="p-0">
+                <ins class="adsbygoogle in-feed-ad"
+                     style="display:block;height:90px;overflow:hidden"
+                     data-ad-format="fluid"
+                     data-ad-layout-key="-6t+ed+2i-1n-4w"
+                     data-ad-client="ca-pub-7331924992804617"
+                     data-ad-slot="YOUR_AD_SLOT_ID"></ins>
+            </td>
+        </tr>`;
+}
+
+function createInFeedAdCard() {
+    return `
+        <div class="in-feed-ad-card p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg">
+            <ins class="adsbygoogle in-feed-ad"
+                 style="display:block;height:180px;overflow:hidden"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="-6t+ed+2i-1n-4w"
+                 data-ad-client="ca-pub-7331924992804617"
+                 data-ad-slot="YOUR_AD_SLOT_ID"></ins>
+        </div>`;
+}
+
+function initInFeedAds() {
+    document.querySelectorAll('.in-feed-ad:not(.ad-initialized)').forEach(ad => {
+        ad.classList.add('ad-initialized');
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {}
+    });
+}
+
 function renderTable(clubs = Object.values(Club)) {
     const tbody = document.getElementById('club-list');
     if (!tbody) return;
@@ -182,9 +217,9 @@ function renderTable(clubs = Object.values(Club)) {
         return;
     }
 
-    tbody.innerHTML = clubs.map(club => {
+    tbody.innerHTML = clubs.map((club, index) => {
         const nameContent = club.link ? `<a href="${club.link}" target="_blank" class="hover:text-primary hover:underline decoration-2 underline-offset-4">${club.name}</a>` : club.name;
-        return `
+        const row = `
         <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
             <td class="px-4 py-5 text-sm font-bold"><span class="block">${club.recruitStart}</span><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
@@ -193,8 +228,10 @@ function renderTable(clubs = Object.values(Club)) {
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
             <td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
-        </tr>
-    `}).join('');
+        </tr>`;
+        return ((index + 1) % 10 === 0 && index + 1 < clubs.length) ? row + createInFeedAdRow() : row;
+    }).join('');
+    initInFeedAds();
 }
 
 function renderMobileCards(clubs = Object.values(Club)) {
@@ -206,10 +243,10 @@ function renderMobileCards(clubs = Object.values(Club)) {
         return;
     }
 
-    container.innerHTML = clubs.map(club => {
+    container.innerHTML = clubs.map((club, index) => {
         const Tag = club.link ? 'a' : 'div';
         const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
-        return `
+        const card = `
         <${Tag} ${hrefAttr} class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg">
             <div class="flex items-start justify-between mb-3">
                 <div class="flex items-center gap-2">
@@ -237,8 +274,10 @@ function renderMobileCards(clubs = Object.values(Club)) {
                     <div class="flex flex-wrap gap-1">${club.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
                 </div>
             </div>
-        </${Tag}>
-    `}).join('');
+        </${Tag}>`;
+        return ((index + 1) % 10 === 0 && index + 1 < clubs.length) ? card + createInFeedAdCard() : card;
+    }).join('');
+    initInFeedAds();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
