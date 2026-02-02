@@ -229,7 +229,7 @@ function renderTable(clubs = Object.values(Club)) {
             <td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
         </tr>`;
-        return ((index + 1) % 10 === 0 && index + 1 < clubs.length) ? row + createInFeedAdRow() : row;
+        return ((index + 1) % 9 === 0 && index + 1 < clubs.length) ? row + createInFeedAdRow() : row;
     }).join('');
     initInFeedAds();
 }
@@ -275,7 +275,7 @@ function renderMobileCards(clubs = Object.values(Club)) {
                 </div>
             </div>
         </${Tag}>`;
-        return ((index + 1) % 10 === 0 && index + 1 < clubs.length) ? card + createInFeedAdCard() : card;
+        return ((index + 1) % 9 === 0 && index + 1 < clubs.length) ? card + createInFeedAdCard() : card;
     }).join('');
     initInFeedAds();
 }
