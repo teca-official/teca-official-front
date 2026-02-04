@@ -175,41 +175,6 @@ function renderDeadlines() {
     }).join('');
 }
 
-function createInFeedAdRow() {
-    return `
-        <tr class="in-feed-ad-row">
-            <td colspan="7" class="p-0">
-                <ins class="adsbygoogle in-feed-ad"
-                     style="display:block"
-                     data-ad-format="fluid"
-                     data-ad-layout-key="-6t+ed+2i-1n-4w"
-                     data-ad-client="ca-pub-7331924992804617"
-                     data-ad-slot="YOUR_AD_SLOT_ID"></ins>
-            </td>
-        </tr>`;
-}
-
-function createInFeedAdCard() {
-    return `
-        <div class="in-feed-ad-card p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg">
-            <ins class="adsbygoogle in-feed-ad"
-                 style="display:block"
-                 data-ad-format="fluid"
-                 data-ad-layout-key="-6t+ed+2i-1n-4w"
-                 data-ad-client="ca-pub-7331924992804617"
-                 data-ad-slot="YOUR_AD_SLOT_ID"></ins>
-        </div>`;
-}
-
-function initInFeedAds() {
-    document.querySelectorAll('.in-feed-ad:not(.ad-initialized)').forEach(ad => {
-        ad.classList.add('ad-initialized');
-        try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {}
-    });
-}
-
 function renderTable(clubs = Object.values(Club)) {
     const tbody = document.getElementById('club-list');
     if (!tbody) return;
@@ -231,9 +196,8 @@ function renderTable(clubs = Object.values(Club)) {
             <td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
         </tr>`;
-        return ((index + 1) % 10 === 0 && index + 1 < clubs.length) ? row + createInFeedAdRow() : row;
+        return row;
     }).join('');
-    initInFeedAds();
 }
 
 function renderMobileCards(clubs = Object.values(Club)) {
