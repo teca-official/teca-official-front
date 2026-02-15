@@ -2,7 +2,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>IT 연합 동아리 모음</title>
+<title>마케팅/경영 연합 동아리 모음</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
@@ -11,7 +11,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
 <script>
         const darkModeMatcher = window.matchMedia('(prefers-color-scheme: dark)');
-        
+
         function updateDarkMode(e) {
             if (e.matches) {
                 document.documentElement.classList.add('dark');
@@ -28,11 +28,11 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#3b82f6",
-                        "background-light": "#ffffff",
-                        "background-dark": "#0f172a",
-                        "card-dark": "rgba(30, 41, 59, 0.7)",
-                        "border-dark": "rgba(255, 255, 255, 0.1)",
+                        primary: "#ec4899",
+                        "background-light": "#fff5f7",
+                        "background-dark": "#1a0a14",
+                        "card-dark": "rgba(50, 20, 35, 0.7)",
+                        "border-dark": "rgba(255, 182, 193, 0.15)",
                         "neon-pink": "#ff2d55",
                         "neon-blue": "#00f3ff",
                         "neon-green": "#39ff14",
@@ -57,21 +57,21 @@
 <div class="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
 <img src="logo.png" alt="Logo" class="h-8 sm:h-10 md:h-12 w-auto" />
 <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-                    IT 연합 동아리 모음
+                    마케팅/경영 연합 동아리 모음
                 </h1>
 </div>
-<p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base md:text-lg">
-                국내 주요 연합 IT 동아리 모집 일정 및 정보를 한눈에 비교하세요.
+            <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base md:text-lg">
+                마케팅, 경영 분야를 모집하는 연합 동아리 일정 및 정보를 한눈에 비교하세요.
             </p>
 
             <div class="flex gap-2 mt-6">
-                <a href="/" class="px-4 py-2 rounded-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm transition-all">IT</a>
-                <a href="/marketing" class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">마케팅/경영</a>
+                <a href="/" class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">IT</a>
+                <a href="/marketing" class="px-4 py-2 rounded-full bg-pink-500 text-white font-bold text-sm transition-all">마케팅/경영</a>
             </div>
 </header>
 <section class="px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full mb-8 md:mb-12">
 <h2 class="text-xl sm:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2 flex-wrap" id="upcoming-deadlines-title">
-<span class="material-symbols-outlined text-neon-pink">alarm</span>
+<span class="material-symbols-outlined text-pink-500">alarm</span>
                 다가오는 동아리 일정
                 <span class="text-sm font-normal text-slate-400">아직 업데이트가 안 된 곳은 작년으로 남아있습니다</span>
             </h2>
@@ -170,11 +170,11 @@
 </div>
 <!-- Notice -->
 <div class="mt-6 md:mt-8 max-w-7xl mx-auto">
-<div class="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 rounded-xl">
+<div class="p-4 bg-pink-50 dark:bg-pink-900/20 border border-pink-200 dark:border-pink-800/50 rounded-xl">
 <div class="flex items-start gap-2">
-<span class="material-symbols-outlined text-amber-500 dark:text-amber-400 shrink-0">warning</span>
-<p class="text-xs sm:text-sm text-amber-700 dark:text-amber-300">
-<span class="font-semibold">UMC, 멋쟁이사자처럼, 구름톤 유니브, Google Developer Group on Campus</span>는 학교별로 개별적으로 운영되는 동아리로, 접수 기간이나 모집 분야가 다를 수 있습니다. 반드시 본교의 공지사항을 확인하시기 바랍니다.
+<span class="material-symbols-outlined text-pink-500 dark:text-pink-400 shrink-0">info</span>
+<p class="text-xs sm:text-sm text-pink-700 dark:text-pink-300">
+이 페이지는 <span class="font-semibold">마케팅, 경영 분야를 모집하는 동아리</span>만 필터링하여 보여줍니다. IT 개발 동아리 전체 목록은 <a href="/" class="underline font-semibold hover:text-pink-500">IT 페이지</a>에서 확인하세요.
 </p>
 </div>
 </div>
@@ -206,5 +206,8 @@
 </div>
 
 
+<script>
+    window.isMarketingPage = true;
+</script>
 <script src="script.js"></script>
 </body></html>

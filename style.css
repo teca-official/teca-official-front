@@ -31,6 +31,7 @@ body {
 .tag-ai { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
 .tag-neutral { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
 .tag-marketing { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.tag-management { background: rgba(236, 72, 153, 0.2); color: #ec4899; }
 
 /* Line clamp utility */
 .line-clamp-2 {

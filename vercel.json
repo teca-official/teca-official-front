@@ -24,6 +24,10 @@
   ],
   "routes": [
     {
+      "src": "/marketing",
+      "dest": "/marketing.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
