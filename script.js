@@ -238,9 +238,12 @@ function renderDeadlines() {
     const upcoming = getAllClubs().filter(club => {
         const recruitEnd = parseDate(club.recruitEnd);
         if (!recruitEnd) return false;
-        
+
+        // 같은 년도에서 이미 마감일이 지난 동아리는 제외
+        if (recruitEnd.getFullYear() === today.getFullYear() && recruitEnd < today) return false;
+
         const endMonth = recruitEnd.getMonth();
-        
+
         return endMonth === currentMonth || endMonth === nextMonth;
     }).map(club => {
         const endDate = parseDate(club.recruitEnd);
