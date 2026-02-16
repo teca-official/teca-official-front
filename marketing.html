@@ -64,9 +64,17 @@
                 마케팅, 경영 분야를 모집하는 연합 동아리 일정 및 정보를 한눈에 비교하세요.
             </p>
 
-            <div class="flex gap-2 mt-6">
+            <div class="flex items-center gap-2 mt-6">
                 <a href="/" class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">IT</a>
                 <a href="/marketing" class="px-4 py-2 rounded-full bg-pink-500 text-white font-bold text-sm transition-all">마케팅/경영</a>
+                <a class="ml-auto inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-blue-400/30 bg-blue-500/10 text-blue-500 dark:text-blue-400 font-medium text-sm hover:bg-blue-500/20 hover:border-blue-400/50 transition-all" href="https://docs.google.com/forms/d/e/1FAIpQLSck-SUA47ybqzMpW6tWSV_iUrPmEU2TH6emzOeg5Sa6jC-b8Q/viewform?usp=dialog" target="_blank">
+                    <span class="material-symbols-outlined text-base">handshake</span>
+                    제휴 문의
+                </a>
+                <a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-purple-400/30 bg-purple-500/10 text-purple-500 dark:text-purple-400 font-medium text-sm hover:bg-purple-500/20 hover:border-purple-400/50 transition-all" href="https://docs.google.com/forms/d/1A7zV5F8fGpHuC7NPs3juTnIlfEuo8hlMfpoo_aKC7rs/edit" target="_blank">
+                    <span class="material-symbols-outlined text-base">feedback</span>
+                    피드백 보내기
+                </a>
             </div>
 </header>
 <section class="px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full mb-8 md:mb-12">
@@ -193,19 +201,40 @@
 </div>
 </div>
 </div>
-<div class="mt-6 md:mt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 dark:text-slate-500 text-xs sm:text-sm gap-3 md:gap-4 max-w-7xl mx-auto">
+<div class="mt-6 md:mt-8 flex justify-center items-center text-slate-500 dark:text-slate-500 text-xs sm:text-sm max-w-7xl mx-auto">
 <p>© 마케팅/경영 Club DB. All information updated daily.</p>
-<div class="flex items-center gap-4 sm:gap-6">
-<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-purple-400/30 bg-purple-500/10 text-purple-500 dark:text-purple-400 font-medium text-sm hover:bg-purple-500/20 hover:border-purple-400/50 transition-all" href="https://docs.google.com/forms/d/1A7zV5F8fGpHuC7NPs3juTnIlfEuo8hlMfpoo_aKC7rs/edit" target="_blank">
-<span class="material-symbols-outlined text-base">feedback</span>
-                            정보 수정 요청
-                        </a>
-</div>
 </div>
 </main>
 </div>
 
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBuvBZ3EZAE5GjdVVggGEa21wgTf6DAwqs",
+    authDomain: "teca-analytics.firebaseapp.com",
+    projectId: "teca-analytics",
+    storageBucket: "teca-analytics.firebasestorage.app",
+    messagingSenderId: "51789117987",
+    appId: "1:51789117987:web:aba99b0a76708c402f4f96",
+    measurementId: "G-H8PR0KJ2QX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  const isDebug = new URLSearchParams(window.location.search).has('debug_mode');
+
+  window._firebaseLogEvent = function(name, params) {
+    if (isDebug) {
+      params = { ...params, debug_mode: true };
+      console.log('[Analytics]', name, params);
+    }
+    logEvent(analytics, name, params);
+  };
+</script>
 <script>
     window.isMarketingPage = true;
 </script>
