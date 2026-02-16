@@ -28,6 +28,10 @@
       "dest": "/marketing.html"
     },
     {
+      "src": "/bootcamp",
+      "dest": "/bootcamp.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
