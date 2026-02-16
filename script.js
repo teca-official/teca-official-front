@@ -332,7 +332,15 @@ function hasDevPosition(club) {
 }
 
 function getAllClubs() {
-    if (window.isHackathonPage) return Object.values(Hackathon);
+    if (window.isHackathonPage) return Object.values(Hackathon).sort((a, b) => {
+        const dateA = parseMonthDay(a.recruitStart);
+        const dateB = parseMonthDay(b.recruitStart);
+        if (!dateA && !dateB) return 0;
+        if (!dateA) return 1;
+        if (!dateB) return -1;
+        if (dateA.month !== dateB.month) return dateA.month - dateB.month;
+        return dateA.day - dateB.day;
+    });
     if (window.isBootcampPage) return Object.values(Bootcamp);
     if (window.isMarketingPage) return getMarketingClubs();
     return Object.values(Club).filter(club => hasDevPosition(club)).sort((a, b) => {
