@@ -67,6 +67,7 @@ const FilterCategory = {
 const PAGE_CATEGORIES = {
     bootcamp: [Category.WEB, Category.BACKEND, Category.MOBILE, Category.AI, Category.CLOUD, Category.DESIGN, Category.MARKETING],
     marketing: [Category.PM, Category.DESIGN, Category.MARKETING],
+    hackathon: [Category.AI, Category.WEB, Category.BACKEND, Category.MOBILE],
 };
 
 const Club = {
@@ -241,6 +242,24 @@ const Bootcamp = {
     LIKELION_UXUI: { name: "멋사 UX/UI 디자인", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "10월 29일 2025", recruitEnd: "12월 12일 2025", activity: ["1월", "2월", "3월", "4월", "5월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 UX/UI 디자인 부트캠프. Figma 중심 4~5개월 과정", fields: [Field.DESIGN] },
 };
 
+const HackathonPrize = {
+    PRIZE: "상금",
+    RECRUITMENT: "채용우대",
+    RESEARCH: "연구지원",
+    CERTIFICATE: "수료증"
+};
+
+const Hackathon = {
+    IMAGINE_CUP: { name: "Microsoft Imagine Cup", link: "https://imaginecup.microsoft.com/", dots: "🌕🌕🌕", icon: "🏆", themeColor: "slate-500", recruitStart: "10월 16일 2025", recruitEnd: "1월 9일 2026", activity: ["10월", "11월", "12월", "1월", "2월", "3월", "4월", "5월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.PRIZE], description: "Microsoft 주관 글로벌 해커톤. AI 필수 활용, 최대 상금 $100,000", fields: [Field.AI, Field.WEB, Field.BACKEND] },
+    SOLUTION_CHALLENGE: { name: "Google Solution Challenge", link: "https://developers.google.com/community/gdsc-solution-challenge", dots: "🌕🌕🌕", icon: "🌍", themeColor: "slate-500", recruitStart: "1월 1일 2026", recruitEnd: "2월 28일 2026", activity: ["1월", "2월", "3월", "4월", "5월", "6월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.PRIZE], description: "Google GDSC 주관 글로벌 챌린지. UN SDGs 기반 솔루션 개발, GDSC 가입 필수", fields: [Field.AI, Field.WEB, Field.ANDROID] },
+    SWIFT_CHALLENGE: { name: "Apple Swift Student Challenge", link: "https://developer.apple.com/swift-student-challenge/", dots: "🌕🌕🌕", icon: "🍎", themeColor: "slate-500", recruitStart: "2월 6일 2026", recruitEnd: "2월 28일 2026", activity: ["2월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.CERTIFICATE], description: "Apple 주관 Swift Student Challenge. App Playground 제출, 350명 수상, 상위 50명 WWDC 초청", fields: [Field.IOS] },
+    SCPC: { name: "Samsung SCPC", link: "https://research.samsung.com/scpc", dots: "🌕🌕🌕", icon: "💙", themeColor: "slate-500", recruitStart: "6월 11일 2025", recruitEnd: "7월 10일 2025", activity: ["6월", "7월", "8월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], prize: [HackathonPrize.PRIZE, HackathonPrize.RECRUITMENT], description: "삼성전자 주관 프로그래밍 경진대회. AI/알고리즘 트랙 분리, 총상금 약 1억원, 삼성 채용 우대", fields: [Field.AI, Field.BACKEND] },
+    LG_AIMERS: { name: "LG Aimers", link: "https://www.lgaimers.ai/", dots: "🌕🌕", icon: "🔴", themeColor: "slate-500", recruitStart: "12월 1일 2025", recruitEnd: "12월 18일 2025", activity: ["12월", "1월", "2월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.CERTIFICATE], description: "LG 주관 AI 교육 + 해커톤 프로그램 8기. 온라인 교육 후 해커톤 본선 진출", fields: [Field.AI, Field.DATA_ANALYSIS] },
+    SKT_FELLOWSHIP: { name: "SKT AI Fellowship", link: "https://www.sktaifellowship.com/", dots: "🌕🌕", icon: "🟣", themeColor: "slate-500", recruitStart: "4월 15일 2026", recruitEnd: "5월 15일 2026", activity: ["4월", "5월", "6월", "7월", "8월", "9월", "10월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.RESEARCH], description: "SKT 주관 AI 연구 지원 프로그램. 팀당 연구지원금 600만원 + 멘토링 제공", fields: [Field.AI] },
+    SHAKE: { name: "shake! 2026", link: "https://www.shake-on.com/", dots: "🌕🌕", icon: "🤝", themeColor: "slate-500", recruitStart: "12월 1일 2025", recruitEnd: "12월 31일 2025", activity: ["1월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.PRIZE], description: "경인지역 7개 대학 연합 알고리즘 대회. 본선 2026년 1월 10일", fields: [Field.BACKEND] },
+    ASCII_THON: { name: "ASCII-THON", link: "https://ascii-thon.com/", dots: "🌕", icon: "💻", themeColor: "slate-500", recruitStart: "1월 7일 2026", recruitEnd: "1월 23일 2026", activity: ["1월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.PRIZE], description: "아주대 주관 수도권 대학 연합 해커톤. 무박 2일(1/30~31) 진행", fields: [Field.WEB, Field.BACKEND, Field.APP] },
+};
+
 // Firebase Analytics helper
 function trackEvent(name, params) {
     if (typeof window._firebaseLogEvent === 'function') {
@@ -259,6 +278,14 @@ function getCostBadge(cost) {
     if (cost === BootcampCost.FREE) return `<span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 text-xs w-fit">무료</span>`;
     if (cost === BootcampCost.GOV_FUNDED) return `<span class="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 text-xs w-fit">국비지원</span>`;
     if (cost === BootcampCost.PAID) return `<span class="px-2 py-0.5 rounded bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-300 text-xs w-fit">유료</span>`;
+    return "";
+}
+
+function getPrizeBadge(prize) {
+    if (prize === HackathonPrize.PRIZE) return `<span class="px-2 py-0.5 rounded bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-300 text-xs w-fit">상금</span>`;
+    if (prize === HackathonPrize.RECRUITMENT) return `<span class="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 text-xs w-fit">채용우대</span>`;
+    if (prize === HackathonPrize.RESEARCH) return `<span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 text-xs w-fit">연구지원</span>`;
+    if (prize === HackathonPrize.CERTIFICATE) return `<span class="px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-300 text-xs w-fit">수료증</span>`;
     return "";
 }
 
@@ -307,6 +334,7 @@ function hasDevPosition(club) {
 }
 
 function getAllClubs() {
+    if (window.isHackathonPage) return Object.values(Hackathon);
     if (window.isBootcampPage) return Object.values(Bootcamp);
     if (window.isMarketingPage) return getMarketingClubs();
     return Object.values(Club).filter(club => hasDevPosition(club)).sort((a, b) => {
@@ -321,6 +349,7 @@ function getAllClubs() {
 }
 
 function getPageName() {
+    if (window.isHackathonPage) return 'hackathon';
     if (window.isBootcampPage) return 'bootcamp';
     if (window.isMarketingPage) return 'marketing';
     return 'it';
@@ -368,7 +397,8 @@ function renderDeadlines() {
     });
 
     if (upcoming.length === 0) {
-        container.innerHTML = `<div class="text-slate-500 text-sm p-4">이번 달과 다음 달에 마감되는 동아리가 없습니다.</div>`;
+        const label = window.isHackathonPage ? 'IT 대회' : '동아리';
+        container.innerHTML = `<div class="text-slate-500 text-sm p-4">이번 달과 다음 달에 마감되는 ${label}가 없습니다.</div>`;
         return;
     }
 
@@ -377,14 +407,14 @@ function renderDeadlines() {
         const Tag = club.link ? 'a' : 'div';
         const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
 
-        const accentBg = window.isBootcampPage ? 'bg-emerald-50 hover:bg-emerald-100' : window.isMarketingPage ? 'bg-pink-50 hover:bg-pink-100' : 'bg-blue-50 hover:bg-blue-100';
+        const accentBg = window.isHackathonPage ? 'bg-violet-50 hover:bg-violet-100' : window.isBootcampPage ? 'bg-emerald-50 hover:bg-emerald-100' : window.isMarketingPage ? 'bg-pink-50 hover:bg-pink-100' : 'bg-blue-50 hover:bg-blue-100';
 
         return `
         <${Tag} ${hrefAttr} class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark ${accentBg} dark:bg-slate-900/40 dark:hover:bg-slate-800/60 transition-all cursor-pointer no-underline hover:no-underline">
             <div class="flex justify-between items-start mb-4">
                 <span class="text-2xl">${club.icon}</span>
             </div>
-            <h4 class="text-lg font-bold mb-1 text-slate-900 dark:text-slate-100">${window.isBootcampPage ? club.name : club.name.split(' ')[0]}</h4>
+            <h4 class="text-lg font-bold mb-1 text-slate-900 dark:text-slate-100">${(window.isBootcampPage || window.isHackathonPage) ? club.name : club.name.split(' ')[0]}</h4>
             <p class="text-sm font-bold text-slate-500">${club.recruitStart} ~ ${club.recruitEnd}</p>
         </${Tag}>`;
     }).join('');
@@ -395,7 +425,9 @@ function renderTable(clubs = getAllClubs()) {
     if (!tbody) return;
 
     if (clubs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-12 text-slate-500">조건에 맞는 동아리가 없습니다.</td></tr>`;
+        const cols = window.isHackathonPage ? 6 : 7;
+        const emptyLabel = window.isHackathonPage ? 'IT 대회' : '동아리';
+        tbody.innerHTML = `<tr><td colspan="${cols}" class="text-center py-12 text-slate-500">조건에 맞는 ${emptyLabel}가 없습니다.</td></tr>`;
         return;
     }
 
@@ -406,9 +438,9 @@ function renderTable(clubs = getAllClubs()) {
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
             <td class="px-4 py-5 text-sm font-bold"><span class="block">${club.recruitStart}</span><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
             <td class="px-4 py-5"><div class="flex gap-1 flex-wrap">${club.activity.map(m => `<span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">${m}</span>`).join('')}</div></td>
-            <td class="px-4 py-5"><div class="flex flex-col gap-1">${window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div></td>
+            <td class="px-4 py-5"><div class="flex flex-col gap-1">${window.isHackathonPage ? club.prize.map(p => getPrizeBadge(p)).join('') : window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
-            <td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>
+            ${window.isHackathonPage ? '' : `<td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>`}
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
         </tr>`;
         return row;
@@ -420,7 +452,8 @@ function renderMobileCards(clubs = getAllClubs()) {
     if (!container) return;
 
     if (clubs.length === 0) {
-        container.innerHTML = `<div class="text-center py-12 text-slate-500">조건에 맞는 동아리가 없습니다.</div>`;
+        const emptyLabel2 = window.isHackathonPage ? 'IT 대회' : '동아리';
+        container.innerHTML = `<div class="text-center py-12 text-slate-500">조건에 맞는 ${emptyLabel2}가 없습니다.</div>`;
         return;
     }
 
@@ -434,7 +467,7 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <span class="text-2xl">${club.icon}</span>
                     <span class="font-bold text-lg">${club.name}</span>
                 </div>
-                <span class="flex gap-0.5 text-sm">${club.dots}</span>
+                ${window.isHackathonPage ? '' : `<span class="flex gap-0.5 text-sm">${club.dots}</span>`}
             </div>
             <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">${club.description}</p>
             <div class="space-y-2 text-sm">
@@ -447,8 +480,8 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <div class="flex gap-1 flex-wrap">${club.activity.map(m => `<span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">${m}</span>`).join('')}</div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">${window.isBootcampPage ? '비용' : '신청 자격'}</span>
-                    <div class="flex gap-1 flex-wrap">${window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div>
+                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">${window.isHackathonPage ? '상금/혜택' : window.isBootcampPage ? '비용' : '신청 자격'}</span>
+                    <div class="flex gap-1 flex-wrap">${window.isHackathonPage ? club.prize.map(p => getPrizeBadge(p)).join('') : window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div>
                 </div>
                 <div class="flex items-start gap-2">
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0 pt-0.5">모집 분야</span>
@@ -470,9 +503,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSortOrder = 'default';
 
     function populateFilters() {
-        // 비용 필터 (부트캠프 전용) / 신청 자격 필터 (동아리)
+        // 비용 필터 (부트캠프 전용) / 상금 필터 (해커톤 전용) / 신청 자격 필터 (동아리)
         const eligibilityContainer = document.getElementById('filter-eligibility');
-        if (window.isBootcampPage && eligibilityContainer) {
+        if (window.isHackathonPage && eligibilityContainer) {
+            eligibilityContainer.innerHTML = Object.values(HackathonPrize).map(prize => `
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" value="${prize}" data-filter-key="eligibility" class="form-checkbox rounded text-primary focus:ring-primary/50">
+                    <span>${prize}</span>
+                </label>
+            `).join('');
+        } else if (window.isBootcampPage && eligibilityContainer) {
             eligibilityContainer.innerHTML = Object.values(BootcampCost).map(cost => `
                 <label class="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" value="${cost}" data-filter-key="eligibility" class="form-checkbox rounded text-primary focus:ring-primary/50">
@@ -495,14 +535,16 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
 
         const tiersContainer = document.getElementById('filter-tiers');
-        const dataSource = window.isBootcampPage ? Bootcamp : Club;
-        const uniqueTiers = [...new Set(Object.values(dataSource).map(c => c.dots))].sort((a, b) => calculateScore(b) - calculateScore(a));
-        tiersContainer.innerHTML = uniqueTiers.map(tier => `
-            <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" value="${tier}" data-filter-key="tiers" class="form-checkbox rounded text-primary focus:ring-primary/50">
-                <span>${tier}</span>
-            </label>
-        `).join('');
+        if (tiersContainer) {
+            const dataSource = window.isHackathonPage ? Hackathon : window.isBootcampPage ? Bootcamp : Club;
+            const uniqueTiers = [...new Set(Object.values(dataSource).map(c => c.dots))].sort((a, b) => calculateScore(b) - calculateScore(a));
+            tiersContainer.innerHTML = uniqueTiers.map(tier => `
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" value="${tier}" data-filter-key="tiers" class="form-checkbox rounded text-primary focus:ring-primary/50">
+                    <span>${tier}</span>
+                </label>
+            `).join('');
+        }
 
         const monthsContainer = document.getElementById('filter-months');
         const quarters = ['1~3월', '4~6월', '7~9월', '10~12월'];
@@ -530,7 +572,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (activeFilters.eligibility.size > 0) {
-                if (window.isBootcampPage) {
+                if (window.isHackathonPage) {
+                    const hasPrizeMatch = club.prize.some(p => activeFilters.eligibility.has(p));
+                    if (!hasPrizeMatch) return false;
+                } else if (window.isBootcampPage) {
                     const hasCostMatch = club.cost.some(c => activeFilters.eligibility.has(c));
                     if (!hasCostMatch) return false;
                 } else {
@@ -607,11 +652,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterButton = document.getElementById('filter-button');
     const filterDropdown = document.getElementById('filter-dropdown');
     const resetFiltersButton = document.getElementById('reset-filters');
+    const sortButton = document.getElementById('sort-button');
+    const sortDropdown = document.getElementById('sort-dropdown');
 
     filterButton.addEventListener('click', (e) => {
         e.stopPropagation();
         filterDropdown.classList.toggle('hidden');
-        sortDropdown.classList.add('hidden');
+        if (sortDropdown) sortDropdown.classList.add('hidden');
     });
 
     document.addEventListener('click', (e) => {
@@ -640,9 +687,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Sort UI Logic
-    const sortButton = document.getElementById('sort-button');
-    const sortDropdown = document.getElementById('sort-dropdown');
-
     if (sortButton && sortDropdown) {
         sortButton.addEventListener('click', (e) => {
             e.stopPropagation();

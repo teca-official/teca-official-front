@@ -32,6 +32,10 @@
       "dest": "/bootcamp.html"
     },
     {
+      "src": "/hackathon",
+      "dest": "/hackathon.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
