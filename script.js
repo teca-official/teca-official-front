@@ -164,6 +164,13 @@ const Club = {
     MCL_2: { name: "MCL (2학기)", link: "http://mcl.or.kr/", dots: "🌕🌕🌕", icon: "💡", themeColor: "slate-500", recruitStart: "8월 14일 2026", recruitEnd: "8월 25일 2026", activity: ["9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY], description: "전략적 사고와 논리력을 기르는 마케팅 전략 학회 (하반기 모집)", fields: [Field.MARKETING, Field.PM] },
 };
 
+// Firebase Analytics helper
+function trackEvent(name, params) {
+    if (typeof window._firebaseLogEvent === 'function') {
+        window._firebaseLogEvent(name, params);
+    }
+}
+
 function getEligibilityBadge(type) {
     if (type === Eligibility.UNIVERSITY) return `<span class="px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 text-xs w-fit">대학생</span>`;
     if (type === Eligibility.WORKER) return `<span class="px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-300 text-xs w-fit">현직자</span>`;
@@ -501,6 +508,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeFilters[key].delete(value);
             }
             applyFilters();
+            trackEvent('filter_apply', {
+                filter_type: key,
+                filter_value: value,
+                action: e.target.checked ? 'add' : 'remove',
+                page: window.isMarketingPage ? 'marketing' : 'it'
+            });
         }
     });
 
@@ -526,6 +539,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentSortOrder = e.target.value;
                 applyFilters();
                 sortDropdown.classList.add('hidden');
+                trackEvent('sort_change', {
+                    sort_order: e.target.value,
+                    page: window.isMarketingPage ? 'marketing' : 'it'
+                });
             }
         });
     }
@@ -543,11 +560,75 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMobileCards();
     renderDeadlines();
 
+    // Analytics: page_view
+    trackEvent('page_view', {
+        page: window.isMarketingPage ? 'marketing' : 'it'
+    });
+
+    // Analytics: club_link_click (desktop table)
+    const clubList = document.getElementById('club-list');
+    if (clubList) {
+        clubList.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link) {
+                const row = link.closest('tr');
+                const clubName = row ? row.querySelector('.font-bold')?.textContent : link.textContent;
+                trackEvent('club_link_click', {
+                    club_name: (clubName || '').trim(),
+                    page: window.isMarketingPage ? 'marketing' : 'it',
+                    view: 'desktop'
+                });
+            }
+        });
+    }
+
+    // Analytics: club_link_click (mobile cards)
+    const clubListMobile = document.getElementById('club-list-mobile');
+    if (clubListMobile) {
+        clubListMobile.addEventListener('click', (e) => {
+            const card = e.target.closest('a');
+            if (card) {
+                const clubName = card.querySelector('.font-bold')?.textContent || '';
+                trackEvent('club_link_click', {
+                    club_name: clubName.trim(),
+                    page: window.isMarketingPage ? 'marketing' : 'it',
+                    view: 'mobile'
+                });
+            }
+        });
+    }
+
+    // Analytics: deadline_card_click
+    const deadlineContainer = document.getElementById('upcoming-deadlines');
+    if (deadlineContainer) {
+        deadlineContainer.addEventListener('click', (e) => {
+            const card = e.target.closest('a');
+            if (card) {
+                const clubName = card.querySelector('h4')?.textContent || '';
+                trackEvent('deadline_card_click', {
+                    club_name: clubName.trim(),
+                    page: window.isMarketingPage ? 'marketing' : 'it'
+                });
+            }
+        });
+    }
+
     // Search logic
     const searchInput = document.querySelector('input');
+    let searchDebounceTimer;
     if (searchInput) {
         searchInput.addEventListener('input', () => {
             applyFilters();
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(() => {
+                const term = searchInput.value.trim();
+                if (term) {
+                    trackEvent('search', {
+                        search_term: term,
+                        page: window.isMarketingPage ? 'marketing' : 'it'
+                    });
+                }
+            }, 1000);
         });
     }
 });

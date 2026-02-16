@@ -206,5 +206,26 @@
 </div>
 
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBuvBZ3EZAE5GjdVVggGEa21wgTf6DAwqs",
+    authDomain: "teca-analytics.firebaseapp.com",
+    projectId: "teca-analytics",
+    storageBucket: "teca-analytics.firebasestorage.app",
+    messagingSenderId: "51789117987",
+    appId: "1:51789117987:web:aba99b0a76708c402f4f96",
+    measurementId: "G-H8PR0KJ2QX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  window._firebaseLogEvent = function(name, params) {
+    logEvent(analytics, name, params);
+  };
+</script>
 <script src="script.js"></script>
 </body></html>
