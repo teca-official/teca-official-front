@@ -3,6 +3,7 @@ body {
     font-family: 'Inter', 'Noto Sans KR', sans-serif;
     -webkit-font-smoothing: antialiased;
     padding-bottom: 90px;
+    overflow-x: hidden;
 }
 
 .notion-scroll::-webkit-scrollbar {
