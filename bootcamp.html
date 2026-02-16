@@ -2,7 +2,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>IT 연합 동아리 모음</title>
+<title>부트캠프 모음</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
@@ -11,7 +11,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
 <script>
         const darkModeMatcher = window.matchMedia('(prefers-color-scheme: dark)');
-        
+
         function updateDarkMode(e) {
             if (e.matches) {
                 document.documentElement.classList.add('dark');
@@ -28,11 +28,11 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#3b82f6",
-                        "background-light": "#ffffff",
-                        "background-dark": "#0f172a",
-                        "card-dark": "rgba(30, 41, 59, 0.7)",
-                        "border-dark": "rgba(255, 255, 255, 0.1)",
+                        primary: "#10b981",
+                        "background-light": "#f0fdf4",
+                        "background-dark": "#0a1a14",
+                        "card-dark": "rgba(20, 50, 35, 0.7)",
+                        "border-dark": "rgba(110, 231, 183, 0.15)",
                         "neon-pink": "#ff2d55",
                         "neon-blue": "#00f3ff",
                         "neon-green": "#39ff14",
@@ -57,17 +57,17 @@
 <div class="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
 <img src="logo.png" alt="Logo" class="h-8 sm:h-10 md:h-12 w-auto" />
 <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-                    IT 연합 동아리 모음
+                    부트캠프 모음
                 </h1>
 </div>
-<p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base md:text-lg">
-                국내 주요 연합 IT 동아리 모집 일정 및 정보를 한눈에 비교하세요.
+            <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base md:text-lg">
+                국내 주요 부트캠프 모집 일정 및 정보를 한눈에 비교하세요.
             </p>
 
             <div class="flex items-center gap-2 mt-6">
-                <a href="/" class="px-4 py-2 rounded-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm transition-all">IT</a>
+                <a href="/" class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">IT</a>
                 <a href="/marketing" class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">마케팅/경영</a>
-                <a href="/bootcamp" class="px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">부트캠프</a>
+                <a href="/bootcamp" class="px-4 py-2 rounded-full bg-emerald-500 text-white font-bold text-sm transition-all">부트캠프</a>
                 <a class="ml-auto inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-blue-400/30 bg-blue-500/10 text-blue-500 dark:text-blue-400 font-medium text-sm hover:bg-blue-500/20 hover:border-blue-400/50 transition-all" href="https://docs.google.com/forms/d/e/1FAIpQLSck-SUA47ybqzMpW6tWSV_iUrPmEU2TH6emzOeg5Sa6jC-b8Q/viewform?usp=dialog" target="_blank">
                     <span class="material-symbols-outlined text-base">handshake</span>
                     제휴 문의
@@ -80,8 +80,8 @@
 </header>
 <section class="px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full mb-8 md:mb-12">
 <h2 class="text-xl sm:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2 flex-wrap" id="upcoming-deadlines-title">
-<span class="material-symbols-outlined text-neon-pink">alarm</span>
-                다가오는 동아리 일정
+<span class="material-symbols-outlined text-emerald-500">alarm</span>
+                다가오는 부트캠프 일정
                 <span class="text-sm font-normal text-slate-400">아직 업데이트가 안 된 곳은 작년으로 남아있습니다</span>
             </h2>
 <div class="space-y-8">
@@ -96,7 +96,7 @@
 <div class="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center">
 <div class="relative w-full md:flex-1">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
-<input class="w-full pl-12 pr-4 py-2.5 sm:py-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all backdrop-blur-xl bg-opacity-70 text-sm sm:text-base" placeholder="동아리명, 기술 스택, 또는 모집 분야 검색..." type="text" />
+<input class="w-full pl-12 pr-4 py-2.5 sm:py-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all backdrop-blur-xl bg-opacity-70 text-sm sm:text-base" placeholder="부트캠프명, 기술 스택, 또는 분야 검색..." type="text" />
 </div>
 <div class="flex items-center gap-2 w-full md:w-auto">
 <div class="relative flex-1 md:flex-none">
@@ -111,14 +111,12 @@
 </div>
 <div class="space-y-4">
 <div>
-<h4 class="font-semibold text-sm mb-2 text-slate-600 dark:text-slate-400">신청 자격</h4>
+<h4 class="font-semibold text-sm mb-2 text-slate-600 dark:text-slate-400">비용</h4>
 <div class="space-y-1" id="filter-eligibility">
-<label class="flex items-center gap-2 cursor-pointer"><input class="form-checkbox rounded text-primary focus:ring-primary/50" data-filter-key="eligibility" type="checkbox" value="대학생"/> <span>대학생</span></label>
-<label class="flex items-center gap-2 cursor-pointer"><input class="form-checkbox rounded text-primary focus:ring-primary/50" data-filter-key="eligibility" type="checkbox" value="현직자"/> <span>현직자</span></label>
 </div>
 </div>
 <div>
-<h4 class="font-semibold text-sm mb-2 text-slate-600 dark:text-slate-400">모집 분야</h4>
+<h4 class="font-semibold text-sm mb-2 text-slate-600 dark:text-slate-400">교육 분야</h4>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-sm" id="filter-fields">
 </div>
 </div>
@@ -160,10 +158,10 @@
 <thead>
 <tr class="border-b border-slate-200 dark:border-border-dark bg-slate-50/50 dark:bg-slate-900/50">
 <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-48">이름</th>
-<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-44">서류 접수 기간</th>
-<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-32">활동 기간</th>
-<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-32">신청 자격</th>
-<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-64">모집 분야</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-44">모집 기간</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-32">교육 기간</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-32">비용</th>
+<th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-64">교육 분야</th>
 <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-24 text-center">티어</th>
 <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm">한 줄 설명</th>
 </tr>
@@ -179,11 +177,11 @@
 </div>
 <!-- Notice -->
 <div class="mt-6 md:mt-8 max-w-7xl mx-auto">
-<div class="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 rounded-xl">
+<div class="p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/50 rounded-xl">
 <div class="flex items-start gap-2">
-<span class="material-symbols-outlined text-amber-500 dark:text-amber-400 shrink-0">warning</span>
-<p class="text-xs sm:text-sm text-amber-700 dark:text-amber-300">
-<span class="font-semibold">UMC, 멋쟁이사자처럼, 구름톤 유니브, Google Developer Group on Campus</span>는 학교별로 개별적으로 운영되는 동아리로, 접수 기간이나 모집 분야가 다를 수 있습니다. 반드시 본교의 공지사항을 확인하시기 바랍니다.
+<span class="material-symbols-outlined text-emerald-500 dark:text-emerald-400 shrink-0">info</span>
+<p class="text-xs sm:text-sm text-emerald-700 dark:text-emerald-300">
+<span class="font-semibold">"상시모집"</span> 부트캠프는 수시로 기수를 모집합니다. 정확한 모집 일정은 각 부트캠프 공식 사이트에서 확인하세요.
 </p>
 </div>
 </div>
@@ -196,15 +194,14 @@
 티어 선정 기준
 </h3>
 <div class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-<p><span class="font-medium">🌕</span> : 초보자, 비전공자, 신입생 - 프로젝트 경험을 시작하기 좋은 곳</p>
-<p><span class="font-medium">🌕🌕</span> : 심도 있는 프로젝트를 경험해보고 싶거나, 하나의 기술 스택을 깊게 공부하고 싶은 사람들을 위한 동아리</p>
-<p><span class="font-medium">🌕🌕🌕</span> : 끝판왕, 모두가 인정하는 동아리, 인지도가 높은 동아리</p>
+<p><span class="font-medium">🌕</span> : 입문자 접근 가능, 국비지원 부트캠프</p>
+<p><span class="font-medium">🌕🌕</span> : 경쟁력 있는 무료 부트캠프, 체계적인 커리큘럼</p>
+<p><span class="font-medium">🌕🌕🌕</span> : 대기업 운영, 최고 경쟁률, 업계 인지도 최상위</p>
 </div>
 </div>
 </div>
-<div class="mt-6 md:mt-8 flex flex-col justify-center items-center text-slate-500 dark:text-slate-500 text-xs sm:text-sm max-w-7xl mx-auto gap-1">
-<p>© IT Club DB. All information updated daily.</p>
-<a href="https://dazzling-myth-cd2.notion.site/3097c67ff1e68022a012f2c5e0389e9b" target="_blank" class="hover:text-slate-700 dark:hover:text-slate-300 underline transition-colors">개인정보 처리방침</a>
+<div class="mt-6 md:mt-8 flex justify-center items-center text-slate-500 dark:text-slate-500 text-xs sm:text-sm max-w-7xl mx-auto">
+<p>© Bootcamp DB. All information updated daily.</p>
 </div>
 </main>
 </div>
@@ -236,6 +233,9 @@
     }
     logEvent(analytics, name, params);
   };
+</script>
+<script>
+    window.isBootcampPage = true;
 </script>
 <script src="script.js"></script>
 </body></html>

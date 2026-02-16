@@ -37,17 +37,36 @@ const Field = {
     MANAGEMENT: { name: "경영", class: "tag-management" }
 };
 
-// 필터 카테고리 매핑
+// 필터 카테고리 Enum
+const Category = {
+    PM: "PM",
+    DESIGN: "디자인",
+    AI: "AI",
+    WEB: "웹",
+    MOBILE: "모바일",
+    BACKEND: "백엔드",
+    ANY: "무관",
+    CLOUD: "클라우드",
+    MARKETING: "마케팅"
+};
+
+// 카테고리 → 필드 매핑
 const FilterCategory = {
-    "PM": ["PM"],
-    "디자인": ["Design", "UX"],
-    "AI": ["AI", "머신러닝", "딥러닝", "LLM", "데이터 분석", "데이터 시각화", "데이터 엔지니어링"],
-    "웹": ["WEB", "Frontend"],
-    "모바일": ["Android", "iOS", "ReactNative", "Flutter", "앱"],
-    "백엔드": ["Backend", "SpringBoot", "Node.js", "Django"],
-    "무관": ["무관"],
-    "클라우드": ["클라우드"],
-    "마케팅": ["Marketing"]
+    [Category.PM]: ["PM"],
+    [Category.DESIGN]: ["Design", "UX"],
+    [Category.AI]: ["AI", "머신러닝", "딥러닝", "LLM", "데이터 분석", "데이터 시각화", "데이터 엔지니어링"],
+    [Category.WEB]: ["WEB", "Frontend"],
+    [Category.MOBILE]: ["Android", "iOS", "ReactNative", "Flutter", "앱"],
+    [Category.BACKEND]: ["Backend", "SpringBoot", "Node.js", "Django"],
+    [Category.ANY]: ["무관"],
+    [Category.CLOUD]: ["클라우드"],
+    [Category.MARKETING]: ["Marketing"]
+};
+
+// 페이지별 표시할 카테고리
+const PAGE_CATEGORIES = {
+    bootcamp: [Category.WEB, Category.BACKEND, Category.MOBILE, Category.AI, Category.CLOUD, Category.DESIGN],
+    marketing: [Category.PM, Category.DESIGN, Category.MARKETING],
 };
 
 const Club = {
@@ -164,6 +183,69 @@ const Club = {
     MCL_2: { name: "MCL (2학기)", link: "http://mcl.or.kr/", dots: "🌕🌕🌕", icon: "💡", themeColor: "slate-500", recruitStart: "8월 14일 2026", recruitEnd: "8월 25일 2026", activity: ["9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY], description: "전략적 사고와 논리력을 기르는 마케팅 전략 학회 (하반기 모집)", fields: [Field.MARKETING, Field.PM] },
 };
 
+const BootcampCost = {
+    FREE: "무료",
+    GOV_FUNDED: "국비지원",
+    PAID: "유료"
+};
+
+const Bootcamp = {
+    // ── 모집 시작월 기준 정렬 ──
+    KAKAO_TECH: { name: "카카오 테크 부트캠프", link: "https://kakaotechbootcamp.com/", dots: "🌕🌕🌕", icon: "💛", themeColor: "slate-500", recruitStart: "3월 6일 2026(사전 설명회)", recruitEnd: "미정", activity: ["미정"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "카카오에서 운영하는 풀스택/AI/클라우드 부트캠프. 내일배움카드 필요", fields: [Field.FRONTEND, Field.BACKEND, Field.AI, Field.CLOUD] },
+
+    // 1월 — 멋사 백엔드(Java) 23기
+    LIKELION_BE_JAVA: { name: "멋사 백엔드 (Java)", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "1월 14일 2026", recruitEnd: "2월 19일 2026", activity: ["2월", "3월", "4월", "5월", "6월", "7월", "8월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 백엔드 부트캠프 23기. Java, Spring 중심 6개월 과정", fields: [Field.BACKEND] },
+
+    // 2월 — 멋사 클라우드 6기
+    LIKELION_CLOUD: { name: "멋사 클라우드", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "2월 5일 2026", recruitEnd: "3월 23일 2026", activity: ["3월", "4월", "5월", "6월", "7월", "8월", "9월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 클라우드 엔지니어링 부트캠프 6기. AWS, Docker, Kubernetes 약 6개월 과정", fields: [Field.CLOUD] },
+
+    // 2월 — 멋사 AI 엔지니어(NLP) 4기
+    LIKELION_AI: { name: "멋사 AI 엔지니어", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "2월 10일 2026", recruitEnd: "3월 16일 2026", activity: ["3월", "4월", "5월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 AI 엔지니어(NLP) 부트캠프 4기. 자연어처리 약 10주 과정", fields: [Field.AI] },
+
+    // 2월 — 엘리스 SW QA 5기
+    ELICE_QA: { name: "엘리스 SW QA", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "2월 11일 2026", recruitEnd: "3월 16일 2026", activity: ["4월", "5월", "6월", "7월", "8월", "9월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 소프트웨어 QA 트랙 5기. 테스트 자동화, 품질 보증 약 6개월 국비지원 과정", fields: [Field.BACKEND] },
+
+    // 4월 하순 — SSAFY 상반기 (매년 4월 하순~5월 초, 패턴 일정)
+    SSAFY_1: { name: "SSAFY (상반기)", link: "https://www.ssafy.com/", dots: "🌕🌕🌕", icon: "💙", themeColor: "slate-500", recruitStart: "4월 22일 2026", recruitEnd: "5월 9일 2026", activity: ["7월", "8월", "9월", "10월", "11월", "12월", "1월", "2월", "3월", "4월", "5월", "6월"], eligibility: [Eligibility.UNIVERSITY], cost: [BootcampCost.FREE], description: "삼성에서 운영하는 12개월 집중 SW 교육. 수료 후 삼성 계열사 입사 기회 제공", fields: [Field.FRONTEND, Field.BACKEND, Field.ANDROID] },
+
+    // 5월 — Apple Developer Academy (매년 5~12월 장기 모집, 패턴 일정)
+    APPLE_ACADEMY: { name: "Apple Developer Academy", link: "https://developeracademy.postech.ac.kr/", dots: "🌕🌕🌕", icon: "🍎", themeColor: "slate-500", recruitStart: "5월 1일 2026", recruitEnd: "12월 7일 2026", activity: ["3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "Apple과 POSTECH이 운영하는 9개월 iOS 개발 교육. 장비 무상대여 + 월 110만원 장학금", fields: [Field.IOS, Field.DESIGN] },
+
+    // 5월 하순 — 부스트캠프 웹/모바일 (매년 5월 말~6월 초, 패턴 일정)
+    BOOSTCAMP_WEB: { name: "네이버 부스트캠프 (웹/모바일)", link: "https://boostcamp.connect.or.kr/", dots: "🌕🌕🌕", icon: "💚", themeColor: "slate-500", recruitStart: "5월 25일 2026", recruitEnd: "6월 8일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월", "2월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "네이버 커넥트재단 웹/모바일 과정. 웹 풀스택, iOS, Android 트랙 운영", fields: [Field.WEB, Field.IOS, Field.ANDROID] },
+
+    // 6월 — KT AIVLE School 상반기 (대체로 6~7월, 패턴 대체로 일정)
+    KRAFTON_JUNGLE: { name: "크래프톤 정글", link: "https://jungle.krafton.com/", dots: "🌕🌕🌗", icon: "🌿", themeColor: "slate-500", recruitStart: "6월 8일 2026", recruitEnd: "7월 5일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "크래프톤에서 운영하는 5개월 CS 집중 교육. 국비지원(내일배움카드) 또는 자비(250만원) 참여 가능", fields: [Field.BACKEND, Field.AI] },
+    KT_AIVLE_1: { name: "KT AIVLE School (상반기)", link: "https://aivle.kt.co.kr/", dots: "🌕🌕", icon: "🔴", themeColor: "slate-500", recruitStart: "6월 10일 2026", recruitEnd: "7월 1일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월"], eligibility: [Eligibility.UNIVERSITY], cost: [BootcampCost.GOV_FUNDED], description: "KT에서 운영하는 AI 전문가 양성 6개월 과정. 내일배움카드 필요", fields: [Field.AI] },
+
+    // 7월 — 부스트캠프 AI Tech (최근 7~8월로 수렴, 기수마다 상이)
+    BOOSTCAMP_AI: { name: "네이버 부스트캠프 (AI Tech)", link: "https://boostcamp.connect.or.kr/", dots: "🌕🌕🌕", icon: "💚", themeColor: "slate-500", recruitStart: "7월 14일 2026", recruitEnd: "8월 14일 2026", activity: ["9월", "10월", "11월", "12월", "1월", "2월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "네이버 커넥트재단 AI 과정. CV, NLP, 추천시스템 트랙 운영", fields: [Field.AI] },
+
+    // 9월 하순 — 우아한테크코스 (매년 9월 말~10월 초, 패턴 일정)
+    WOOWACOURSE: { name: "우아한테크코스", link: "https://www.woowacourse.io/", dots: "🌕🌕🌕", icon: "🍊", themeColor: "slate-500", recruitStart: "9월 29일 2026", recruitEnd: "10월 10일 2026", activity: ["2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "우아한형제들에서 운영하는 10개월 실무형 개발자 교육 프로그램", fields: [Field.FRONTEND, Field.BACKEND, Field.ANDROID] },
+
+    // 10월 하순 — SSAFY 하반기 (매년 10월 하순~11월 초, 패턴 일정)
+    SSAFY_2: { name: "SSAFY (하반기)", link: "https://www.ssafy.com/", dots: "🌕🌕🌕", icon: "💙", themeColor: "slate-500", recruitStart: "10월 20일 2026", recruitEnd: "11월 3일 2026", activity: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY], cost: [BootcampCost.FREE], description: "삼성에서 운영하는 12개월 집중 SW 교육. 수료 후 삼성 계열사 입사 기회 제공", fields: [Field.FRONTEND, Field.BACKEND, Field.ANDROID] },
+
+    // 12월 — KT AIVLE School 하반기 (대체로 12~1월, 패턴 대체로 일정)
+    KT_AIVLE_2: { name: "KT AIVLE School (하반기)", link: "https://aivle.kt.co.kr/", dots: "🌕🌕", icon: "🔴", themeColor: "slate-500", recruitStart: "12월 8일 2026", recruitEnd: "1월 7일 2027", activity: ["2월", "3월", "4월", "5월", "6월", "7월"], eligibility: [Eligibility.UNIVERSITY], cost: [BootcampCost.GOV_FUNDED], description: "KT에서 운영하는 AI 전문가 양성 6개월 과정. 내일배움카드 필요", fields: [Field.AI] },
+
+    // ── 상시모집 (티어 높은순) ──
+    PROGRAMMERS: { name: "프로그래머스 데브코스", link: "https://school.programmers.co.kr/", dots: "🌕🌕", icon: "👨‍💻", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "프로그래머스에서 운영하는 국비지원 개발자 교육 과정. BE/풀스택/데이터 트랙", fields: [Field.BACKEND, Field.WEB, Field.AI] },
+    SPARTA_NBC: { name: "내일배움캠프", link: "https://nbcamp.spartacodingclub.kr/", dots: "🌕", icon: "🏋️", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "스파르타클럽에서 운영하는 국비지원 부트캠프. 다양한 트랙 운영", fields: [Field.BACKEND, Field.AI, Field.IOS, Field.FLUTTER] },
+
+    // 멋사 부트캠프 트랙별 (상시모집)
+    LIKELION_FE: { name: "멋사 프론트엔드", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 프론트엔드 부트캠프. React, Next.js 중심 6개월 과정", fields: [Field.FRONTEND] },
+    LIKELION_PYTHON: { name: "멋사 Python", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 Python 부트캠프. Django, FastAPI 중심 6개월 과정", fields: [Field.BACKEND] },
+    LIKELION_DATA: { name: "멋사 데이터 분석", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 데이터 분석 부트캠프. Tableau, 머신러닝/딥러닝 5개월 과정", fields: [Field.AI] },
+    LIKELION_UXUI: { name: "멋사 UX/UI 디자인", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 UX/UI 디자인 부트캠프. Figma 중심 4~5개월 과정", fields: [Field.DESIGN] },
+    // 엘리스 트랙별
+    ELICE_FE: { name: "엘리스 React", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 React 프론트엔드 트랙. 국비지원 약 5~6개월 과정", fields: [Field.FRONTEND] },
+    ELICE_BE: { name: "엘리스 백엔드", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 클라우드 Java/Spring 기반 백엔드 트랙. 국비지원 약 6개월 과정", fields: [Field.BACKEND] },
+    ELICE_FULLSTACK: { name: "엘리스 풀스택+AI", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 풀스택+AI 활용 웹 프로젝트 트랙. 국비지원 약 6개월 과정", fields: [Field.WEB, Field.BACKEND, Field.AI] },
+    ELICE_AI: { name: "엘리스 AI", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 AI 트랙. 국비지원 약 5~6개월 과정", fields: [Field.AI] },
+};
+
 // Firebase Analytics helper
 function trackEvent(name, params) {
     if (typeof window._firebaseLogEvent === 'function') {
@@ -175,6 +257,13 @@ function getEligibilityBadge(type) {
     if (type === Eligibility.UNIVERSITY) return `<span class="px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 text-xs w-fit">대학생</span>`;
     if (type === Eligibility.WORKER) return `<span class="px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-300 text-xs w-fit">현직자</span>`;
     if (type === Eligibility.SINCHON) return `<span class="px-2 py-0.5 rounded bg-pink-100 dark:bg-pink-900/40 text-pink-600 dark:text-pink-300 text-xs w-fit">신촌지역대학생</span>`;
+    return "";
+}
+
+function getCostBadge(cost) {
+    if (cost === BootcampCost.FREE) return `<span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 text-xs w-fit">무료</span>`;
+    if (cost === BootcampCost.GOV_FUNDED) return `<span class="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 text-xs w-fit">국비지원</span>`;
+    if (cost === BootcampCost.PAID) return `<span class="px-2 py-0.5 rounded bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-300 text-xs w-fit">유료</span>`;
     return "";
 }
 
@@ -223,6 +312,7 @@ function hasDevPosition(club) {
 }
 
 function getAllClubs() {
+    if (window.isBootcampPage) return Object.values(Bootcamp);
     if (window.isMarketingPage) return getMarketingClubs();
     return Object.values(Club).filter(club => hasDevPosition(club)).sort((a, b) => {
         const dateA = parseMonthDay(a.recruitStart);
@@ -233,6 +323,12 @@ function getAllClubs() {
         if (dateA.month !== dateB.month) return dateA.month - dateB.month;
         return dateA.day - dateB.day;
     });
+}
+
+function getPageName() {
+    if (window.isBootcampPage) return 'bootcamp';
+    if (window.isMarketingPage) return 'marketing';
+    return 'it';
 }
 
 function renderDeadlines() {
@@ -286,8 +382,10 @@ function renderDeadlines() {
         const Tag = club.link ? 'a' : 'div';
         const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
 
+        const accentBg = window.isBootcampPage ? 'bg-emerald-50 hover:bg-emerald-100' : window.isMarketingPage ? 'bg-pink-50 hover:bg-pink-100' : 'bg-blue-50 hover:bg-blue-100';
+
         return `
-        <${Tag} ${hrefAttr} class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40 hover:bg-blue-100 dark:hover:bg-slate-800/60 transition-all cursor-pointer no-underline hover:no-underline">
+        <${Tag} ${hrefAttr} class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark ${accentBg} dark:bg-slate-900/40 dark:hover:bg-slate-800/60 transition-all cursor-pointer no-underline hover:no-underline">
             <div class="flex justify-between items-start mb-4">
                 <span class="text-2xl">${club.icon}</span>
             </div>
@@ -313,7 +411,7 @@ function renderTable(clubs = getAllClubs()) {
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
             <td class="px-4 py-5 text-sm font-bold"><span class="block">${club.recruitStart}</span><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
             <td class="px-4 py-5"><div class="flex gap-1 flex-wrap">${club.activity.map(m => `<span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">${m}</span>`).join('')}</div></td>
-            <td class="px-4 py-5"><div class="flex flex-col gap-1">${club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div></td>
+            <td class="px-4 py-5"><div class="flex flex-col gap-1">${window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
             <td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
@@ -354,8 +452,8 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <div class="flex gap-1 flex-wrap">${club.activity.map(m => `<span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">${m}</span>`).join('')}</div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">신청 자격</span>
-                    <div class="flex gap-1 flex-wrap">${club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div>
+                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">${window.isBootcampPage ? '비용' : '신청 자격'}</span>
+                    <div class="flex gap-1 flex-wrap">${window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div>
                 </div>
                 <div class="flex items-start gap-2">
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0 pt-0.5">모집 분야</span>
@@ -377,10 +475,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSortOrder = 'default';
 
     function populateFilters() {
+        // 비용 필터 (부트캠프 전용) / 신청 자격 필터 (동아리)
+        const eligibilityContainer = document.getElementById('filter-eligibility');
+        if (window.isBootcampPage && eligibilityContainer) {
+            eligibilityContainer.innerHTML = Object.values(BootcampCost).map(cost => `
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" value="${cost}" data-filter-key="eligibility" class="form-checkbox rounded text-primary focus:ring-primary/50">
+                    <span>${cost}</span>
+                </label>
+            `).join('');
+        }
+
         const fieldsContainer = document.getElementById('filter-fields');
-        const marketingCategories = ["PM", "디자인", "마케팅"];
-        const categories = window.isMarketingPage
-            ? Object.keys(FilterCategory).filter(c => marketingCategories.includes(c))
+        const pageName = getPageName();
+        const pageCategories = PAGE_CATEGORIES[pageName];
+        const categories = pageCategories
+            ? Object.keys(FilterCategory).filter(c => pageCategories.includes(c))
             : Object.keys(FilterCategory);
         fieldsContainer.innerHTML = categories.map(category => `
             <label class="flex items-center gap-2 cursor-pointer">
@@ -390,7 +500,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
 
         const tiersContainer = document.getElementById('filter-tiers');
-        const uniqueTiers = [...new Set(Object.values(Club).map(c => c.dots))].sort((a, b) => calculateScore(b) - calculateScore(a));
+        const dataSource = window.isBootcampPage ? Bootcamp : Club;
+        const uniqueTiers = [...new Set(Object.values(dataSource).map(c => c.dots))].sort((a, b) => calculateScore(b) - calculateScore(a));
         tiersContainer.innerHTML = uniqueTiers.map(tier => `
             <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" value="${tier}" data-filter-key="tiers" class="form-checkbox rounded text-primary focus:ring-primary/50">
@@ -424,15 +535,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (activeFilters.eligibility.size > 0) {
-                const clubEligibilities = new Set();
-                if (club.eligibility.includes(Eligibility.UNIVERSITY) || club.eligibility.includes(Eligibility.SINCHON)) {
-                    clubEligibilities.add('대학생');
+                if (window.isBootcampPage) {
+                    const hasCostMatch = club.cost.some(c => activeFilters.eligibility.has(c));
+                    if (!hasCostMatch) return false;
+                } else {
+                    const clubEligibilities = new Set();
+                    if (club.eligibility.includes(Eligibility.UNIVERSITY) || club.eligibility.includes(Eligibility.SINCHON)) {
+                        clubEligibilities.add('대학생');
+                    }
+                    if (club.eligibility.includes(Eligibility.WORKER)) {
+                        clubEligibilities.add('현직자');
+                    }
+                    const intersection = new Set([...clubEligibilities].filter(x => activeFilters.eligibility.has(x)));
+                    if (intersection.size === 0) return false;
                 }
-                if (club.eligibility.includes(Eligibility.WORKER)) {
-                    clubEligibilities.add('현직자');
-                }
-                const intersection = new Set([...clubEligibilities].filter(x => activeFilters.eligibility.has(x)));
-                if (intersection.size === 0) return false;
             }
 
             if (activeFilters.fields.size > 0) {
@@ -523,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 filter_type: key,
                 filter_value: value,
                 action: e.target.checked ? 'add' : 'remove',
-                page: window.isMarketingPage ? 'marketing' : 'it'
+                page: getPageName()
             });
         }
     });
@@ -552,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sortDropdown.classList.add('hidden');
                 trackEvent('sort_change', {
                     sort_order: e.target.value,
-                    page: window.isMarketingPage ? 'marketing' : 'it'
+                    page: getPageName()
                 });
             }
         });
@@ -573,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Analytics: page_view
     trackEvent('page_view', {
-        page: window.isMarketingPage ? 'marketing' : 'it'
+        page: getPageName()
     });
 
     // Analytics: club_link_click (desktop table)
@@ -586,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const clubName = row ? row.querySelector('.font-bold')?.textContent : link.textContent;
                 trackEvent('club_link_click', {
                     club_name: (clubName || '').trim(),
-                    page: window.isMarketingPage ? 'marketing' : 'it',
+                    page: getPageName(),
                     view: 'desktop'
                 });
             }
@@ -602,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const clubName = card.querySelector('.font-bold')?.textContent || '';
                 trackEvent('club_link_click', {
                     club_name: clubName.trim(),
-                    page: window.isMarketingPage ? 'marketing' : 'it',
+                    page: getPageName(),
                     view: 'mobile'
                 });
             }
@@ -618,7 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const clubName = card.querySelector('h4')?.textContent || '';
                 trackEvent('deadline_card_click', {
                     club_name: clubName.trim(),
-                    page: window.isMarketingPage ? 'marketing' : 'it'
+                    page: getPageName()
                 });
             }
         });
@@ -636,7 +752,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (term) {
                     trackEvent('search', {
                         search_term: term,
-                        page: window.isMarketingPage ? 'marketing' : 'it'
+                        page: getPageName()
                     });
                 }
             }, 1000);
