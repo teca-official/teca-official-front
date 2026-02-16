@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:namu.wiki)",
+      "WebFetch(domain:boottent.com)",
+      "WebFetch(domain:www.ssafy.com)",
+      "WebFetch(domain:m.blog.naver.com)",
+      "WebFetch(domain:boostcamp.connect.or.kr)",
+      "WebFetch(domain:ko.wikipedia.org)",
+      "WebFetch(domain:www.wanted.co.kr)",
+      "WebFetch(domain:bootcamp.likelion.net)",
+      "WebFetch(domain:www.codestates.com)",
+      "WebFetch(domain:www.woowacourse.io)",
+      "WebFetch(domain:techblog.woowahan.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:koll.cau.ac.kr)",
+      "WebFetch(domain:elice.training)",
+      "WebFetch(domain:nbcamp.spartaclub.kr)",
+      "WebFetch(domain:www.catch.co.kr)",
+      "WebFetch(domain:velog.io)",
+      "WebFetch(domain:programmers.co.kr)",
+      "WebFetch(domain:www.google.com)",
+      "WebFetch(domain:school.programmers.co.kr)",
+      "WebFetch(domain:tistory.com)",
+      "WebFetch(domain:www.hankyung.com)",
+      "WebFetch(domain:www.donga.com)",
+      "WebFetch(domain:www.sedaily.com)",
+      "WebFetch(domain:search.naver.com)",
+      "Bash(node --check:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:www.boottent.com)",
+      "Bash(gemini:*)"
+    ]
+  }
+}

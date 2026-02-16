@@ -65,7 +65,7 @@ const FilterCategory = {
 
 // 페이지별 표시할 카테고리
 const PAGE_CATEGORIES = {
-    bootcamp: [Category.WEB, Category.BACKEND, Category.MOBILE, Category.AI, Category.CLOUD, Category.DESIGN],
+    bootcamp: [Category.WEB, Category.BACKEND, Category.MOBILE, Category.AI, Category.CLOUD, Category.DESIGN, Category.MARKETING],
     marketing: [Category.PM, Category.DESIGN, Category.MARKETING],
 };
 
@@ -193,6 +193,9 @@ const Bootcamp = {
     // ── 모집 시작월 기준 정렬 ──
     KAKAO_TECH: { name: "카카오 테크 부트캠프", link: "https://kakaotechbootcamp.com/", dots: "🌕🌕🌕", icon: "💛", themeColor: "slate-500", recruitStart: "3월 6일 2026(사전 설명회)", recruitEnd: "미정", activity: ["미정"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "카카오에서 운영하는 풀스택/AI/클라우드 부트캠프. 내일배움카드 필요", fields: [Field.FRONTEND, Field.BACKEND, Field.AI, Field.CLOUD] },
 
+    // 1월 — 멋사 그로스 마케팅 4기
+    LIKELION_GROWTH: { name: "멋사 그로스 마케팅", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "1월 29일 2026", recruitEnd: "3월 8일 2026", activity: ["3월", "4월", "5월", "6월", "7월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 그로스 마케팅 부트캠프 4기. 약 5개월 국비지원 과정", fields: [Field.MARKETING] },
+
     // 1월 — 멋사 백엔드(Java) 23기
     LIKELION_BE_JAVA: { name: "멋사 백엔드 (Java)", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "1월 14일 2026", recruitEnd: "2월 19일 2026", activity: ["2월", "3월", "4월", "5월", "6월", "7월", "8월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 백엔드 부트캠프 23기. Java, Spring 중심 6개월 과정", fields: [Field.BACKEND] },
 
@@ -201,9 +204,6 @@ const Bootcamp = {
 
     // 2월 — 멋사 AI 엔지니어(NLP) 4기
     LIKELION_AI: { name: "멋사 AI 엔지니어", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "2월 10일 2026", recruitEnd: "3월 16일 2026", activity: ["3월", "4월", "5월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 AI 엔지니어(NLP) 부트캠프 4기. 자연어처리 약 10주 과정", fields: [Field.AI] },
-
-    // 2월 — 엘리스 SW QA 5기
-    ELICE_QA: { name: "엘리스 SW QA", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "2월 11일 2026", recruitEnd: "3월 16일 2026", activity: ["4월", "5월", "6월", "7월", "8월", "9월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 소프트웨어 QA 트랙 5기. 테스트 자동화, 품질 보증 약 6개월 국비지원 과정", fields: [Field.BACKEND] },
 
     // 4월 하순 — SSAFY 상반기 (매년 4월 하순~5월 초, 패턴 일정)
     SSAFY_1: { name: "SSAFY (상반기)", link: "https://www.ssafy.com/", dots: "🌕🌕🌕", icon: "💙", themeColor: "slate-500", recruitStart: "4월 22일 2026", recruitEnd: "5월 9일 2026", activity: ["7월", "8월", "9월", "10월", "11월", "12월", "1월", "2월", "3월", "4월", "5월", "6월"], eligibility: [Eligibility.UNIVERSITY], cost: [BootcampCost.FREE], description: "삼성에서 운영하는 12개월 집중 SW 교육. 수료 후 삼성 계열사 입사 기회 제공", fields: [Field.FRONTEND, Field.BACKEND, Field.ANDROID] },
@@ -234,16 +234,11 @@ const Bootcamp = {
     PROGRAMMERS: { name: "프로그래머스 데브코스", link: "https://school.programmers.co.kr/", dots: "🌕🌕", icon: "👨‍💻", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "프로그래머스에서 운영하는 국비지원 개발자 교육 과정. BE/풀스택/데이터 트랙", fields: [Field.BACKEND, Field.WEB, Field.AI] },
     SPARTA_NBC: { name: "내일배움캠프", link: "https://nbcamp.spartacodingclub.kr/", dots: "🌕", icon: "🏋️", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "스파르타클럽에서 운영하는 국비지원 부트캠프. 다양한 트랙 운영", fields: [Field.BACKEND, Field.AI, Field.IOS, Field.FLUTTER] },
 
-    // 멋사 부트캠프 트랙별 (상시모집)
+    // 멋사 부트캠프 트랙별 (모집 마감)
+    LIKELION_PYTHON: { name: "멋사 Python", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "9월 26일 2025", recruitEnd: "11월 23일 2025", activity: ["12월", "1월", "2월", "3월", "4월", "5월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 Python 부트캠프. Django, FastAPI 중심 6개월 과정", fields: [Field.BACKEND] },
+    LIKELION_DATA: { name: "멋사 데이터 분석", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "10월 14일 2025", recruitEnd: "11월 23일 2025", activity: ["12월", "1월", "2월", "3월", "4월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 데이터 분석 부트캠프. Tableau, 머신러닝/딥러닝 5개월 과정", fields: [Field.AI] },
+    LIKELION_UXUI: { name: "멋사 UX/UI 디자인", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "10월 29일 2025", recruitEnd: "12월 12일 2025", activity: ["1월", "2월", "3월", "4월", "5월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 UX/UI 디자인 부트캠프. Figma 중심 4~5개월 과정", fields: [Field.DESIGN] },
     LIKELION_FE: { name: "멋사 프론트엔드", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 프론트엔드 부트캠프. React, Next.js 중심 6개월 과정", fields: [Field.FRONTEND] },
-    LIKELION_PYTHON: { name: "멋사 Python", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 Python 부트캠프. Django, FastAPI 중심 6개월 과정", fields: [Field.BACKEND] },
-    LIKELION_DATA: { name: "멋사 데이터 분석", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 데이터 분석 부트캠프. Tableau, 머신러닝/딥러닝 5개월 과정", fields: [Field.AI] },
-    LIKELION_UXUI: { name: "멋사 UX/UI 디자인", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 UX/UI 디자인 부트캠프. Figma 중심 4~5개월 과정", fields: [Field.DESIGN] },
-    // 엘리스 트랙별
-    ELICE_FE: { name: "엘리스 React", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 React 프론트엔드 트랙. 국비지원 약 5~6개월 과정", fields: [Field.FRONTEND] },
-    ELICE_BE: { name: "엘리스 백엔드", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 클라우드 Java/Spring 기반 백엔드 트랙. 국비지원 약 6개월 과정", fields: [Field.BACKEND] },
-    ELICE_FULLSTACK: { name: "엘리스 풀스택+AI", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 풀스택+AI 활용 웹 프로젝트 트랙. 국비지원 약 6개월 과정", fields: [Field.WEB, Field.BACKEND, Field.AI] },
-    ELICE_AI: { name: "엘리스 AI", link: "https://elice.training/", dots: "🌕", icon: "🐰", themeColor: "slate-500", recruitStart: "상시모집", recruitEnd: "상시모집", activity: ["상시"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "엘리스 AI 트랙. 국비지원 약 5~6개월 과정", fields: [Field.AI] },
 };
 
 // Firebase Analytics helper
