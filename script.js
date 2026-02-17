@@ -732,11 +732,14 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDeadlines();
 
     // Analytics: page_view
+    const pageName = getPageName();
+    const pageLabels = { it: 'IT 동아리', marketing: '마케팅/경영', bootcamp: '부트캠프', hackathon: '해커톤/대회' };
     trackEvent('page_view', {
-        page: getPageName()
+        page: pageName,
+        page_title: pageLabels[pageName] || pageName
     });
 
-    // Analytics: club_link_click (desktop table)
+    // Analytics: link_click (desktop table)
     const clubList = document.getElementById('club-list');
     if (clubList) {
         clubList.addEventListener('click', (e) => {
@@ -744,40 +747,46 @@ document.addEventListener('DOMContentLoaded', () => {
             if (link) {
                 const row = link.closest('tr');
                 const clubName = row ? row.querySelector('.font-bold')?.textContent : link.textContent;
-                trackEvent('club_link_click', {
+                trackEvent('link_click', {
                     club_name: (clubName || '').trim(),
-                    page: getPageName(),
-                    view: 'desktop'
+                    link_url: link.href,
+                    section: 'table',
+                    view: 'desktop',
+                    page: getPageName()
                 });
             }
         });
     }
 
-    // Analytics: club_link_click (mobile cards)
+    // Analytics: link_click (mobile cards)
     const clubListMobile = document.getElementById('club-list-mobile');
     if (clubListMobile) {
         clubListMobile.addEventListener('click', (e) => {
             const card = e.target.closest('a');
             if (card) {
                 const clubName = card.querySelector('.font-bold')?.textContent || '';
-                trackEvent('club_link_click', {
+                trackEvent('link_click', {
                     club_name: clubName.trim(),
-                    page: getPageName(),
-                    view: 'mobile'
+                    link_url: card.href,
+                    section: 'card',
+                    view: 'mobile',
+                    page: getPageName()
                 });
             }
         });
     }
 
-    // Analytics: deadline_card_click
+    // Analytics: link_click (deadline cards)
     const deadlineContainer = document.getElementById('upcoming-deadlines');
     if (deadlineContainer) {
         deadlineContainer.addEventListener('click', (e) => {
             const card = e.target.closest('a');
             if (card) {
                 const clubName = card.querySelector('h4')?.textContent || '';
-                trackEvent('deadline_card_click', {
+                trackEvent('link_click', {
                     club_name: clubName.trim(),
+                    link_url: card.href,
+                    section: 'deadline',
                     page: getPageName()
                 });
             }
