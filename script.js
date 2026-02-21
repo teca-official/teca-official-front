@@ -194,6 +194,12 @@ const Bootcamp = {
     // ── 모집 시작월 기준 정렬 ──
     KAKAO_TECH: { name: "카카오 테크 부트캠프", link: "https://kakaotechbootcamp.com/", dots: "🌕🌕🌕", icon: "💛", themeColor: "slate-500", recruitStart: "3월 6일 2026(사전 설명회)", recruitEnd: "미정", activity: ["미정"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "카카오에서 운영하는 풀스택/AI/클라우드 부트캠프. 내일배움카드 필요", fields: [Field.FRONTEND, Field.BACKEND, Field.AI, Field.CLOUD] },
 
+    // 1월 — AI·SW마에스트로 서울 17기 (모집 마감)
+    SWM_SEOUL: { name: "AI·SW마에스트로 서울", link: "https://swmaestro.ai/", dots: "🌕🌕🌕", icon: "🎓", themeColor: "slate-500", recruitStart: "1월 12일 2026", recruitEnd: "2월 11일 2026", activity: ["5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "과기정통부 주관 AI·SW 핵심 인재 양성 프로그램 17기. 월 100만원 장학금, IT기기 300만원, 팀별 1,200만원 지원. 경쟁률 19:1", fields: [Field.NONE] },
+
+    // 2월 — AI·SW마에스트로 부산 17기
+    SWM_BUSAN: { name: "AI·SW마에스트로 부산", link: "https://swmaestro.ai/busan/", dots: "🌕🌕🌕", icon: "🎓", themeColor: "slate-500", recruitStart: "2월 13일 2026", recruitEnd: "3월 12일 2026", activity: ["7월", "8월", "9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "과기정통부 주관 AI·SW 핵심 인재 양성 프로그램 부산센터 17기. 월 100만원 장학금, IT기기 300만원, 팀별 1,200만원 지원. 150명 선발", fields: [Field.NONE] },
+
     // 1월 — 멋사 그로스 마케팅 4기
     LIKELION_GROWTH: { name: "멋사 그로스 마케팅", link: "https://bootcamp.likelion.net/", dots: "🌕", icon: "🦁", themeColor: "slate-500", recruitStart: "1월 29일 2026", recruitEnd: "3월 8일 2026", activity: ["3월", "4월", "5월", "6월", "7월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "멋쟁이사자처럼 그로스 마케팅 부트캠프 4기. 약 5개월 국비지원 과정", fields: [Field.MARKETING] },
 
