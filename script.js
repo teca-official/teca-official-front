@@ -192,7 +192,9 @@ const BootcampCost = {
 
 const Bootcamp = {
     // ── 모집 시작월 기준 정렬 ──
-    KAKAO_TECH: { name: "카카오 테크 부트캠프", link: "https://kakaotechbootcamp.com/", dots: "🌕🌕🌕", icon: "💛", themeColor: "slate-500", recruitStart: "3월 6일 2026(사전 설명회)", recruitEnd: "미정", activity: ["미정"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "카카오에서 운영하는 풀스택/AI/클라우드 부트캠프. 내일배움카드 필요", fields: [Field.FRONTEND, Field.BACKEND, Field.AI, Field.CLOUD] },
+    KAKAO_TECH_FULLSTACK: { name: "카카오 테크 부트캠프 (풀스택)", link: "https://kakaotechbootcamp.com/", dots: "🌕🌕🌕", icon: "💛", themeColor: "slate-500", recruitStart: "2월 26일 2026", recruitEnd: "3월 22일 2026", activity: ["5월", "6월", "7월", "8월", "9월", "10월", "11월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "Java, React, SpringBoot, MySQL을 활용한 풀스택 개발자 양성 과정입니다. 교육 일정: 26.5.12 - 26.11.17", fields: [Field.FRONTEND, Field.BACKEND] },
+    KAKAO_TECH_AI: { name: "카카오 테크 부트캠프 (AI 실무)", link: "https://kakaotechbootcamp.com/", dots: "🌕🌕🌕", icon: "💛", themeColor: "slate-500", recruitStart: "2월 26일 2026", recruitEnd: "3월 22일 2026", activity: ["미정"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "AI 이론과 LLM 기반 서비스 개발을 배우고, 서비스 구현·기술 통합 역량을 키우는 실무 개발자 과정입니다. (DeepLearning, NLP, FastAPI, Transformer)", fields: [Field.AI, Field.DL] },
+    KAKAO_TECH_CLOUD: { name: "카카오 테크 부트캠프 (클라우드 네이티브)", link: "https://kakaotechbootcamp.com/", dots: "🌕🌕🌕", icon: "💛", themeColor: "slate-500", recruitStart: "2월 26일 2026", recruitEnd: "3월 22일 2026", activity: ["미정"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "클라우드 네이티브 환경에서 백엔드 개발과 서비스 운영 전 과정을 경험하며 실전 역량을 키우는 과정입니다. (Java, SpringBoot, Docker, Kubernetes)", fields: [Field.CLOUD, Field.BACKEND] },
 
     // 1월 — AI·SW마에스트로 서울 17기 (모집 마감)
     SWM_SEOUL: { name: "AI·SW마에스트로 서울", link: "https://swmaestro.ai/", dots: "🌕🌕🌕", icon: "🎓", themeColor: "slate-500", recruitStart: "1월 12일 2026", recruitEnd: "2월 11일 2026", activity: ["5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "과기정통부 주관 AI·SW 핵심 인재 양성 프로그램 17기. 월 100만원 장학금, IT기기 300만원, 팀별 1,200만원 지원. 경쟁률 19:1", fields: [Field.NONE] },
@@ -346,7 +348,15 @@ function getAllClubs() {
         if (dateA.month !== dateB.month) return dateA.month - dateB.month;
         return dateA.day - dateB.day;
     });
-    if (window.isBootcampPage) return Object.values(Bootcamp);
+    if (window.isBootcampPage) return Object.values(Bootcamp).sort((a, b) => {
+        const dateA = parseMonthDay(a.recruitStart);
+        const dateB = parseMonthDay(b.recruitStart);
+        if (!dateA && !dateB) return 0;
+        if (!dateA) return 1;
+        if (!dateB) return -1;
+        if (dateA.month !== dateB.month) return dateA.month - dateB.month;
+        return dateA.day - dateB.day;
+    });
     if (window.isMarketingPage) return getMarketingClubs();
     return Object.values(Club).filter(club => hasDevPosition(club)).sort((a, b) => {
         const dateA = parseMonthDay(a.recruitStart);
@@ -385,27 +395,17 @@ function renderDeadlines() {
         const recruitEnd = parseDate(club.recruitEnd);
         if (!recruitEnd) return false;
 
-        // 같은 년도에서 이미 마감일이 지난 동아리는 제외
-        if (recruitEnd.getFullYear() === today.getFullYear() && recruitEnd < today) return false;
+        // 오늘 날짜 기준으로 이미 마감된 항목은 제외
+        if (recruitEnd < today) return false;
 
         const endMonth = recruitEnd.getMonth();
 
+        // 현재 달 또는 다음 달에 마감되는 항목만 표시
         return endMonth === currentMonth || endMonth === nextMonth;
     }).map(club => {
         const endDate = parseDate(club.recruitEnd);
         return { ...club, endDate };
-    }).sort((a, b) => {
-        const currentYear = new Date().getFullYear();
-        const aIsCurrentYear = a.endDate.getFullYear() === currentYear;
-        const bIsCurrentYear = b.endDate.getFullYear() === currentYear;
-
-        // 올해 날짜인 동아리 우선
-        if (aIsCurrentYear && !bIsCurrentYear) return -1;
-        if (!aIsCurrentYear && bIsCurrentYear) return 1;
-
-        // 같은 그룹 내에서는 마감일 순
-        return a.endDate - b.endDate;
-    });
+    }).sort((a, b) => a.endDate - b.endDate);
 
     if (upcoming.length === 0) {
         const label = window.isHackathonPage ? 'IT 대회' : '동아리';
