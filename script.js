@@ -476,7 +476,7 @@ function renderMobileCards(clubs = getAllClubs()) {
             <div class="flex items-start justify-between mb-3">
                 <div class="flex items-center gap-2 min-w-0">
                     <span class="text-2xl shrink-0">${club.icon}</span>
-                    <span class="font-bold text-lg truncate">${club.name}</span>
+                    <span class="font-bold text-lg">${club.name}</span>
                 </div>
                 ${window.isHackathonPage ? '' : `<span class="flex gap-0.5 text-sm shrink-0">${club.dots}</span>`}
             </div>
