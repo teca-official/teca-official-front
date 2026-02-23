@@ -474,11 +474,11 @@ function renderMobileCards(clubs = getAllClubs()) {
         return `
         <${Tag} ${hrefAttr} class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg">
             <div class="flex items-start justify-between mb-3">
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl">${club.icon}</span>
-                    <span class="font-bold text-lg">${club.name}</span>
+                <div class="flex items-center gap-2 min-w-0">
+                    <span class="text-2xl shrink-0">${club.icon}</span>
+                    <span class="font-bold text-lg truncate">${club.name}</span>
                 </div>
-                ${window.isHackathonPage ? '' : `<span class="flex gap-0.5 text-sm">${club.dots}</span>`}
+                ${window.isHackathonPage ? '' : `<span class="flex gap-0.5 text-sm shrink-0">${club.dots}</span>`}
             </div>
             <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">${club.description}</p>
             <div class="space-y-2 text-sm">
