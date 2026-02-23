@@ -391,21 +391,31 @@ function renderDeadlines() {
         nextMonth = 0;
     }
 
-    const upcoming = getAllClubs().filter(club => {
+    const currentYear = today.getFullYear();
+    const lastYear = currentYear - 1;
+
+    const allClubs = getAllClubs();
+
+    // 2026년: 아직 마감 안 된 이번 달/다음 달 항목
+    const currentYearItems = allClubs.filter(club => {
         const recruitEnd = parseDate(club.recruitEnd);
         if (!recruitEnd) return false;
-
-        // 오늘 날짜 기준으로 이미 마감된 항목은 제외
         if (recruitEnd < today) return false;
-
         const endMonth = recruitEnd.getMonth();
+        return recruitEnd.getFullYear() === currentYear && (endMonth === currentMonth || endMonth === nextMonth);
+    }).map(club => ({ ...club, endDate: parseDate(club.recruitEnd) }))
+      .sort((a, b) => a.endDate - b.endDate);
 
-        // 현재 달 또는 다음 달에 마감되는 항목만 표시
-        return endMonth === currentMonth || endMonth === nextMonth;
-    }).map(club => {
-        const endDate = parseDate(club.recruitEnd);
-        return { ...club, endDate };
-    }).sort((a, b) => a.endDate - b.endDate);
+    // 2025년: 같은 달 기준 작년 항목 (아직 업데이트 안 된 곳)
+    const lastYearItems = allClubs.filter(club => {
+        const recruitEnd = parseDate(club.recruitEnd);
+        if (!recruitEnd) return false;
+        const endMonth = recruitEnd.getMonth();
+        return recruitEnd.getFullYear() === lastYear && (endMonth === currentMonth || endMonth === nextMonth);
+    }).map(club => ({ ...club, endDate: parseDate(club.recruitEnd) }))
+      .sort((a, b) => a.endDate - b.endDate);
+
+    const upcoming = [...currentYearItems, ...lastYearItems];
 
     if (upcoming.length === 0) {
         const label = window.isHackathonPage ? 'IT 대회' : '동아리';
