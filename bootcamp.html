@@ -214,7 +214,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+  import { getAnalytics, logEvent, setDefaultEventParameters } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBuvBZ3EZAE5GjdVVggGEa21wgTf6DAwqs",
@@ -228,6 +228,7 @@
 
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  setDefaultEventParameters({ page: 'bootcamp' });
 
   const isDebug = new URLSearchParams(window.location.search).has('debug_mode');
 
