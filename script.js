@@ -343,20 +343,22 @@ function getMarketingClubs() {
 
 // ── 인프런 파트너스 네이티브 광고 (미니멀 추천) ──
 const InflearnAds = [
-    { title: "React 완벽 가이드", link: "https://www.inflearn.com/", fields: [Field.WEB, Field.FRONTEND], hookText: "웹 프론트엔드가 처음이라면?", hookSub: "인프런에서 React 기초부터 시작하세요", categories: ["웹"] },
-    { title: "스프링부트 핵심 원리", link: "https://www.inflearn.com/", fields: [Field.SPRING, Field.BACKEND], hookText: "백엔드 개발자를 꿈꾼다면?", hookSub: "인프런에서 Spring Boot를 배워보세요", categories: ["Java/Spring"] },
-    { title: "Figma 실전 UI/UX 디자인", link: "https://www.inflearn.com/", fields: [Field.DESIGN, Field.UX], hookText: "디자이너 포지션이 목표라면?", hookSub: "인프런에서 Figma 실전 스킬을 익히세요", categories: ["디자인"] },
-    { title: "Flutter 앱 개발 입문", link: "https://www.inflearn.com/", fields: [Field.FLUTTER, Field.APP], hookText: "모바일 앱 개발이 궁금하다면?", hookSub: "Flutter로 크로스플랫폼 앱을 만들어보세요", categories: ["Flutter"] },
-    { title: "딥러닝 기초부터 실전까지", link: "https://www.inflearn.com/", fields: [Field.DL, Field.AI], hookText: "AI 분야에 도전하고 싶다면?", hookSub: "인프런에서 딥러닝을 시작하세요", categories: ["AI"] },
-    { title: "Node.js 백엔드 완전 정복", link: "https://www.inflearn.com/", fields: [Field.NODE], hookText: "Node.js로 서버를 만들어볼까?", hookSub: "인프런에서 Node.js 백엔드를 배워보세요", categories: ["Node.js"] },
-    { title: "iOS 앱 개발 with Swift", link: "https://www.inflearn.com/", fields: [Field.IOS], hookText: "iOS 개발자가 되고 싶다면?", hookSub: "Swift로 나만의 앱을 만들어보세요", categories: ["iOS"] },
-    { title: "Android Kotlin 마스터", link: "https://www.inflearn.com/", fields: [Field.ANDROID], hookText: "Android 개발을 시작한다면?", hookSub: "Kotlin으로 안드로이드 앱 개발을 배워보세요", categories: ["Android"] },
+    { title: "앨런 Swift문법 마스터 스쿨 (온라인 BootCamp -  2개월과정)", link: "https://inf.run/xDG94", thumbnailUrl: "https://cdn.inflearn.com/public/courses/327472/cover/e56033c6-33a2-4275-9b86-a685045146ef/327472.jpg", instructor: "앨런(Allen)", rating: 5, reviewCount: 299, studentCount: 1453, regularPrice: 1430000, payPrice: 1430000, discountRate: 0, isBest: true, skillTags: ["Swift"], hookText: "앨런 Swift문법 마스터 스쿨 (온라인 BootCamp -  2개월과정)", hookSub: "앨런(Allen) · ⭐ 5 · 수강생 1,453명" }
 ];
 
 const AD_INTERVAL = 5; // 매 N번째 행마다 광고 삽입
 
 function pickAdForContext(index) {
     return InflearnAds[index % InflearnAds.length];
+}
+
+function renderAdSkillTags(ad) {
+    return (ad.skillTags || []).map(tag => `<span class="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-700/70 text-xs font-medium text-slate-600 dark:text-slate-300">${tag}</span>`).join('');
+}
+
+function renderAdDiscountBadge(ad) {
+    if (!ad.discountRate) return '';
+    return `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(239,68,68,0.15);color:#ef4444">${ad.discountRate}%</span>`;
 }
 
 function renderAdMinimal_Desktop(ad) {
@@ -366,13 +368,14 @@ function renderAdMinimal_Desktop(ad) {
             <a href="${ad.link}" target="_blank" rel="noopener" class="flex items-center justify-between gap-4 group">
                 <div class="flex items-center gap-3">
                     <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
+                    ${renderAdDiscountBadge(ad)}
                     <span class="text-sm text-slate-500 dark:text-slate-400">
                         <span class="font-medium text-slate-700 dark:text-slate-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">${ad.hookText}</span>
                         ${ad.hookSub}
                     </span>
-                    <div class="flex gap-1.5">${ad.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
+                    <div class="flex gap-1.5">${renderAdSkillTags(ad)}</div>
                 </div>
-                <span class="text-xs font-medium shrink-0 group-hover:underline" style="color:#00c471">자세히 보기 →</span>
+                <span class="text-xs font-medium shrink-0 group-hover:underline" style="color:#00c471">강의 보기 →</span>
             </a>
         </td>
     </tr>`;
@@ -382,6 +385,7 @@ function renderAdMinimal_Mobile(ad) {
     return `
     <a href="${ad.link}" target="_blank" rel="noopener" class="flex items-center gap-3 px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl">
         <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none shrink-0" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
+        ${renderAdDiscountBadge(ad)}
         <div class="flex-1 min-w-0">
             <span class="text-sm font-medium text-slate-700 dark:text-slate-300">${ad.hookText}</span>
             <span class="text-xs text-slate-400 block">${ad.hookSub}</span>
