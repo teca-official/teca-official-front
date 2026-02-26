@@ -343,7 +343,7 @@ function getMarketingClubs() {
 
 // ── 인프런 파트너스 네이티브 광고 (미니멀 추천) ──
 const InflearnAds = [
-    { title: "앨런 Swift문법 마스터 스쿨 (온라인 BootCamp -  2개월과정)", link: "https://inf.run/xDG94", thumbnailUrl: "https://cdn.inflearn.com/public/courses/327472/cover/e56033c6-33a2-4275-9b86-a685045146ef/327472.jpg", instructor: "앨런(Allen)", rating: 5, reviewCount: 299, studentCount: 1453, regularPrice: 1430000, payPrice: 1430000, discountRate: 0, isBest: true, skillTags: ["Swift"], hookText: "앨런 Swift문법 마스터 스쿨 (온라인 BootCamp -  2개월과정)", hookSub: "앨런(Allen) · ⭐ 5 · 수강생 1,453명" }
+    { title: "앨런 Swift문법 마스터 스쿨 (온라인 BootCamp -  2개월과정)", link: "https://inf.run/xDG94", categories: ["iOS"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/327472/cover/e56033c6-33a2-4275-9b86-a685045146ef/327472.jpg", instructor: "앨런(Allen)", rating: 5, reviewCount: 299, studentCount: 1453, regularPrice: 1430000, payPrice: 1430000, discountRate: 0, isBest: true, skillTags: ["Swift"], hookText: "앨런 Swift문법 마스터 스쿨 (온라인 BootCamp -  2개월과정)", hookSub: "앨런(Allen) · ⭐ 5 · 수강생 1,453명" }
 ];
 
 const AD_INTERVAL = 5; // 매 N번째 행마다 광고 삽입

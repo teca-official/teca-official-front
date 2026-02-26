@@ -10,9 +10,45 @@
  * script.js의 InflearnAds 배열을 갱신합니다.
  */
 
-// ── 여기에 인프런 파트너스 링크를 추가하세요 ──
+// ── 분야별 인프런 파트너스 링크 ──
+// categories: script.js의 Category 값과 동일하게 작성
+// 하나의 강의가 여러 분야에 해당할 수 있음
 const PARTNER_LINKS = [
-    "https://inf.run/xDG94",
+    // PM
+    // { link: "https://inf.run/xxx", categories: ["PM"] },
+
+    // 디자인
+    // { link: "https://inf.run/xxx", categories: ["디자인"] },
+
+    // AI
+    // { link: "https://inf.run/xxx", categories: ["AI"] },
+
+    // 웹
+    // { link: "https://inf.run/xxx", categories: ["웹"] },
+
+    // iOS
+    { link: "https://inf.run/xDG94", categories: ["iOS"] },
+
+    // Android
+    // { link: "https://inf.run/xxx", categories: ["Android"] },
+
+    // Flutter
+    // { link: "https://inf.run/xxx", categories: ["Flutter"] },
+
+    // ReactNative
+    // { link: "https://inf.run/xxx", categories: ["ReactNative"] },
+
+    // Java/Spring
+    // { link: "https://inf.run/xxx", categories: ["Java/Spring"] },
+
+    // Node.js
+    // { link: "https://inf.run/xxx", categories: ["Node.js"] },
+
+    // 클라우드
+    // { link: "https://inf.run/xxx", categories: ["클라우드"] },
+
+    // 마케팅
+    // { link: "https://inf.run/xxx", categories: ["마케팅"] },
 ];
 
 const https = require('https');
@@ -174,6 +210,7 @@ function formatRuntime(seconds) {
  */
 function printCourseInfo(course) {
     console.log(`  📚 ${course.title}`);
+    console.log(`     🎯 분야: ${(course.categories || []).join(', ')}`);
     console.log(`     👤 강사: ${course.instructor}`);
     console.log(`     💰 가격: ${formatPrice(course.payPrice)}${course.discountRate > 0 ? ` (${course.discountRate}% 할인, 원가 ${formatPrice(course.regularPrice)})` : ''}`);
     console.log(`     ⭐ 평점: ${course.averageStar} (리뷰 ${course.reviewCount}개)`);
@@ -202,7 +239,7 @@ function updateScriptJs(courses) {
             : c.title;
         const hookSub = `${c.instructor} · ⭐ ${c.averageStar} · 수강생 ${c.studentCount.toLocaleString()}명`;
 
-        return `    { title: ${JSON.stringify(c.title)}, link: ${JSON.stringify(c.link)}, thumbnailUrl: ${JSON.stringify(c.thumbnailUrl)}, instructor: ${JSON.stringify(c.instructor)}, rating: ${c.averageStar}, reviewCount: ${c.reviewCount}, studentCount: ${c.studentCount}, regularPrice: ${c.regularPrice}, payPrice: ${c.payPrice}, discountRate: ${c.discountRate}, isBest: ${c.isBest}, skillTags: ${JSON.stringify(c.skillTags)}, hookText: ${JSON.stringify(hookText)}, hookSub: ${JSON.stringify(hookSub)} }`;
+        return `    { title: ${JSON.stringify(c.title)}, link: ${JSON.stringify(c.link)}, categories: ${JSON.stringify(c.categories)}, thumbnailUrl: ${JSON.stringify(c.thumbnailUrl)}, instructor: ${JSON.stringify(c.instructor)}, rating: ${c.averageStar}, reviewCount: ${c.reviewCount}, studentCount: ${c.studentCount}, regularPrice: ${c.regularPrice}, payPrice: ${c.payPrice}, discountRate: ${c.discountRate}, isBest: ${c.isBest}, skillTags: ${JSON.stringify(c.skillTags)}, hookText: ${JSON.stringify(hookText)}, hookSub: ${JSON.stringify(hookSub)} }`;
     });
 
     const newArray = `const InflearnAds = [\n${entries.join(',\n')}\n];`;
@@ -224,13 +261,14 @@ async function main() {
 
     const courses = [];
 
-    for (const link of PARTNER_LINKS) {
-        console.log(`📡 Fetching: ${link}`);
+    for (const entry of PARTNER_LINKS) {
+        console.log(`📡 Fetching: ${entry.link} [${entry.categories.join(', ')}]`);
         try {
-            const { html, finalUrl } = await fetchWithRedirect(link);
+            const { html, finalUrl } = await fetchWithRedirect(entry.link);
             console.log(`  → Redirected to: ${finalUrl.substring(0, 80)}...`);
 
-            const course = extractCourseData(html, link);
+            const course = extractCourseData(html, entry.link);
+            course.categories = entry.categories;
             printCourseInfo(course);
             courses.push(course);
         } catch (err) {
