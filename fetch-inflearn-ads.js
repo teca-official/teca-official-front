@@ -15,40 +15,85 @@
 // 하나의 강의가 여러 분야에 해당할 수 있음
 const PARTNER_LINKS = [
     // PM
-    // { link: "https://inf.run/xxx", categories: ["PM"] },
+    { link: "https://inf.run/sb7Rc", categories: ["PM"] },
+    { link: "https://inf.run/pvSun", categories: ["PM"] },
+    { link: "https://inf.run/13JYP", categories: ["PM"] },
+    { link: "https://inf.run/9P8oE", categories: ["PM"] },
+    { link: "https://inf.run/nEnxv", categories: ["PM"] },
+    { link: "https://inf.run/hQQ1Z", categories: ["PM"] },
+    { link: "https://inf.run/MPybe", categories: ["PM", "마케팅"] },
+    { link: "https://inf.run/TF313", categories: ["PM", "마케팅"] },
+
+    // 마케팅
+    { link: "https://inf.run/yq7Js", categories: ["마케팅"] },
+    { link: "https://inf.run/GzdjU", categories: ["마케팅"] },
+    { link: "https://inf.run/JZRKL", categories: ["마케팅"] },
+    { link: "https://inf.run/Gvtg2", categories: ["마케팅"] },
 
     // 디자인
-    // { link: "https://inf.run/xxx", categories: ["디자인"] },
+    { link: "https://inf.run/9C8D3", categories: ["디자인"] },
+    { link: "https://inf.run/vAQqk", categories: ["디자인"] },
+    { link: "https://inf.run/qAQUA", categories: ["디자인"] },
 
     // AI
-    // { link: "https://inf.run/xxx", categories: ["AI"] },
+    { link: "https://inf.run/iXpfe", categories: ["AI"] },
+    { link: "https://inf.run/1nrN2", categories: ["AI"] },
 
     // 웹
-    // { link: "https://inf.run/xxx", categories: ["웹"] },
+    { link: "https://inf.run/ZfCoZ", categories: ["웹"] },
+    { link: "https://inf.run/YNTjk", categories: ["웹"] },
+    { link: "https://inf.run/2Mhb9", categories: ["웹"] },
+    { link: "https://inf.run/pU8ib", categories: ["웹"] },
 
     // iOS
     { link: "https://inf.run/xDG94", categories: ["iOS"] },
+    { link: "https://inf.run/L17du", categories: ["iOS"] },
+    { link: "https://inf.run/hFK5d", categories: ["iOS"] },
+    { link: "https://inf.run/qkbkT", categories: ["iOS"] },
+    { link: "https://inf.run/JonM7", categories: ["iOS"] },
+    { link: "https://inf.run/FdpRN", categories: ["iOS"] },
 
     // Android
-    // { link: "https://inf.run/xxx", categories: ["Android"] },
+    { link: "https://inf.run/7uspX", categories: ["Android"] },
+    { link: "https://inf.run/xz1Qt", categories: ["Android"] },
+    { link: "https://inf.run/AKrUS", categories: ["Android"] },
 
     // Flutter
-    // { link: "https://inf.run/xxx", categories: ["Flutter"] },
+    { link: "https://inf.run/LgetC", categories: ["Flutter"] },
+    { link: "https://inf.run/LWvPj", categories: ["Flutter"] },
+    { link: "https://inf.run/mhU3P", categories: ["Flutter"] },
+    { link: "https://inf.run/jyrKK", categories: ["Flutter"] },
+    { link: "https://inf.run/h6Dh2", categories: ["Flutter"] },
+    { link: "https://inf.run/pfmMm", categories: ["Flutter"] },
 
     // ReactNative
-    // { link: "https://inf.run/xxx", categories: ["ReactNative"] },
+    { link: "https://inf.run/fYy4A", categories: ["ReactNative"] },
 
     // Java/Spring
-    // { link: "https://inf.run/xxx", categories: ["Java/Spring"] },
+    { link: "https://inf.run/FCqpv", categories: ["Java/Spring"] },
+    { link: "https://inf.run/a9My3", categories: ["Java/Spring"] },
+    { link: "https://inf.run/LFn3p", categories: ["Java/Spring"] },
 
     // Node.js
-    // { link: "https://inf.run/xxx", categories: ["Node.js"] },
+    { link: "https://inf.run/rr6bz", categories: ["Node.js"] },
+    { link: "https://inf.run/7z8R8", categories: ["Node.js"] },
 
     // 클라우드
     // { link: "https://inf.run/xxx", categories: ["클라우드"] },
 
-    // 마케팅
-    // { link: "https://inf.run/xxx", categories: ["마케팅"] },
+    // Language
+    { link: "https://inf.run/9efRW", categories: ["Language"] },
+
+    // CS
+    { link: "https://inf.run/PaMxM", categories: ["CS"] },
+    { link: "https://inf.run/BBy39", categories: ["CS"] },
+    { link: "https://inf.run/wid86", categories: ["CS"] },
+    { link: "https://inf.run/DAXoZ", categories: ["CS"] },
+    { link: "https://inf.run/CMK3d", categories: ["CS"] },
+
+    // Algorithm
+    { link: "https://inf.run/nJU8L", categories: ["Algorithm"] },
+    { link: "https://inf.run/VgHmC", categories: ["Algorithm"] },
 ];
 
 const https = require('https');
