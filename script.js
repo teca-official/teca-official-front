@@ -43,8 +43,12 @@ const Category = {
     DESIGN: "디자인",
     AI: "AI",
     WEB: "웹",
-    MOBILE: "모바일",
-    BACKEND: "백엔드",
+    IOS: "iOS",
+    ANDROID: "Android",
+    FLUTTER: "Flutter",
+    REACT_NATIVE: "ReactNative",
+    JAVA_SPRING: "Java/Spring",
+    NODEJS: "Node.js",
     ANY: "무관",
     CLOUD: "클라우드",
     MARKETING: "마케팅"
@@ -56,8 +60,12 @@ const FilterCategory = {
     [Category.DESIGN]: ["Design", "UX"],
     [Category.AI]: ["AI", "머신러닝", "딥러닝", "LLM", "데이터 분석", "데이터 시각화", "데이터 엔지니어링"],
     [Category.WEB]: ["WEB", "Frontend"],
-    [Category.MOBILE]: ["Android", "iOS", "ReactNative", "Flutter", "앱"],
-    [Category.BACKEND]: ["Backend", "SpringBoot", "Node.js", "Django"],
+    [Category.IOS]: ["iOS"],
+    [Category.ANDROID]: ["Android"],
+    [Category.FLUTTER]: ["Flutter", "앱"],
+    [Category.REACT_NATIVE]: ["ReactNative"],
+    [Category.JAVA_SPRING]: ["SpringBoot", "Backend", "Django"],
+    [Category.NODEJS]: ["Node.js"],
     [Category.ANY]: ["무관"],
     [Category.CLOUD]: ["클라우드"],
     [Category.MARKETING]: ["Marketing"]
@@ -65,9 +73,9 @@ const FilterCategory = {
 
 // 페이지별 표시할 카테고리
 const PAGE_CATEGORIES = {
-    bootcamp: [Category.WEB, Category.BACKEND, Category.MOBILE, Category.AI, Category.CLOUD, Category.DESIGN, Category.MARKETING],
+    bootcamp: [Category.WEB, Category.JAVA_SPRING, Category.NODEJS, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE, Category.AI, Category.CLOUD, Category.DESIGN, Category.MARKETING],
     marketing: [Category.PM, Category.DESIGN, Category.MARKETING],
-    hackathon: [Category.AI, Category.WEB, Category.BACKEND, Category.MOBILE],
+    hackathon: [Category.AI, Category.WEB, Category.JAVA_SPRING, Category.NODEJS, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE],
 };
 
 const Club = {
@@ -333,271 +341,29 @@ function getMarketingClubs() {
     });
 }
 
-const NON_DEV_FIELDS = new Set([
-    Field.MARKETING.name, Field.MANAGEMENT.name,
-    Field.PM.name, Field.DESIGN.name, Field.UX.name
-]);
-
-function hasDevPosition(club) {
-    return club.fields.some(f => !NON_DEV_FIELDS.has(f.name));
-}
-
-// ── 인프런 파트너스 네이티브 광고 데이터 ──
+// ── 인프런 파트너스 네이티브 광고 (미니멀 추천) ──
 const InflearnAds = [
-    {
-        title: "React 완벽 가이드",
-        link: "https://www.inflearn.com/",
-        instructor: "김리액트",
-        rating: "4.9",
-        icon: "⚛️",
-        emoji: "📚",
-        colorFrom: "blue",
-        fields: [Field.WEB, Field.FRONTEND],
-        description: "동아리 합류 전 React 기초를 탄탄히 다져보세요",
-        hookText: "웹 프론트엔드가 처음이라면?",
-        hookSub: "인프런에서 React 기초부터 시작하세요"
-    },
-    {
-        title: "스프링부트 핵심 원리와 활용",
-        link: "https://www.inflearn.com/",
-        instructor: "박스프링",
-        rating: "4.8",
-        icon: "🍃",
-        emoji: "📚",
-        colorFrom: "green",
-        fields: [Field.SPRING, Field.BACKEND],
-        description: "동아리 지원 전, Spring Boot 핵심 개념을 마스터하세요",
-        hookText: "백엔드 개발자를 꿈꾼다면?",
-        hookSub: "인프런에서 Spring Boot를 배워보세요"
-    },
-    {
-        title: "Figma 실전 UI/UX 디자인",
-        link: "https://www.inflearn.com/",
-        instructor: "이디자인",
-        rating: "4.7",
-        icon: "🎨",
-        emoji: "📚",
-        colorFrom: "purple",
-        fields: [Field.DESIGN, Field.UX],
-        description: "IT 동아리 디자이너 포지션 준비를 위한 실무 중심 Figma 강의",
-        hookText: "디자이너 포지션이 목표라면?",
-        hookSub: "인프런에서 Figma 실전 스킬을 익히세요"
-    },
-    {
-        title: "Flutter 앱 개발 입문",
-        link: "https://www.inflearn.com/",
-        instructor: "최플러터",
-        rating: "4.6",
-        icon: "📱",
-        emoji: "📚",
-        colorFrom: "yellow",
-        fields: [Field.FLUTTER, Field.APP],
-        description: "하나의 코드로 iOS, Android 앱을 동시에 만들어보세요",
-        hookText: "모바일 앱 개발이 궁금하다면?",
-        hookSub: "Flutter로 크로스플랫폼 앱을 만들어보세요"
-    },
-    {
-        title: "딥러닝 기초부터 실전까지",
-        link: "https://www.inflearn.com/",
-        instructor: "정딥러닝",
-        rating: "4.8",
-        icon: "🤖",
-        emoji: "📚",
-        colorFrom: "orange",
-        fields: [Field.DL, Field.AI],
-        description: "AI 동아리 준비를 위한 딥러닝 핵심 이론과 실습",
-        hookText: "AI 분야에 도전하고 싶다면?",
-        hookSub: "인프런에서 딥러닝을 시작하세요"
-    }
+    { title: "React 완벽 가이드", link: "https://www.inflearn.com/", fields: [Field.WEB, Field.FRONTEND], hookText: "웹 프론트엔드가 처음이라면?", hookSub: "인프런에서 React 기초부터 시작하세요", categories: ["웹"] },
+    { title: "스프링부트 핵심 원리", link: "https://www.inflearn.com/", fields: [Field.SPRING, Field.BACKEND], hookText: "백엔드 개발자를 꿈꾼다면?", hookSub: "인프런에서 Spring Boot를 배워보세요", categories: ["Java/Spring"] },
+    { title: "Figma 실전 UI/UX 디자인", link: "https://www.inflearn.com/", fields: [Field.DESIGN, Field.UX], hookText: "디자이너 포지션이 목표라면?", hookSub: "인프런에서 Figma 실전 스킬을 익히세요", categories: ["디자인"] },
+    { title: "Flutter 앱 개발 입문", link: "https://www.inflearn.com/", fields: [Field.FLUTTER, Field.APP], hookText: "모바일 앱 개발이 궁금하다면?", hookSub: "Flutter로 크로스플랫폼 앱을 만들어보세요", categories: ["Flutter"] },
+    { title: "딥러닝 기초부터 실전까지", link: "https://www.inflearn.com/", fields: [Field.DL, Field.AI], hookText: "AI 분야에 도전하고 싶다면?", hookSub: "인프런에서 딥러닝을 시작하세요", categories: ["AI"] },
+    { title: "Node.js 백엔드 완전 정복", link: "https://www.inflearn.com/", fields: [Field.NODE], hookText: "Node.js로 서버를 만들어볼까?", hookSub: "인프런에서 Node.js 백엔드를 배워보세요", categories: ["Node.js"] },
+    { title: "iOS 앱 개발 with Swift", link: "https://www.inflearn.com/", fields: [Field.IOS], hookText: "iOS 개발자가 되고 싶다면?", hookSub: "Swift로 나만의 앱을 만들어보세요", categories: ["iOS"] },
+    { title: "Android Kotlin 마스터", link: "https://www.inflearn.com/", fields: [Field.ANDROID], hookText: "Android 개발을 시작한다면?", hookSub: "Kotlin으로 안드로이드 앱 개발을 배워보세요", categories: ["Android"] },
 ];
 
-const isAdDemo = new URLSearchParams(window.location.search).has('ad_demo');
+const AD_INTERVAL = 5; // 매 N번째 행마다 광고 삽입
 
-// ── 인프런 광고 렌더링 함수 (5가지 디자인) ──
-
-// 시안 1: 스텔스 행 (데스크톱)
-function renderAdStealth_Desktop(ad) {
-    return `
-    <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer" onclick="window.open('${ad.link}','_blank')">
-        <td class="px-4 py-5">
-            <div class="flex items-center gap-2">
-                <span class="text-xl">${ad.emoji}</span>
-                <span class="font-bold"><a href="${ad.link}" target="_blank" class="hover:text-primary hover:underline decoration-2 underline-offset-4">${ad.title}</a></span>
-                <span class="px-1.5 py-0.5 rounded bg-slate-300/50 dark:bg-slate-600/50 text-slate-400 dark:text-slate-500 text-[10px] font-medium leading-none">AD</span>
-            </div>
-        </td>
-        <td class="px-4 py-5 text-sm font-bold"><span class="block" style="color:#00c471">인프런 강의</span><span class="text-slate-400">상시 수강</span></td>
-        <td class="px-4 py-5"><div class="flex gap-1 flex-wrap"><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">무제한</span></div></td>
-        <td class="px-4 py-5"><span class="px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium">누구나</span></td>
-        <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${ad.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
-        <td class="px-4 py-5 text-center">-</td>
-        <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${ad.description}</td>
-    </tr>`;
+function pickAdForContext(index) {
+    return InflearnAds[index % InflearnAds.length];
 }
 
-// 시안 1: 스텔스 카드 (모바일)
-function renderAdStealth_Mobile(ad) {
-    return `
-    <a href="${ad.link}" target="_blank" class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg">
-        <div class="flex items-start justify-between mb-3">
-            <div class="flex items-center gap-2 min-w-0">
-                <span class="text-2xl shrink-0">${ad.emoji}</span>
-                <span class="font-bold text-lg">${ad.title}</span>
-                <span class="px-1.5 py-0.5 rounded bg-slate-300/50 dark:bg-slate-600/50 text-slate-400 dark:text-slate-500 text-[10px] font-medium leading-none">AD</span>
-            </div>
-        </div>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">${ad.description}</p>
-        <div class="space-y-2 text-sm">
-            <div class="flex items-center gap-2">
-                <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">플랫폼</span>
-                <span class="font-medium" style="color:#00c471">인프런 강의</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">수강 기간</span>
-                <span class="font-medium">무제한</span>
-            </div>
-            <div class="flex items-start gap-2">
-                <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0 pt-0.5">관련 분야</span>
-                <div class="flex flex-wrap gap-1">${ad.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
-            </div>
-        </div>
-    </a>`;
-}
-
-// 시안 2: 하이라이트 행 (데스크톱)
-function renderAdHighlight_Desktop(ad) {
-    return `
-    <tr class="bg-green-50/40 dark:bg-green-900/10 hover:bg-green-50/70 dark:hover:bg-green-900/20 transition-colors cursor-pointer" style="border-left:3px solid #00c471" onclick="window.open('${ad.link}','_blank')">
-        <td class="px-4 py-5">
-            <div class="flex items-center gap-2">
-                <span class="text-xl">${ad.emoji}</span>
-                <div class="flex flex-col gap-1">
-                    <span class="font-bold"><a href="${ad.link}" target="_blank" class="hover:underline decoration-2 underline-offset-4" style="color:inherit">${ad.title}</a></span>
-                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold w-fit" style="background:rgba(0,196,113,0.15);color:#00c471">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        인프런 추천
-                    </span>
-                </div>
-            </div>
-        </td>
-        <td class="px-4 py-5 text-sm font-bold"><span class="block" style="color:#00c471">인프런 강의</span><span class="text-slate-400">상시 수강</span></td>
-        <td class="px-4 py-5"><div class="flex gap-1 flex-wrap"><span class="px-2 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-xs text-green-700 dark:text-green-400">무제한</span></div></td>
-        <td class="px-4 py-5"><span class="px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium">누구나</span></td>
-        <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${ad.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
-        <td class="px-4 py-5 text-center">-</td>
-        <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${ad.description}</td>
-    </tr>`;
-}
-
-// 시안 2: 하이라이트 카드 (모바일)
-function renderAdHighlight_Mobile(ad) {
-    return `
-    <a href="${ad.link}" target="_blank" class="block p-4 bg-green-50/50 dark:bg-green-900/10 border rounded-2xl shadow-lg relative overflow-hidden" style="border-color:rgba(0,196,113,0.3)">
-        <div class="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl" style="background:#00c471"></div>
-        <div class="flex items-start justify-between mb-2">
-            <div class="flex items-center gap-2 min-w-0">
-                <span class="text-2xl shrink-0">${ad.emoji}</span>
-                <span class="font-bold text-lg">${ad.title}</span>
-            </div>
-            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold shrink-0" style="background:rgba(0,196,113,0.15);color:#00c471">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                인프런 추천
-            </span>
-        </div>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">${ad.description}</p>
-        <div class="space-y-2 text-sm">
-            <div class="flex items-center gap-2">
-                <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">플랫폼</span>
-                <span class="font-medium" style="color:#00c471">인프런 강의</span>
-            </div>
-            <div class="flex items-start gap-2">
-                <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0 pt-0.5">관련 분야</span>
-                <div class="flex flex-wrap gap-1">${ad.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
-            </div>
-        </div>
-    </a>`;
-}
-
-// 시안 3: 코스 카드 행 (데스크톱)
-function renderAdCourseCard_Desktop(ad) {
-    const gradientColors = {
-        blue: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/20',
-        green: 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/20',
-        purple: 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/20',
-        yellow: 'from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/20',
-        orange: 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/20'
-    };
-    const gradient = gradientColors[ad.colorFrom] || gradientColors.blue;
-    return `
-    <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-        <td colspan="7" class="px-4 py-4">
-            <a href="${ad.link}" target="_blank" class="block p-4 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/15 dark:to-emerald-900/10 border border-green-200/50 dark:border-green-800/30 hover:border-green-400/40 transition-all group">
-                <div class="flex items-center gap-5">
-                    <div class="w-32 h-20 rounded-lg bg-gradient-to-br ${gradient} shrink-0 flex items-center justify-center">
-                        <span class="text-3xl">${ad.icon}</span>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="font-bold text-base group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">${ad.title}</span>
-                            <span class="px-1.5 py-0.5 rounded bg-slate-300/50 dark:bg-slate-600/50 text-slate-400 dark:text-slate-500 text-[10px] font-medium leading-none">AD</span>
-                        </div>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">${ad.description}</p>
-                        <div class="flex items-center gap-3">
-                            <div class="flex flex-wrap gap-1.5">${ad.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
-                            <span class="text-xs text-slate-400">|</span>
-                            <span class="text-xs text-slate-500 dark:text-slate-400">${ad.instructor} 강사</span>
-                            <span class="text-xs text-yellow-500">${ad.rating} ★</span>
-                        </div>
-                    </div>
-                    <div class="shrink-0 flex flex-col items-end gap-2">
-                        <span class="px-4 py-2 rounded-lg text-white text-sm font-semibold" style="background:#00c471">강의 보기</span>
-                        <span class="text-xs text-slate-400">인프런 파트너스</span>
-                    </div>
-                </div>
-            </a>
-        </td>
-    </tr>`;
-}
-
-// 시안 3: 코스 카드 (모바일)
-function renderAdCourseCard_Mobile(ad) {
-    const gradientColors = {
-        blue: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/20',
-        green: 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/20',
-        purple: 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/20',
-        yellow: 'from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/20',
-        orange: 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/20'
-    };
-    const gradient = gradientColors[ad.colorFrom] || gradientColors.blue;
-    return `
-    <a href="${ad.link}" target="_blank" class="block rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/15 dark:to-emerald-900/10 border border-green-200/50 dark:border-green-800/30 shadow-lg overflow-hidden">
-        <div class="w-full h-36 bg-gradient-to-br ${gradient} flex items-center justify-center">
-            <span class="text-4xl">${ad.icon}</span>
-        </div>
-        <div class="p-4">
-            <div class="flex items-center gap-2 mb-1">
-                <span class="font-bold text-lg">${ad.title}</span>
-                <span class="px-1.5 py-0.5 rounded bg-slate-300/50 dark:bg-slate-600/50 text-slate-400 dark:text-slate-500 text-[10px] font-medium leading-none">AD</span>
-            </div>
-            <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">${ad.description}</p>
-            <div class="flex items-center gap-2 mb-3">
-                ${ad.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}
-                <span class="text-xs text-yellow-500 ml-auto">${ad.rating} ★</span>
-            </div>
-            <div class="flex items-center justify-between">
-                <span class="text-xs text-slate-400">인프런 파트너스</span>
-                <span class="px-4 py-2 rounded-lg text-white text-sm font-semibold" style="background:#00c471">강의 보기</span>
-            </div>
-        </div>
-    </a>`;
-}
-
-// 시안 4: 미니멀 추천 행 (데스크톱)
 function renderAdMinimal_Desktop(ad) {
     return `
     <tr class="bg-slate-50/30 dark:bg-slate-800/20">
         <td colspan="7" class="px-4 py-2.5">
-            <a href="${ad.link}" target="_blank" class="flex items-center justify-between gap-4 group">
+            <a href="${ad.link}" target="_blank" rel="noopener" class="flex items-center justify-between gap-4 group">
                 <div class="flex items-center gap-3">
                     <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
                     <span class="text-sm text-slate-500 dark:text-slate-400">
@@ -612,10 +378,9 @@ function renderAdMinimal_Desktop(ad) {
     </tr>`;
 }
 
-// 시안 4: 미니멀 추천 (모바일)
 function renderAdMinimal_Mobile(ad) {
     return `
-    <a href="${ad.link}" target="_blank" class="flex items-center gap-3 px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl">
+    <a href="${ad.link}" target="_blank" rel="noopener" class="flex items-center gap-3 px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl">
         <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none shrink-0" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
         <div class="flex-1 min-w-0">
             <span class="text-sm font-medium text-slate-700 dark:text-slate-300">${ad.hookText}</span>
@@ -625,80 +390,13 @@ function renderAdMinimal_Mobile(ad) {
     </a>`;
 }
 
-// 시안 5: 멀티 코스 캐러셀 (데스크톱)
-function renderAdCarousel_Desktop(ads) {
-    const gradientColors = {
-        blue: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/20',
-        green: 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/20',
-        purple: 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/20',
-        yellow: 'from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/20',
-        orange: 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/20'
-    };
-    const cards = ads.map(ad => {
-        const gradient = gradientColors[ad.colorFrom] || gradientColors.blue;
-        return `
-            <a href="${ad.link}" target="_blank" class="shrink-0 w-56 p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group" style="border-color:transparent" onmouseover="this.style.borderColor='rgba(0,196,113,0.4)'" onmouseout="this.style.borderColor='transparent'">
-                <div class="w-full h-28 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center mb-3">
-                    <span class="text-3xl">${ad.icon}</span>
-                </div>
-                <h4 class="font-semibold text-sm mb-1 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-2">${ad.title}</h4>
-                <p class="text-xs text-slate-400 mb-2">${ad.instructor} 강사</p>
-                <div class="flex items-center justify-between">
-                    <span class="px-1.5 py-0.5 rounded ${ad.fields[0].class} text-[11px] font-medium">${ad.fields[0].name}</span>
-                    <span class="text-xs text-yellow-500">${ad.rating} ★</span>
-                </div>
-            </a>`;
-    }).join('');
+const NON_DEV_FIELDS = new Set([
+    Field.MARKETING.name, Field.MANAGEMENT.name,
+    Field.PM.name, Field.DESIGN.name, Field.UX.name
+]);
 
-    return `
-    <tr class="bg-slate-50/30 dark:bg-slate-800/20">
-        <td colspan="7" class="px-4 py-4">
-            <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2">
-                    <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
-                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">동아리 준비에 도움되는 인프런 강의</span>
-                </div>
-                <span class="text-xs text-slate-400">스크롤하여 더 보기 →</span>
-            </div>
-            <div class="flex gap-3 overflow-x-auto pb-2 notion-scroll" style="scroll-snap-type:x mandatory">${cards}</div>
-        </td>
-    </tr>`;
-}
-
-// 시안 5: 멀티 코스 캐러셀 (모바일)
-function renderAdCarousel_Mobile(ads) {
-    const gradientColors = {
-        blue: 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/20',
-        green: 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/20',
-        purple: 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/20',
-        yellow: 'from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/20',
-        orange: 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/20'
-    };
-    const cards = ads.map(ad => {
-        const gradient = gradientColors[ad.colorFrom] || gradientColors.blue;
-        return `
-            <a href="${ad.link}" target="_blank" class="shrink-0 w-40 p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
-                <div class="w-full h-20 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center mb-2">
-                    <span class="text-2xl">${ad.icon}</span>
-                </div>
-                <h4 class="font-semibold text-xs mb-0.5 line-clamp-2">${ad.title}</h4>
-                <div class="flex items-center justify-between">
-                    <span class="text-[10px] text-slate-400">${ad.instructor}</span>
-                    <span class="text-[10px] text-yellow-500">${ad.rating} ★</span>
-                </div>
-            </a>`;
-    }).join('');
-
-    return `
-    <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-4">
-        <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
-                <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">추천 인프런 강의</span>
-            </div>
-        </div>
-        <div class="flex gap-3 overflow-x-auto pb-2 notion-scroll" style="scroll-snap-type:x mandatory;margin:0 -4px;padding:0 4px">${cards}</div>
-    </div>`;
+function hasDevPosition(club) {
+    return club.fields.some(f => !NON_DEV_FIELDS.has(f.name));
 }
 
 function getAllClubs() {
@@ -815,9 +513,11 @@ function renderTable(clubs = getAllClubs()) {
         return;
     }
 
-    const rows = clubs.map((club, index) => {
+    let adIndex = 0;
+    const result = [];
+    clubs.forEach((club, index) => {
         const nameContent = club.link ? `<a href="${club.link}" target="_blank" class="hover:text-primary hover:underline decoration-2 underline-offset-4">${club.name}</a>` : club.name;
-        const row = `
+        result.push(`
         <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
             <td class="px-4 py-5 text-sm font-bold"><span class="block">${club.recruitStart}</span><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
@@ -826,29 +526,13 @@ function renderTable(clubs = getAllClubs()) {
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
             ${window.isHackathonPage ? '' : `<td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>`}
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
-        </tr>`;
-        return row;
+        </tr>`);
+        if ((index + 1) % AD_INTERVAL === 0) {
+            result.push(renderAdMinimal_Desktop(pickAdForContext(adIndex++)));
+        }
     });
 
-    // 광고 데모 모드: 5가지 디자인을 모두 행 사이에 삽입
-    if (isAdDemo && rows.length >= 2) {
-        const adRenderers = [
-            () => renderAdStealth_Desktop(InflearnAds[0]),
-            () => renderAdHighlight_Desktop(InflearnAds[1]),
-            () => renderAdCourseCard_Desktop(InflearnAds[2]),
-            () => renderAdMinimal_Desktop(InflearnAds[3]),
-            () => renderAdCarousel_Desktop(InflearnAds),
-        ];
-        const labels = ['시안 1: 스텔스 행', '시안 2: 하이라이트 행', '시안 3: 코스 카드 행', '시안 4: 미니멀 추천', '시안 5: 멀티 캐러셀'];
-        const labelColors = ['bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400', 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400', 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400', 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400', 'bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400'];
-        for (let i = adRenderers.length - 1; i >= 0; i--) {
-            const insertAt = Math.min(i + 1, rows.length);
-            const labelRow = `<tr><td colspan="7" class="px-4 pt-6 pb-2"><span class="px-3 py-1 rounded-full ${labelColors[i]} text-xs font-bold">${labels[i]}</span></td></tr>`;
-            rows.splice(insertAt, 0, labelRow + adRenderers[i]());
-        }
-    }
-
-    tbody.innerHTML = rows.join('');
+    tbody.innerHTML = result.join('');
 }
 
 function renderMobileCards(clubs = getAllClubs()) {
@@ -861,10 +545,12 @@ function renderMobileCards(clubs = getAllClubs()) {
         return;
     }
 
-    const cards = clubs.map(club => {
+    let adIndex = 0;
+    const result = [];
+    clubs.forEach((club, index) => {
         const Tag = club.link ? 'a' : 'div';
         const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
-        return `
+        result.push(`
         <${Tag} ${hrefAttr} class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg">
             <div class="flex items-start justify-between mb-3">
                 <div class="flex items-center gap-2 min-w-0">
@@ -892,28 +578,13 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <div class="flex flex-wrap gap-1">${club.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
                 </div>
             </div>
-        </${Tag}>`;
+        </${Tag}>`);
+        if ((index + 1) % AD_INTERVAL === 0) {
+            result.push(renderAdMinimal_Mobile(pickAdForContext(adIndex++)));
+        }
     });
 
-    // 광고 데모 모드: 5가지 디자인을 모두 카드 사이에 삽입
-    if (isAdDemo && cards.length >= 2) {
-        const adRenderers = [
-            () => renderAdStealth_Mobile(InflearnAds[0]),
-            () => renderAdHighlight_Mobile(InflearnAds[1]),
-            () => renderAdCourseCard_Mobile(InflearnAds[2]),
-            () => renderAdMinimal_Mobile(InflearnAds[3]),
-            () => renderAdCarousel_Mobile(InflearnAds),
-        ];
-        const labels = ['시안 1: 스텔스 카드', '시안 2: 하이라이트 카드', '시안 3: 코스 카드', '시안 4: 미니멀 추천', '시안 5: 멀티 캐러셀'];
-        const labelColors = ['bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400', 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400', 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400', 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400', 'bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400'];
-        for (let i = adRenderers.length - 1; i >= 0; i--) {
-            const insertAt = Math.min(i + 1, cards.length);
-            const labelHtml = `<div class="pt-4 pb-1"><span class="px-3 py-1 rounded-full ${labelColors[i]} text-xs font-bold">${labels[i]}</span></div>`;
-            cards.splice(insertAt, 0, labelHtml + adRenderers[i]());
-        }
-    }
-
-    container.innerHTML = cards.join('');
+    container.innerHTML = result.join('');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
