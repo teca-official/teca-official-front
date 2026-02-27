@@ -47,8 +47,7 @@ const Category = {
     ANDROID: "Android",
     FLUTTER: "Flutter",
     REACT_NATIVE: "ReactNative",
-    JAVA_SPRING: "Java/Spring",
-    NODEJS: "Node.js",
+    BACKEND: "백엔드",
     ANY: "무관",
     CLOUD: "클라우드",
     MARKETING: "마케팅",
@@ -66,8 +65,7 @@ const FilterCategory = {
     [Category.ANDROID]: ["Android"],
     [Category.FLUTTER]: ["Flutter", "앱"],
     [Category.REACT_NATIVE]: ["ReactNative"],
-    [Category.JAVA_SPRING]: ["SpringBoot", "Backend", "Django"],
-    [Category.NODEJS]: ["Node.js"],
+    [Category.BACKEND]: ["SpringBoot", "Backend", "Django", "Node.js"],
     [Category.ANY]: ["무관"],
     [Category.CLOUD]: ["클라우드"],
     [Category.MARKETING]: ["Marketing"],
@@ -77,9 +75,10 @@ const FilterCategory = {
 
 // 페이지별 표시할 카테고리
 const PAGE_CATEGORIES = {
-    bootcamp: [Category.WEB, Category.JAVA_SPRING, Category.NODEJS, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE, Category.AI, Category.CLOUD, Category.DESIGN, Category.MARKETING],
+    it: [Category.PM, Category.DESIGN, Category.AI, Category.WEB, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE, Category.BACKEND, Category.ANY, Category.CLOUD, Category.ALGORITHM, Category.CS],
+    bootcamp: [Category.WEB, Category.BACKEND, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE, Category.AI, Category.CLOUD, Category.DESIGN, Category.MARKETING],
     marketing: [Category.PM, Category.DESIGN, Category.MARKETING],
-    hackathon: [Category.AI, Category.WEB, Category.JAVA_SPRING, Category.NODEJS, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE],
+    hackathon: [Category.AI, Category.WEB, Category.BACKEND, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE],
 };
 
 const Club = {
@@ -107,7 +106,7 @@ const Club = {
     // 2025-06-12
     DND_SUMMER: { name: "DnD (여름방학)", link: "https://dnd.ac/", dots: "🌕🌕", icon: "🎲", themeColor: "slate-500", recruitStart: "6월 12일 2025", recruitEnd: "6월 22일 2025", activity: ["7월", "8월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], description: "'프로젝트에 즐거움을, 모두에게 기회를'이라는 슬로건으로 8주간 기획자와 디자이너가 함께 협업하는 동아리", fields: [Field.PM, Field.DESIGN, Field.UX, Field.WEB, Field.IOS, Field.ANDROID, Field.SPRING] },
     // 2025-06-14
-    AUSG: { name: "AUSG", link: "https://www.instagram.com/ausg.awskrug/", dots: "🌕🌕🌗", icon: "☁️", themeColor: "slate-500", recruitStart: "6월 14일 2025", recruitEnd: "6월 30일 2025", activity: ["9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY], description: "AWSKRUG University Student Group의 약자로, AWS를 공부하고 활용하는 대학생들의 커뮤니티", fields: [Field.NONE] },
+    AUSG: { name: "AUSG", link: "https://www.instagram.com/ausg.awskrug/", dots: "🌕🌕🌗", icon: "☁️", themeColor: "slate-500", recruitStart: "6월 14일 2025", recruitEnd: "6월 30일 2025", activity: ["9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY], description: "AWSKRUG University Student Group의 약자로, AWS를 공부하고 활용하는 대학생들의 커뮤니티", fields: [Field.CLOUD, Field.NONE] },
     // 2025-06-16
     BOAZ_H2: { name: "보아즈 (하반기)", link: "https://www.bigdataboaz.com/", dots: "🌕🌕🌕", icon: "📈", themeColor: "slate-500", recruitStart: "6월 16일 2025", recruitEnd: "6월 25일 2025", activity: ["7월", "8월", "9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], description: "국내 최초 빅데이터 동아리로, 6개월간 장기 프로젝트와 컨퍼런스 발표를 진행", fields: [Field.DATA_ANALYSIS, Field.DATA_VIZ, Field.DATA_ENGINEERING] },
     // 2025-06-30
@@ -720,9 +719,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const fieldsContainer = document.getElementById('filter-fields');
         const pageName = getPageName();
         const pageCategories = PAGE_CATEGORIES[pageName];
-        const categories = pageCategories
-            ? Object.keys(FilterCategory).filter(c => pageCategories.includes(c))
-            : Object.keys(FilterCategory);
+        const allItems = getAllClubs();
+        const allFieldNames = new Set(allItems.flatMap(item => item.fields.map(f => f.name)));
+        const DISPLAY_ORDER = [Category.PM, Category.DESIGN, Category.WEB, Category.ANDROID, Category.IOS, Category.FLUTTER, Category.REACT_NATIVE, Category.BACKEND, Category.CLOUD, Category.AI, Category.ANY, Category.MARKETING, Category.ALGORITHM, Category.CS];
+        const categorySet = new Set(
+            (pageCategories
+                ? Object.keys(FilterCategory).filter(c => pageCategories.includes(c))
+                : Object.keys(FilterCategory)
+            ).filter(category => FilterCategory[category].some(field => allFieldNames.has(field)))
+        );
+        const categories = DISPLAY_ORDER.filter(c => categorySet.has(c));
         fieldsContainer.innerHTML = categories.map(category => `
             <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" value="${category}" data-filter-key="fields" class="form-checkbox rounded text-primary focus:ring-primary/50">
