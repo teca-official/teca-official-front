@@ -36,6 +36,10 @@
       "dest": "/hackathon.html"
     },
     {
+      "src": "/recommend",
+      "dest": "/recommend.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }

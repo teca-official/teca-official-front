@@ -518,6 +518,7 @@ function renderMobileCards(clubs = getAllClubs()) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.isRecommendPage) return;
     // --- Filter Logic ---
     const activeFilters = {
         eligibility: new Set(),
