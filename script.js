@@ -833,8 +833,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// 🦕 Easter Egg
+// 🦕 Easter Egg (IT 연합동아리 페이지에서만 동작)
 (function() {
+    if (getPageName() !== 'it') return;
+
     const logo = document.querySelector('header img[alt="Logo"]');
     if (!logo) return;
 
