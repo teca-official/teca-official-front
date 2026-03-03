@@ -843,6 +843,8 @@ document.addEventListener('DOMContentLoaded', () => {
     logo.addEventListener('click', function() {
         if (document.getElementById('easter-egg-modal')) return;
 
+        trackEvent('favicon_easter_egg_click', { page: getPageName() });
+
         const overlay = document.createElement('div');
         overlay.id = 'easter-egg-modal';
         overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm';
