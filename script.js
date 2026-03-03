@@ -832,3 +832,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// 🦕 Easter Egg
+(function() {
+    const logo = document.querySelector('header img[alt="Logo"]');
+    if (!logo) return;
+
+    logo.style.cursor = 'pointer';
+
+    logo.addEventListener('click', function() {
+        if (document.getElementById('easter-egg-modal')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'easter-egg-modal';
+        overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm';
+
+        overlay.innerHTML = `
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-2xl text-center max-w-sm mx-4 transform animate-bounce-in">
+                <div class="text-5xl mb-4">🎉</div>
+                <p class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">쿠폰을 발견했어요!</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">인프런 쿠폰번호</p>
+                <div class="bg-slate-100 dark:bg-slate-700 rounded-xl px-6 py-3 mb-4 select-all">
+                    <span class="text-xl font-bold text-primary tracking-wider">인프런짱짱</span>
+                </div>
+                <p class="text-xs text-slate-400 dark:text-slate-500 mb-4">쿠폰번호를 복사해서 인프런에서 사용하세요!</p>
+                <button id="easter-egg-close" class="px-6 py-2 bg-primary text-white rounded-full text-sm font-medium hover:bg-blue-600 transition-colors mb-3">닫기</button>
+                <p class="text-[10px] text-slate-400 dark:text-slate-500">본 쿠폰은 이미 공개된 코드이며, 인프런과는 무관합니다.</p>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay || e.target.id === 'easter-egg-close') {
+                overlay.remove();
+            }
+        });
+    });
+})();
