@@ -51,7 +51,7 @@
 <link href="style.css" rel="stylesheet"/>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
-<div class="min-h-screen flex flex-col">
+<div class="flex flex-col md:min-h-screen">
 <header class="pt-8 md:pt-12 pb-4 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full">
 <div class="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
 <a href="/">
@@ -63,11 +63,11 @@
 </div>
 </header>
 
-<main class="flex-1 px-4 sm:px-6 md:px-12 pb-8 md:pb-12">
-<div class="max-w-2xl mx-auto">
+<main class="md:flex-1 px-4 sm:px-6 md:px-12 pb-8 md:pb-12">
+<div class="max-w-2xl md:max-w-3xl mx-auto">
 
 <!-- Progress Bar -->
-<div class="mb-8" id="progress-section">
+<div class="mb-6 md:mb-8" id="progress-section">
     <div class="flex justify-between items-center mb-2">
         <span class="text-sm font-medium text-slate-500 dark:text-slate-400" id="progress-label">질문 1/4</span>
         <span class="text-sm font-medium text-primary" id="progress-percent">25%</span>
@@ -85,17 +85,17 @@
         <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl p-6 sm:p-8 shadow-lg">
             <h2 class="text-xl sm:text-2xl font-bold mb-2">현재 상태가 어떻게 되시나요?</h2>
             <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">지원 자격에 맞는 동아리를 추천해 드릴게요</p>
-            <div class="space-y-3" id="step1-options">
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="대학생">
-                    <span class="text-lg font-medium">🎓 대학생</span>
+            <div class="space-y-2 sm:space-y-3" id="step1-options">
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="대학생">
+                    <span class="text-base sm:text-lg font-medium">🎓 대학생</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">재학생, 휴학생 포함</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="현직자">
-                    <span class="text-lg font-medium">💼 현직자</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="현직자">
+                    <span class="text-base sm:text-lg font-medium">💼 현직자</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">직장인, 프리랜서, 취준생 등</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="신촌지역대학생">
-                    <span class="text-lg font-medium">🏫 신촌지역 대학생</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="신촌지역대학생">
+                    <span class="text-base sm:text-lg font-medium">🏫 신촌지역 대학생</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">서강대, 숙명여대, 연세대, 이화여대, 홍익대</p>
                 </button>
             </div>
@@ -107,7 +107,7 @@
         <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl p-6 sm:p-8 shadow-lg">
             <h2 class="text-xl sm:text-2xl font-bold mb-2">어떤 분야에 관심이 있으신가요?</h2>
             <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">여러 개 선택할 수 있어요</p>
-            <div class="grid grid-cols-2 gap-3" id="step2-options">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="step2-options">
                 <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-center" data-value="PM">
                     <span class="text-2xl block mb-1">📋</span>
                     <span class="text-sm font-medium">PM</span>
@@ -124,9 +124,21 @@
                     <span class="text-2xl block mb-1">🌐</span>
                     <span class="text-sm font-medium">웹</span>
                 </button>
-                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-center" data-value="모바일">
-                    <span class="text-2xl block mb-1">📱</span>
-                    <span class="text-sm font-medium">모바일</span>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-center" data-value="Android">
+                    <span class="text-2xl block mb-1">🤖</span>
+                    <span class="text-sm font-medium">Android</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-center" data-value="iOS">
+                    <span class="text-2xl block mb-1">🍎</span>
+                    <span class="text-sm font-medium">iOS</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-center" data-value="Flutter">
+                    <span class="text-2xl block mb-1">💙</span>
+                    <span class="text-sm font-medium">Flutter</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-center" data-value="ReactNative">
+                    <span class="text-2xl block mb-1">⚛️</span>
+                    <span class="text-sm font-medium">React Native</span>
                 </button>
                 <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-center" data-value="백엔드">
                     <span class="text-2xl block mb-1">🗄️</span>
@@ -158,21 +170,21 @@
         <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl p-6 sm:p-8 shadow-lg">
             <h2 class="text-xl sm:text-2xl font-bold mb-2">경험 수준은 어느 정도인가요?</h2>
             <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">티어에 맞는 동아리를 매칭해 드릴게요</p>
-            <div class="space-y-3" id="step3-options">
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="1">
-                    <span class="text-lg font-medium">🌕 초보</span>
+            <div class="space-y-2 sm:space-y-3 md:grid md:grid-cols-2 md:gap-3 md:space-y-0" id="step3-options">
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="1">
+                    <span class="text-base sm:text-lg font-medium">🌕 초보</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">비전공자, 신입생 - 프로젝트 경험을 시작하기 좋은 곳</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="2">
-                    <span class="text-lg font-medium">🌕🌕 중급</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="2">
+                    <span class="text-base sm:text-lg font-medium">🌕🌕 중급</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">심도 있는 프로젝트를 경험하고 싶은 분</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="3">
-                    <span class="text-lg font-medium">🌕🌕🌕 고급</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="3">
+                    <span class="text-base sm:text-lg font-medium">🌕🌕🌕 고급</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">인지도 높은 동아리, 끝판왕을 찾는 분</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="any">
-                    <span class="text-lg font-medium">✨ 상관없어요</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="any">
+                    <span class="text-base sm:text-lg font-medium">✨ 상관없어요</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">티어 상관없이 모두 보여주세요</p>
                 </button>
             </div>
@@ -190,25 +202,25 @@
         <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl p-6 sm:p-8 shadow-lg">
             <h2 class="text-xl sm:text-2xl font-bold mb-2">언제 활동하고 싶으신가요?</h2>
             <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">원하는 활동 시기에 맞춰 추천해 드릴게요</p>
-            <div class="space-y-3" id="step4-options">
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q1">
-                    <span class="text-lg font-medium">❄️ 1~3월</span>
+            <div class="space-y-2 sm:space-y-3 md:grid md:grid-cols-2 md:gap-3 md:space-y-0" id="step4-options">
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q1">
+                    <span class="text-base sm:text-lg font-medium">❄️ 1~3월</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">겨울방학 ~ 1학기 초</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q2">
-                    <span class="text-lg font-medium">🌸 4~6월</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q2">
+                    <span class="text-base sm:text-lg font-medium">🌸 4~6월</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">1학기</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q3">
-                    <span class="text-lg font-medium">☀️ 7~9월</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q3">
+                    <span class="text-base sm:text-lg font-medium">☀️ 7~9월</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">여름방학 ~ 2학기 초</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q4">
-                    <span class="text-lg font-medium">🍂 10~12월</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q4">
+                    <span class="text-base sm:text-lg font-medium">🍂 10~12월</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">2학기</p>
                 </button>
-                <button class="quiz-option w-full text-left px-5 py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="any">
-                    <span class="text-lg font-medium">✨ 상관없어요</span>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="any">
+                    <span class="text-base sm:text-lg font-medium">✨ 상관없어요</span>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">시기 상관없이 모두 보여주세요</p>
                 </button>
             </div>
@@ -238,7 +250,7 @@
         <p class="text-slate-400 dark:text-slate-500 text-sm mt-1">조건을 바꿔서 다시 시도해 보세요!</p>
     </div>
 
-    <div class="flex gap-3">
+    <div class="flex flex-col sm:flex-row gap-3">
         <button id="retry-btn" class="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white font-medium hover:bg-blue-600 transition-all">
             <span class="material-symbols-outlined text-base">refresh</span>
             다시 해보기
@@ -325,7 +337,10 @@
         "디자인": ["Design", "UX"],
         "AI": ["AI", "머신러닝", "딥러닝", "LLM", "데이터 분석", "데이터 시각화", "데이터 엔지니어링"],
         "웹": ["WEB", "Frontend"],
-        "모바일": ["Android", "iOS", "ReactNative", "Flutter", "앱"],
+        "Android": ["Android"],
+        "iOS": ["iOS"],
+        "Flutter": ["Flutter"],
+        "ReactNative": ["ReactNative"],
         "백엔드": ["Backend", "SpringBoot", "Node.js", "Django"],
         "클라우드": ["클라우드"]
     };
@@ -335,8 +350,24 @@
         return (dots.match(/🌕/g) || []).length;
     }
 
+    // --- Date Parsing ---
+    function parseKoreanDate(str) {
+        const match = str.match(/(\d+)월\s*(\d+)일\s*(\d+)/);
+        if (!match) return null;
+        return new Date(Number(match[3]), Number(match[1]) - 1, Number(match[2]));
+    }
+
     // --- Matching Algorithm ---
     function calculateScore(club) {
+        // 0. Marketing 동아리 제외 (프로그래피 예외)
+        if (club.fields.some(f => f.name === "Marketing") && !club.name.includes("프로그래피")) return -1;
+
+        // 0-1. Recruit period hard filter (활동 시기를 선택한 경우에만 적용)
+        if (answers.timing !== "any") {
+            const endDate = parseKoreanDate(club.recruitEnd);
+            if (endDate && endDate < new Date()) return -1;
+        }
+
         // 1. Eligibility hard filter
         const userElig = answers.eligibility;
         let eligible = false;
@@ -351,7 +382,7 @@
 
         let score = 0;
 
-        // 2. Field matching (40 points)
+        // 2. Field hard filter + scoring (40 points)
         if (answers.fields.includes("상관없어요") || answers.fields.length === 0) {
             score += 40;
         } else {
@@ -361,10 +392,13 @@
                 if (FIELD_MAP[cat]) userFieldNames.push(...FIELD_MAP[cat]);
             });
 
-            if (clubFieldNames.includes("무관")) {
-                score += 40;
+            const specificFields = clubFieldNames.filter(f => f !== "무관");
+            if (specificFields.length === 0) {
+                // 분야가 "무관"만 있는 동아리 (예: sipe) → 절반 점수
+                score += 20;
             } else {
-                const matchCount = userFieldNames.filter(f => clubFieldNames.includes(f)).length;
+                const matchCount = userFieldNames.filter(f => specificFields.includes(f)).length;
+                if (matchCount === 0) return -1; // 매칭 분야 없으면 제외
                 if (userFieldNames.length > 0) {
                     score += Math.round((matchCount / userFieldNames.length) * 40);
                 }
@@ -473,15 +507,24 @@
         document.getElementById('progress-section').classList.add('hidden');
         document.getElementById('results-container').classList.remove('hidden');
 
-        const results = [];
+        const allResults = [];
         Object.values(Club).forEach(club => {
             const score = calculateScore(club);
             if (score >= 40) {
-                results.push({ club, score });
+                allResults.push({ club, score });
             }
         });
 
-        results.sort((a, b) => b.score - a.score);
+        allResults.sort((a, b) => b.score - a.score);
+
+        // 같은 동아리 중복 제거 (점수 높은 것만 남김)
+        const seen = new Set();
+        const results = allResults.filter(r => {
+            const baseName = r.club.name.replace(/\s*\(.*\)$/, '');
+            if (seen.has(baseName)) return false;
+            seen.add(baseName);
+            return true;
+        });
 
         const bestMatches = results.filter(r => r.score >= 70);
         const goodMatches = results.filter(r => r.score >= 40 && r.score < 70);
@@ -503,9 +546,9 @@
             bestContainer.innerHTML = `
                 <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
                     <span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1">star</span>
-                    최고의 매치
+                    추천 동아리
                 </h3>
-                <div class="space-y-3">${bestMatches.map(r => renderCard(r)).join('')}</div>
+                <div class="flex gap-3 overflow-x-auto pb-4 notion-scroll">${bestMatches.map(r => renderCard(r)).join('')}</div>
             `;
         }
 
@@ -515,7 +558,7 @@
                     <span class="material-symbols-outlined text-slate-400">thumb_up</span>
                     이런 동아리도 있어요
                 </h3>
-                <div class="space-y-3">${goodMatches.map(r => renderCard(r)).join('')}</div>
+                <div class="flex gap-3 overflow-x-auto pb-4 notion-scroll">${goodMatches.map(r => renderCard(r)).join('')}</div>
             `;
         }
 
@@ -532,6 +575,7 @@
     function renderCard(result) {
         const { club, score } = result;
         const pct = score;
+        const displayName = club.name.replace(/\s*\(.*\)$/, '');
         const tierText = club.dots;
         const fieldTags = club.fields.map(f =>
             `<span class="inline-block px-2 py-0.5 rounded text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">${f.name}</span>`
@@ -543,26 +587,24 @@
         const linkAttr = hasLink ? `href="${club.link}" target="_blank"` : '';
 
         return `
-            <${tag} ${linkAttr} class="block bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl p-4 sm:p-5 hover:shadow-md transition-all cursor-pointer group" onclick="trackResultClick('${club.name.replace(/'/g, "\\'")}', ${pct})">
-                <div class="flex items-start gap-3">
-                    <span class="text-3xl shrink-0">${club.icon}</span>
+            <${tag} ${linkAttr} class="block w-64 sm:w-72 md:w-80 shrink-0 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl p-4 sm:p-5 hover:shadow-md transition-all cursor-pointer group" onclick="trackResultClick('${club.name.replace(/'/g, "\\'")}', ${pct})">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-3xl">${club.icon}</span>
                     <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-2 mb-1">
-                            <h4 class="font-bold text-base truncate">${club.name}</h4>
-                            <span class="text-sm shrink-0">${tierText}</span>
-                            ${hasLink ? '<span class="material-symbols-outlined text-sm text-slate-400 group-hover:text-primary transition-colors shrink-0">open_in_new</span>' : ''}
-                        </div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="flex-1 bg-slate-200 dark:bg-slate-700 rounded-full h-1.5">
-                                <div class="bg-gradient-to-r ${barColor} h-1.5 rounded-full" style="width: ${pct}%"></div>
-                            </div>
-                            <span class="text-xs font-bold ${pct >= 70 ? 'text-orange-500' : 'text-blue-500'}">${pct}%</span>
-                        </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 line-clamp-2">${club.description}</p>
-                        <div class="flex flex-wrap gap-1 mb-1.5">${fieldTags}</div>
-                        <p class="text-xs text-slate-400 dark:text-slate-500">모집: ${club.recruitStart} ~ ${club.recruitEnd}</p>
+                        <h4 class="font-bold text-sm sm:text-base truncate">${displayName}</h4>
+                        <span class="text-xs sm:text-sm">${tierText}</span>
                     </div>
+                    ${hasLink ? '<span class="material-symbols-outlined text-sm text-slate-400 group-hover:text-primary transition-colors">open_in_new</span>' : ''}
                 </div>
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="flex-1 bg-slate-200 dark:bg-slate-700 rounded-full h-1.5">
+                        <div class="bg-gradient-to-r ${barColor} h-1.5 rounded-full" style="width: ${pct}%"></div>
+                    </div>
+                    <span class="text-xs font-bold ${pct >= 70 ? 'text-orange-500' : 'text-blue-500'}">${pct}%</span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 line-clamp-3">${club.description}</p>
+                <div class="flex flex-wrap gap-1 mb-2">${fieldTags}</div>
+                <p class="text-xs text-slate-400 dark:text-slate-500">모집: ${club.recruitStart} ~ ${club.recruitEnd}</p>
             </${tag}>
         `;
     }
