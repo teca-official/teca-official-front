@@ -43,11 +43,16 @@ const Category = {
     DESIGN: "디자인",
     AI: "AI",
     WEB: "웹",
-    MOBILE: "모바일",
+    IOS: "iOS",
+    ANDROID: "Android",
+    FLUTTER: "Flutter",
+    REACT_NATIVE: "ReactNative",
     BACKEND: "백엔드",
     ANY: "무관",
     CLOUD: "클라우드",
-    MARKETING: "마케팅"
+    MARKETING: "마케팅",
+    ALGORITHM: "Algorithm",
+    CS: "CS"
 };
 
 // 카테고리 → 필드 매핑
@@ -56,18 +61,24 @@ const FilterCategory = {
     [Category.DESIGN]: ["Design", "UX"],
     [Category.AI]: ["AI", "머신러닝", "딥러닝", "LLM", "데이터 분석", "데이터 시각화", "데이터 엔지니어링"],
     [Category.WEB]: ["WEB", "Frontend"],
-    [Category.MOBILE]: ["Android", "iOS", "ReactNative", "Flutter", "앱"],
-    [Category.BACKEND]: ["Backend", "SpringBoot", "Node.js", "Django"],
+    [Category.IOS]: ["iOS"],
+    [Category.ANDROID]: ["Android"],
+    [Category.FLUTTER]: ["Flutter", "앱"],
+    [Category.REACT_NATIVE]: ["ReactNative"],
+    [Category.BACKEND]: ["SpringBoot", "Backend", "Django", "Node.js"],
     [Category.ANY]: ["무관"],
     [Category.CLOUD]: ["클라우드"],
-    [Category.MARKETING]: ["Marketing"]
+    [Category.MARKETING]: ["Marketing"],
+    [Category.ALGORITHM]: ["Algorithm"],
+    [Category.CS]: ["CS"]
 };
 
 // 페이지별 표시할 카테고리
 const PAGE_CATEGORIES = {
-    bootcamp: [Category.WEB, Category.BACKEND, Category.MOBILE, Category.AI, Category.CLOUD, Category.DESIGN, Category.MARKETING],
+    it: [Category.PM, Category.DESIGN, Category.AI, Category.WEB, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE, Category.BACKEND, Category.ANY, Category.CLOUD, Category.ALGORITHM, Category.CS],
+    bootcamp: [Category.WEB, Category.BACKEND, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE, Category.AI, Category.CLOUD, Category.DESIGN, Category.MARKETING],
     marketing: [Category.PM, Category.DESIGN, Category.MARKETING],
-    hackathon: [Category.AI, Category.WEB, Category.BACKEND, Category.MOBILE],
+    hackathon: [Category.AI, Category.WEB, Category.BACKEND, Category.IOS, Category.ANDROID, Category.FLUTTER, Category.REACT_NATIVE],
 };
 
 const Club = {
@@ -95,7 +106,7 @@ const Club = {
     // 2025-06-12
     DND_SUMMER: { name: "DnD (여름방학)", link: "https://dnd.ac/", dots: "🌕🌕", icon: "🎲", themeColor: "slate-500", recruitStart: "6월 12일 2025", recruitEnd: "6월 22일 2025", activity: ["7월", "8월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], description: "'프로젝트에 즐거움을, 모두에게 기회를'이라는 슬로건으로 8주간 기획자와 디자이너가 함께 협업하는 동아리", fields: [Field.PM, Field.DESIGN, Field.UX, Field.WEB, Field.IOS, Field.ANDROID, Field.SPRING] },
     // 2025-06-14
-    AUSG: { name: "AUSG", link: "https://www.instagram.com/ausg.awskrug/", dots: "🌕🌕🌗", icon: "☁️", themeColor: "slate-500", recruitStart: "6월 14일 2025", recruitEnd: "6월 30일 2025", activity: ["9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY], description: "AWSKRUG University Student Group의 약자로, AWS를 공부하고 활용하는 대학생들의 커뮤니티", fields: [Field.NONE] },
+    AUSG: { name: "AUSG", link: "https://www.instagram.com/ausg.awskrug/", dots: "🌕🌕🌗", icon: "☁️", themeColor: "slate-500", recruitStart: "6월 14일 2025", recruitEnd: "6월 30일 2025", activity: ["9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY], description: "AWSKRUG University Student Group의 약자로, AWS를 공부하고 활용하는 대학생들의 커뮤니티", fields: [Field.CLOUD, Field.NONE] },
     // 2025-06-16
     BOAZ_H2: { name: "보아즈 (하반기)", link: "https://www.bigdataboaz.com/", dots: "🌕🌕🌕", icon: "📈", themeColor: "slate-500", recruitStart: "6월 16일 2025", recruitEnd: "6월 25일 2025", activity: ["7월", "8월", "9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], description: "국내 최초 빅데이터 동아리로, 6개월간 장기 프로젝트와 컨퍼런스 발표를 진행", fields: [Field.DATA_ANALYSIS, Field.DATA_VIZ, Field.DATA_ENGINEERING] },
     // 2025-06-30
@@ -333,6 +344,150 @@ function getMarketingClubs() {
     });
 }
 
+// ── 인프런 파트너스 네이티브 광고 (미니멀 추천) ──
+const InflearnAds = [
+    { title: "옵시디언 마스터 클래스(생산성을 바꾸는 기록 습관)", link: "https://inf.run/sb7Rc", categories: ["PM"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/337714/cover/01jyn838cx48pfk0hfh77c2k2q", instructor: "조영수(데이먼)", rating: 4.9, reviewCount: 99, studentCount: 581, regularPrice: 132000, payPrice: 132000, discountRate: 0, isBest: true, skillTags: ["업무 생산성","obsidian"], hookText: "옵시디언 마스터 클래스(생산성을 바꾸는 기록 습관)", hookSub: "조영수(데이먼) · ⭐ 4.9 · 수강생 581명" },
+    { title: "PM을 위한 데이터 리터러시(프로덕트 데이터 분석)", link: "https://inf.run/pvSun", categories: ["PM"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/329416/cover/32d4b07f-caf1-4ce8-83d0-e4fe8ed7eca6/329416-eng.png", instructor: "카일스쿨", rating: 4.9, reviewCount: 164, studentCount: 2751, regularPrice: 132000, payPrice: 132000, discountRate: 0, isBest: true, skillTags: ["데이터 리터러시","metric hierarchy","AB test"], hookText: "PM을 위한 데이터 리터러시(프로덕트 데이터 분석)", hookSub: "카일스쿨 · ⭐ 4.9 · 수강생 2,751명" },
+    { title: "PM을 위한 데이터 리터러시 함께 공부하기 챌린지 - 1기 챌린지", link: "https://inf.run/13JYP", categories: ["PM"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/340788/cover/ai/3/49009886-86a3-4be5-804c-697f90b0acac.png", instructor: "", rating: 0, reviewCount: 0, studentCount: 0, regularPrice: 143000, payPrice: 143000, discountRate: 0, isBest: false, skillTags: [], hookText: "PM을 위한 데이터 리터러시 함께 공부하기 챌린지 - 1기 챌린지", hookSub: " · ⭐ 0 · 수강생 0명" },
+    { title: "개발자 없이 만드는 AI 웹서비스! 구글 안티그래비티로 웹앱 제작·배포·수익화까지", link: "https://inf.run/9P8oE", categories: ["PM"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/340837/cover/01khemxmvw34tx5xt20e4n2r1t", instructor: "스탠리탬", rating: 0, reviewCount: 0, studentCount: 26, regularPrice: 60500, payPrice: 42350, discountRate: 30, isBest: false, skillTags: ["Google Ads","GitHub","vercel","supabase","바이브코딩"], hookText: "개발자 없이 만드는 AI 웹서비스! 구글 안티그래비티로 웹앱 제작·배포·수익화까지 - 30% 할인 중!", hookSub: "스탠리탬 · ⭐ 0 · 수강생 26명" },
+    { title: "[기초스피치] 14년차 아나운서에게 배우는 말 잘하는 방법!", link: "https://inf.run/nEnxv", categories: ["PM"], thumbnailUrl: "https://cdn.inflearn.com/public/course-325171-cover/aba3e219-8982-4410-935c-b930bbe0f6fe", instructor: "흥버튼 정흥수", rating: 4.7, reviewCount: 139, studentCount: 1268, regularPrice: 99000, payPrice: 99000, discountRate: 0, isBest: true, skillTags: ["스피치","면접","대인관계","프레젠테이션"], hookText: "[기초스피치] 14년차 아나운서에게 배우는 말 잘하는 방법!", hookSub: "흥버튼 정흥수 · ⭐ 4.7 · 수강생 1,268명" },
+    { title: "초보자를 위한 발표 요령", link: "https://inf.run/hQQ1Z", categories: ["PM"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/332105/cover/c82a0b03-dc23-4479-a443-c4ec3b06ba70/inf-short-logo-발표요령.jpg", instructor: "드립커피+한모금더", rating: 4.8, reviewCount: 27, studentCount: 3644, regularPrice: 11000, payPrice: 11000, discountRate: 0, isBest: true, skillTags: ["프레젠테이션","기술면접","audience","slideshow"], hookText: "초보자를 위한 발표 요령", hookSub: "드립커피+한모금더 · ⭐ 4.8 · 수강생 3,644명" },
+    { title: "IT 회사에서 비개발자가 살아남기 위한 모든 개발 지식 A to Z", link: "https://inf.run/MPybe", categories: ["PM","마케팅"], thumbnailUrl: "https://cdn.inflearn.com/public/course-325903-cover/335d6f7d-bb22-4ea8-b1dc-131d79b721cd", instructor: "그랩", rating: 4.7, reviewCount: 230, studentCount: 1908, regularPrice: 55000, payPrice: 55000, discountRate: 0, isBest: true, skillTags: ["커뮤니케이션"], hookText: "IT 회사에서 비개발자가 살아남기 위한 모든 개발 지식 A to Z", hookSub: "그랩 · ⭐ 4.7 · 수강생 1,908명" },
+    { title: "CTA를 높이는 랜딩페이지 설계법", link: "https://inf.run/TF313", categories: ["PM","마케팅"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/340884/cover/01kh5h1cgyfrxbn3ek8q58gbss", instructor: "zenith", rating: 0, reviewCount: 0, studentCount: 14, regularPrice: 16500, payPrice: 8250, discountRate: 50, isBest: false, skillTags: ["웹 디자인","서비스 기획","UX 기획","프로덕트디자인","고객경험설계"], hookText: "CTA를 높이는 랜딩페이지 설계법 - 50% 할인 중!", hookSub: "zenith · ⭐ 0 · 수강생 14명" },
+    { title: "지금 당장 성과내기, 페이스북 퍼포먼스 마케팅 실습", link: "https://inf.run/yq7Js", categories: ["마케팅"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/315347/cover/8cdc5f1c-7808-4a45-857b-8ee4ff667a0b/315347-eng.png", instructor: "Seongmin Yoo", rating: 5, reviewCount: 30, studentCount: 401, regularPrice: 44000, payPrice: 44000, discountRate: 0, isBest: true, skillTags: ["디지털 마케팅","그로스해킹","Facebook Page","Facebook Pixel","Facebook Ads"], hookText: "지금 당장 성과내기, 페이스북 퍼포먼스 마케팅 실습", hookSub: "Seongmin Yoo · ⭐ 5 · 수강생 401명" },
+    { title: "잘나가는 프리랜서의, AI 자동화 마케팅 [AI 활용 1위 작가]", link: "https://inf.run/GzdjU", categories: ["마케팅"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/338586/cover/01k2vfn09h9kdvcgc87sggzn8b", instructor: "Slearnic AI LAB", rating: 4.8, reviewCount: 16, studentCount: 333, regularPrice: 33000, payPrice: 33000, discountRate: 0, isBest: true, skillTags: ["디지털 마케팅","퍼포먼스 마케팅","인공지능(AI)","ChatGPT","AI 활용 (AX)"], hookText: "잘나가는 프리랜서의, AI 자동화 마케팅 [AI 활용 1위 작가]", hookSub: "Slearnic AI LAB · ⭐ 4.8 · 수강생 333명" },
+    { title: "맥킨지 출신 김재성의 AI로 앞서가는 문제 해결력 & 리서치 전략", link: "https://inf.run/JZRKL", categories: ["마케팅"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/338841/cover/01k5r218y9fnz5sw1qqghj69m9", instructor: "Jaesung Kim", rating: 4.8, reviewCount: 38, studentCount: 367, regularPrice: 330000, payPrice: 330000, discountRate: 0, isBest: true, skillTags: ["경영노하우","인공지능(AI)","ChatGPT","컨설팅","문제해결능력"], hookText: "맥킨지 출신 김재성의 AI로 앞서가는 문제 해결력 & 리서치 전략", hookSub: "Jaesung Kim · ⭐ 4.8 · 수강생 367명" },
+    { title: "모르면 야근하는 AI 마케팅 노하우", link: "https://inf.run/Gvtg2", categories: ["마케팅"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/338670/cover/01k4p44dm4nyn5vfv9ygf992sa", instructor: "챗대리", rating: 4.8, reviewCount: 22, studentCount: 154, regularPrice: 68200, payPrice: 68200, discountRate: 0, isBest: false, skillTags: ["make.com","프롬프트엔지니어링","AI 활용 (AX)","MCP"], hookText: "모르면 야근하는 AI 마케팅 노하우", hookSub: "챗대리 · ⭐ 4.8 · 수강생 154명" },
+    { title: "입문자에서 실무자로: 피그마로 마스터하는 디자인 시스템 A to Z", link: "https://inf.run/9C8D3", categories: ["디자인"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/335180/cover/01kg55fmr33f3rabt2cz6sdrvy", instructor: "에릭", rating: 5, reviewCount: 7, studentCount: 33, regularPrice: 139700, payPrice: 139700, discountRate: 0, isBest: false, skillTags: ["Figma","Figma Tokens","디자인 시스템","responsive-design","UIUX"], hookText: "입문자에서 실무자로: 피그마로 마스터하는 디자인 시스템 A to Z", hookSub: "에릭 · ⭐ 5 · 수강생 33명" },
+    { title: "UX/UI 시작하기 : UX 서비스 기획 (Inflearn Original)", link: "https://inf.run/vAQqk", categories: ["디자인"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/326442/cover/9d0dd9bb-676d-4955-be52-f533ba423d88", instructor: "인프런", rating: 3.9, reviewCount: 128, studentCount: 19953, regularPrice: 33000, payPrice: 33000, discountRate: 0, isBest: false, skillTags: ["서비스 기획"], hookText: "UX/UI 시작하기 : UX 서비스 기획 (Inflearn Original)", hookSub: "인프런 · ⭐ 3.9 · 수강생 19,953명" },
+    { title: "기초부터 실무까지 제대로 배우는 피그마 UI 디자인 클래스", link: "https://inf.run/qAQUA", categories: ["디자인"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/333517/cover/01k3f3zjvjz4tcs9msy33h2v0v", instructor: "볼드 UX", rating: 4.8, reviewCount: 16, studentCount: 276, regularPrice: 79200, payPrice: 79200, discountRate: 0, isBest: true, skillTags: ["웹 디자인","프로토타이핑","Figma","반응형 웹","프로덕트디자인"], hookText: "기초부터 실무까지 제대로 배우는 피그마 UI 디자인 클래스", hookSub: "볼드 UX · ⭐ 4.8 · 수강생 276명" },
+    { title: "RAG를 활용한 LLM Application 개발 (feat. LangChain)", link: "https://inf.run/iXpfe", categories: ["AI"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/333796/cover/97e4a8aa-06b4-4e6d-89c7-a6231062cedd/333796.png", instructor: "제이쓴", rating: 4.9, reviewCount: 479, studentCount: 3945, regularPrice: 66000, payPrice: 66000, discountRate: 0, isBest: true, skillTags: ["LLM","RAG","LangChain","vector-database","openAI API"], hookText: "RAG를 활용한 LLM Application 개발 (feat. LangChain)", hookSub: "제이쓴 · ⭐ 4.9 · 수강생 3,945명" },
+    { title: "클로드 코드 완벽 마스터: AI 개발 워크플로우 기초부터 실전까지", link: "https://inf.run/1nrN2", categories: ["AI"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/339317/cover/01ka8fyg15t2g2tzh7hcd5ern5.gif", instructor: "짐코딩", rating: 4.9, reviewCount: 246, studentCount: 2963, regularPrice: 165000, payPrice: 165000, discountRate: 0, isBest: true, skillTags: ["React","claude","AI 활용 (AX)","인공지능(AI)"], hookText: "클로드 코드 완벽 마스터: AI 개발 워크플로우 기초부터 실전까지", hookSub: "짐코딩 · ⭐ 4.9 · 수강생 2,963명" },
+    { title: "한 입 크기로 잘라 먹는 리액트(React.js) : 기초부터 실전까지", link: "https://inf.run/ZfCoZ", categories: ["웹"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/328340/cover/01jx9xv8sprqfcjdkhy723nw9y", instructor: "이정환 Winterlood", rating: 4.9, reviewCount: 1367, studentCount: 14503, regularPrice: 48400, payPrice: 48400, discountRate: 0, isBest: true, skillTags: ["JavaScript","React","Node.js"], hookText: "한 입 크기로 잘라 먹는 리액트(React.js) : 기초부터 실전까지", hookSub: "이정환 Winterlood · ⭐ 4.9 · 수강생 14,503명" },
+    { title: "한 입 크기로 잘라먹는 타입스크립트(TypeScript)", link: "https://inf.run/YNTjk", categories: ["웹"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/330452/cover/01jx9xw8c433n8hppthehe9r1g", instructor: "이정환 Winterlood", rating: 5, reviewCount: 649, studentCount: 13910, regularPrice: 48400, payPrice: 48400, discountRate: 0, isBest: true, skillTags: ["TypeScript"], hookText: "한 입 크기로 잘라먹는 타입스크립트(TypeScript)", hookSub: "이정환 Winterlood · ⭐ 5 · 수강생 13,910명" },
+    { title: "한 입 크기로 잘라먹는 Next.js", link: "https://inf.run/2Mhb9", categories: ["웹"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/333250/cover/01jx9zy2h8wyf9qbcrk2kyyt26", instructor: "이정환 Winterlood", rating: 5, reviewCount: 552, studentCount: 5335, regularPrice: 48400, payPrice: 48400, discountRate: 0, isBest: true, skillTags: ["React","TypeScript","Next.js"], hookText: "한 입 크기로 잘라먹는 Next.js", hookSub: "이정환 Winterlood · ⭐ 5 · 수강생 5,335명" },
+    { title: "타입스크립트 입문 - 기초부터 실전까지", link: "https://inf.run/pU8ib", categories: ["웹"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/326082/cover/c6519e92-f334-46ac-8a31-6290db19b32a", instructor: "캡틴판교", rating: 5, reviewCount: 644, studentCount: 5623, regularPrice: 44000, payPrice: 44000, discountRate: 0, isBest: true, skillTags: ["TypeScript","ES6","JavaScript"], hookText: "타입스크립트 입문 - 기초부터 실전까지", hookSub: "캡틴판교 · ⭐ 5 · 수강생 5,623명" },
+    { title: "앨런 Swift문법 마스터 스쿨 (온라인 BootCamp -  2개월과정)", link: "https://inf.run/xDG94", categories: ["iOS"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/327472/cover/e56033c6-33a2-4275-9b86-a685045146ef/327472.jpg", instructor: "앨런(Allen)", rating: 5, reviewCount: 299, studentCount: 1453, regularPrice: 1430000, payPrice: 1430000, discountRate: 0, isBest: true, skillTags: ["Swift"], hookText: "앨런 Swift문법 마스터 스쿨 (온라인 BootCamp -  2개월과정)", hookSub: "앨런(Allen) · ⭐ 5 · 수강생 1,453명" },
+    { title: "앨런 Swift Concurrency for Swift 6 (Part-1)", link: "https://inf.run/L17du", categories: ["iOS"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/335069/cover/1e62d3be-b4f1-4889-9c73-d22c49136a65/335069.jpg", instructor: "앨런(Allen)", rating: 5, reviewCount: 62, studentCount: 578, regularPrice: 99000, payPrice: 99000, discountRate: 0, isBest: true, skillTags: ["iOS","Swift","동시성","async-await","concurrency"], hookText: "앨런 Swift Concurrency for Swift 6 (Part-1)", hookSub: "앨런(Allen) · ⭐ 5 · 수강생 578명" },
+    { title: "앨런 Swift Concurrency for Swift 6 (Part-2)", link: "https://inf.run/hFK5d", categories: ["iOS"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/336499/cover/cf65b9cb-9827-4e85-abdb-aa92382b44f4/336499.png", instructor: "앨런(Allen)", rating: 5, reviewCount: 25, studentCount: 258, regularPrice: 242000, payPrice: 242000, discountRate: 0, isBest: true, skillTags: ["iOS","Swift","동시성","async-await","concurrency"], hookText: "앨런 Swift Concurrency for Swift 6 (Part-2)", hookSub: "앨런(Allen) · ⭐ 5 · 수강생 258명" },
+    { title: "[Lv.1] iOS 17 앱 개발 기초 - SwiftUI로 시작하기", link: "https://inf.run/qkbkT", categories: ["iOS"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/329815/cover/f0cadfc4-389a-4cef-a67b-72fed66ff4c5/Basic_Cover.png", instructor: "Jacob(제이콥)", rating: 5, reviewCount: 32, studentCount: 519, regularPrice: 88000, payPrice: 66000, discountRate: 25, isBest: true, skillTags: ["iOS","SwiftUI","Swift"], hookText: "[Lv.1] iOS 17 앱 개발 기초 - SwiftUI로 시작하기 - 25% 할인 중!", hookSub: "Jacob(제이콥) · ⭐ 5 · 수강생 519명" },
+    { title: "[Lv.3] 실전 네트워크 통신 - SwiftUI Combine, Async/Await", link: "https://inf.run/JonM7", categories: ["iOS"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/335552/cover/01kj15b6f429wcq1d8e2aa189s", instructor: "Jacob(제이콥)", rating: 5, reviewCount: 5, studentCount: 92, regularPrice: 165000, payPrice: 123750, discountRate: 25, isBest: false, skillTags: ["SwiftUI","combine","async-await","iOS","Swift"], hookText: "[Lv.3] 실전 네트워크 통신 - SwiftUI Combine, Async/Await - 25% 할인 중!", hookSub: "Jacob(제이콥) · ⭐ 5 · 수강생 92명" },
+    { title: "SwiftUI + TCA: 실전 프로젝트로 완성하는 차세대 iOS 아키텍처", link: "https://inf.run/FdpRN", categories: ["iOS"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/337595/cover/01jytf26x7a1fzkhzma409c36f", instructor: "덤벨로퍼", rating: 5, reviewCount: 10, studentCount: 65, regularPrice: 79200, payPrice: 79200, discountRate: 0, isBest: false, skillTags: ["Swift","SwiftUI","iOS","swift-composable-architecture"], hookText: "SwiftUI + TCA: 실전 프로젝트로 완성하는 차세대 iOS 아키텍처", hookSub: "덤벨로퍼 · ⭐ 5 · 수강생 65명" },
+    { title: "[왕초보편] 앱 8개를 만들면서 배우는 안드로이드 코틀린(Android Kotlin)", link: "https://inf.run/7uspX", categories: ["Android"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/327096/cover/fa1cbc3c-c0e8-4a3d-9f2a-1150b67f6457/327096-eng.png", instructor: "개복치개발자", rating: 4.8, reviewCount: 230, studentCount: 3511, regularPrice: 24200, payPrice: 24200, discountRate: 0, isBest: true, skillTags: ["Android","Kotlin","Firebase"], hookText: "[왕초보편] 앱 8개를 만들면서 배우는 안드로이드 코틀린(Android Kotlin)", hookSub: "개복치개발자 · ⭐ 4.8 · 수강생 3,511명" },
+    { title: "모던 안드로이드 - Jetpack Compose 입문", link: "https://inf.run/xz1Qt", categories: ["Android"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/327890/cover/767897fa-36b3-4b8a-a4aa-2355ec4b5602/327890-eng.png", instructor: "오준석", rating: 4.7, reviewCount: 24, studentCount: 393, regularPrice: 77000, payPrice: 77000, discountRate: 0, isBest: true, skillTags: ["Jetpack","Kotlin","Android"], hookText: "모던 안드로이드 - Jetpack Compose 입문", hookSub: "오준석 · ⭐ 4.7 · 수강생 393명" },
+    { title: "모던 안드로이드 - 코틀린과 Jetpack 활용", link: "https://inf.run/AKrUS", categories: ["Android"], thumbnailUrl: "https://cdn.inflearn.com/public/course-325652-cover/ac6b554c-bd7c-4b20-94fb-6e0e82b482ee", instructor: "오준석", rating: 4, reviewCount: 42, studentCount: 435, regularPrice: 99000, payPrice: 99000, discountRate: 0, isBest: false, skillTags: ["Android","Kotlin","Jetpack"], hookText: "모던 안드로이드 - 코틀린과 Jetpack 활용", hookSub: "오준석 · ⭐ 4 · 수강생 435명" },
+    { title: "[코드팩토리] [초급] Flutter 3.0 앱 개발 - 10개의 프로젝트로 오늘 초보 탈출!", link: "https://inf.run/LgetC", categories: ["Flutter"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/328329/cover/72f06aa7-f5f1-422b-88a7-bca65e78dffd/328329.png", instructor: "코드팩토리", rating: 4.9, reviewCount: 331, studentCount: 5426, regularPrice: 99000, payPrice: 99000, discountRate: 0, isBest: true, skillTags: ["Flutter","클론코딩"], hookText: "[코드팩토리] [초급] Flutter 3.0 앱 개발 - 10개의 프로젝트로 오늘 초보 탈출!", hookSub: "코드팩토리 · ⭐ 4.9 · 수강생 5,426명" },
+    { title: "[코드팩토리] [초급] 8시간만에 끝내는 코드팩토리의 Typescript 완전정복 풀코스", link: "https://inf.run/LWvPj", categories: ["Flutter"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/330970/cover/3c24c2b8-9dc1-44ed-af4e-2b58542a6504/330970-eng.png", instructor: "코드팩토리", rating: 5, reviewCount: 89, studentCount: 1203, regularPrice: 44000, payPrice: 44000, discountRate: 0, isBest: true, skillTags: ["TypeScript"], hookText: "[코드팩토리] [초급] 8시간만에 끝내는 코드팩토리의 Typescript 완전정복 풀코스", hookSub: "코드팩토리 · ⭐ 5 · 수강생 1,203명" },
+    { title: "Flutter 앱 개발 기초", link: "https://inf.run/mhU3P", categories: ["Flutter"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/328842/cover/10e28601-a5b8-4df6-b54f-18916e8631ad/flutter 앱 개발 기초.png", instructor: "DevStory", rating: 5, reviewCount: 125, studentCount: 1433, regularPrice: 66000, payPrice: 49500, discountRate: 25, isBest: true, skillTags: ["Flutter"], hookText: "Flutter 앱 개발 기초 - 25% 할인 중!", hookSub: "DevStory · ⭐ 5 · 수강생 1,433명" },
+    { title: "[코드팩토리] [중급] Flutter 진짜 실전! 상태관리, 캐시관리, Code Generation, GoRouter, 인증로직 등 중수가 되기 위한 필수 스킬들!", link: "https://inf.run/jyrKK", categories: ["Flutter"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/328615/cover/4abab928-4fd1-442b-b422-3968f9cc393e/thumbnail.png", instructor: "코드팩토리", rating: 4.9, reviewCount: 179, studentCount: 3058, regularPrice: 132000, payPrice: 132000, discountRate: 0, isBest: true, skillTags: ["Flutter","하이브리드 앱"], hookText: "[코드팩토리] [중급] Flutter 진짜 실전! 상태관리, 캐시관리, Code Generation, GoRouter, 인증로직 등 중수가 되기 위한 필수 스킬들!", hookSub: "코드팩토리 · ⭐ 4.9 · 수강생 3,058명" },
+    { title: "Flutter 앱 개발 실전", link: "https://inf.run/h6Dh2", categories: ["Flutter"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/331298/cover/27a22615-d818-4265-998e-1450f24c1559/flutter 앱 개발 실전.png", instructor: "DevStory", rating: 4.8, reviewCount: 36, studentCount: 508, regularPrice: 143000, payPrice: 107250, discountRate: 25, isBest: true, skillTags: ["Flutter"], hookText: "Flutter 앱 개발 실전 - 25% 할인 중!", hookSub: "DevStory · ⭐ 4.8 · 수강생 508명" },
+    { title: "Flutter 입문 - 안드로이드, iOS 개발을 한 번에 (with Firebase)", link: "https://inf.run/pfmMm", categories: ["Flutter"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/287760/cover/442e883c-66ce-4b2f-9dd2-03c954eef60e/287760-eng.png", instructor: "오준석", rating: 4.6, reviewCount: 201, studentCount: 2455, regularPrice: 66000, payPrice: 66000, discountRate: 0, isBest: true, skillTags: ["Flutter","iOS","Android"], hookText: "Flutter 입문 - 안드로이드, iOS 개발을 한 번에 (with Firebase)", hookSub: "오준석 · ⭐ 4.6 · 수강생 2,455명" },
+    { title: "TDD 개발 방법론을 활용한 React Native 앱 개발", link: "https://inf.run/fYy4A", categories: ["ReactNative"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/324046/course_cover/f22ad076-c7b5-4706-ae65-fa68c16f29e6/bdh_TDDreact.png", instructor: "박동호", rating: 4.2, reviewCount: 54, studentCount: 487, regularPrice: 29700, payPrice: 29700, discountRate: 0, isBest: false, skillTags: ["JavaScript","React","React Native","TDD","소프트웨어 테스트"], hookText: "TDD 개발 방법론을 활용한 React Native 앱 개발", hookSub: "박동호 · ⭐ 4.2 · 수강생 487명" },
+    { title: "스프링 핵심 원리 - 기본편", link: "https://inf.run/FCqpv", categories: ["Java/Spring"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/325969/cover/2868c757-5886-4508-a140-7cb68a83dfd8/325969-eng.png", instructor: "김영한", rating: 5, reviewCount: 4765, studentCount: 49381, regularPrice: 88000, payPrice: 88000, discountRate: 0, isBest: true, skillTags: ["Spring","객체지향"], hookText: "스프링 핵심 원리 - 기본편", hookSub: "김영한 · ⭐ 5 · 수강생 49,381명" },
+    { title: "스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술", link: "https://inf.run/a9My3", categories: ["Java/Spring"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/326674/cover/4657d793-56a4-42f3-9d44-dc88d125a49e", instructor: "김영한", rating: 5, reviewCount: 2521, studentCount: 30370, regularPrice: 99000, payPrice: 99000, discountRate: 0, isBest: true, skillTags: ["MVC","Spring"], hookText: "스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술", hookSub: "김영한 · ⭐ 5 · 수강생 30,370명" },
+    { title: "비전공자도 이해할 수 있는 Docker 입문/실전", link: "https://inf.run/LFn3p", categories: ["Java/Spring"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/334085/cover/01k0qnn19n56p5gtsphaqfmqz5", instructor: "JSCODE 박재성", rating: 4.9, reviewCount: 575, studentCount: 14346, regularPrice: 88000, payPrice: 88000, discountRate: 0, isBest: true, skillTags: ["Docker","container","docker-compose","docker-volume","ecr"], hookText: "비전공자도 이해할 수 있는 Docker 입문/실전", hookSub: "JSCODE 박재성 · ⭐ 4.9 · 수강생 14,346명" },
+    { title: "[개정3판] Node.js 교과서 - 기본부터 프로젝트 실습까지", link: "https://inf.run/rr6bz", categories: ["Node.js"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/330181/cover/47e0125e-75ad-4946-96d3-54bbc444a188/330181-eng.jpg", instructor: "제로초(조현영)", rating: 4.7, reviewCount: 71, studentCount: 2303, regularPrice: 49500, payPrice: 49500, discountRate: 0, isBest: true, skillTags: ["Node.js","Express","MySQL","MongoDB","Socket.io"], hookText: "[개정3판] Node.js 교과서 - 기본부터 프로젝트 실습까지", hookSub: "제로초(조현영) · ⭐ 4.7 · 수강생 2,303명" },
+    { title: "얄코의 가장 쉬운 Node.js", link: "https://inf.run/7z8R8", categories: ["Node.js"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/336276/cover/01jwqpa3aad1vkfz2c4cjjdzrv", instructor: "얄팍한 코딩사전", rating: 4.9, reviewCount: 52, studentCount: 596, regularPrice: 33000, payPrice: 23100, discountRate: 30, isBest: true, skillTags: ["Node.js"], hookText: "얄코의 가장 쉬운 Node.js - 30% 할인 중!", hookSub: "얄팍한 코딩사전 · ⭐ 4.9 · 수강생 596명" },
+    { title: "김영한의 실전 자바 - 기본편", link: "https://inf.run/9efRW", categories: ["Language"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/332506/cover/a2cc776f-4996-44a4-bbb3-b31df29c087c/332506.png", instructor: "김영한", rating: 5, reviewCount: 2169, studentCount: 26855, regularPrice: 44000, payPrice: 44000, discountRate: 0, isBest: true, skillTags: ["Java","객체지향"], hookText: "김영한의 실전 자바 - 기본편", hookSub: "김영한 · ⭐ 5 · 수강생 26,855명" },
+    { title: "처음하는 컴퓨터공학(CS 지식) 부트캠프 | 컴퓨터구조, 운영체제, 네트워크", link: "https://inf.run/PaMxM", categories: ["CS"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/337332/cover/01jtn2tf5nwh8s7n0c1m2s4bre", instructor: "잔재미코딩 DaveLee", rating: 5, reviewCount: 7, studentCount: 104, regularPrice: 132000, payPrice: 132000, discountRate: 0, isBest: false, skillTags: ["네트워크","컴퓨터 구조","운영체제"], hookText: "처음하는 컴퓨터공학(CS 지식) 부트캠프 | 컴퓨터구조, 운영체제, 네트워크", hookSub: "잔재미코딩 DaveLee · ⭐ 5 · 수강생 104명" },
+    { title: "모든 개발자를 위한 HTTP 웹 기본 지식", link: "https://inf.run/BBy39", categories: ["CS"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/326277/cover/52d4f143-b470-4109-96cb-a0b146fb42ed/http.png", instructor: "김영한", rating: 5, reviewCount: 3908, studentCount: 36192, regularPrice: 44000, payPrice: 44000, discountRate: 0, isBest: true, skillTags: ["네트워크"], hookText: "모든 개발자를 위한 HTTP 웹 기본 지식", hookSub: "김영한 · ⭐ 5 · 수강생 36,192명" },
+    { title: "모든 개발자의 실무를 위한 올인원 기본기 클래스", link: "https://inf.run/wid86", categories: ["CS"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/327997/cover/6d8192c6-8a28-40c3-b8df-ef5bff5cb9ac/327997-eng.png", instructor: "그랩", rating: 4.7, reviewCount: 47, studentCount: 1326, regularPrice: 165000, payPrice: 165000, discountRate: 0, isBest: true, skillTags: ["객체지향","소프트웨어 테스트","아키텍처","Git","Python"], hookText: "모든 개발자의 실무를 위한 올인원 기본기 클래스", hookSub: "그랩 · ⭐ 4.7 · 수강생 1,326명" },
+    { title: "CS 지식의 정석 | 디자인패턴 네트워크 운영체제 데이터베이스 자료구조", link: "https://inf.run/DAXoZ", categories: ["CS"], thumbnailUrl: "https://cdn.inflearn.com/public/courses/328823/cover/1081d7c2-64b4-4063-87f4-c40e11bb481f/KakaoTalk_20220517_140737840.jpg", instructor: "큰돌", rating: 4.8, reviewCount: 254, studentCount: 4027, regularPrice: 165000, payPrice: 165000, discountRate: 0, isBest: true, skillTags: ["기술면접","면접","운영체제"], hookText: "CS 지식의 정석 | 디자인패턴 네트워크 운영체제 데이터베이스 자료구조", hookSub: "큰돌 · ⭐ 4.8 · 수강생 4,027명" },
+    { title: "Git & GitHub, 원리부터 차근차근 - 근본깃 [AI 더빙]", link: "https://inf.run/CMK3d", categories: ["CS"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/335191/cover/01kgzxr3ww6a02k2923tjt9y0z.gif", instructor: "geek", rating: 4.9, reviewCount: 63, studentCount: 733, regularPrice: 52800, payPrice: 39600, discountRate: 25, isBest: true, skillTags: ["Git","GitHub"], hookText: "Git & GitHub, 원리부터 차근차근 - 근본깃 [AI 더빙] - 25% 할인 중!", hookSub: "geek · ⭐ 4.9 · 수강생 733명" },
+    { title: "얄코의 가장 쉬운 자료구조와 알고리즘", link: "https://inf.run/nJU8L", categories: ["Algorithm"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/337721/cover/01jxc8hmgmr5je2nb9p2dk837t", instructor: "얄팍한 코딩사전", rating: 4.9, reviewCount: 102, studentCount: 1180, regularPrice: 44000, payPrice: 30800, discountRate: 30, isBest: true, skillTags: ["알고리즘","data-structure"], hookText: "얄코의 가장 쉬운 자료구조와 알고리즘 - 30% 할인 중!", hookSub: "얄팍한 코딩사전 · ⭐ 4.9 · 수강생 1,180명" },
+    { title: "38군데 합격 비법, 2025 코딩테스트 필수 알고리즘", link: "https://inf.run/VgHmC", categories: ["Algorithm"], thumbnailUrl: "https://cdn.inflearn.com/public/files/courses/335301/cover/01jwb6qbc5ps47da0skg233zdw.gif", instructor: "딩코딩코", rating: 5, reviewCount: 396, studentCount: 2528, regularPrice: 165000, payPrice: 165000, discountRate: 0, isBest: true, skillTags: ["Python","코딩 테스트","알고리즘","data-structure"], hookText: "38군데 합격 비법, 2025 코딩테스트 필수 알고리즘", hookSub: "딩코딩코 · ⭐ 5 · 수강생 2,528명" }
+];
+
+const AD_INTERVAL = 7; // 매 N번째 행마다 광고 삽입
+
+const IT_EXCLUDED_AD_CATEGORIES = new Set(["PM", "마케팅", "디자인"]);
+const IT_DEFAULT_AD_CATEGORIES = new Set(["Algorithm", "CS"]);
+
+function shuffleArray(arr) {
+    const shuffled = [...arr];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+let _shuffledAdsCache = null;
+let _lastFilterKey = null;
+
+function getFilteredAds(activeFieldFilters) {
+    const isITPage = !window.isMarketingPage && !window.isBootcampPage && !window.isHackathonPage;
+    let ads = InflearnAds;
+
+    if (isITPage) {
+        ads = ads.filter(ad => !ad.categories.some(c => IT_EXCLUDED_AD_CATEGORIES.has(c)));
+
+        if (activeFieldFilters && activeFieldFilters.size > 0) {
+            const matching = ads.filter(ad => ad.categories.some(c => activeFieldFilters.has(c)));
+            if (matching.length > 0) ads = matching;
+        } else {
+            const defaults = ads.filter(ad => ad.categories.some(c => IT_DEFAULT_AD_CATEGORIES.has(c)));
+            if (defaults.length > 0) ads = defaults;
+        }
+    }
+
+    const filterKey = [...(activeFieldFilters || [])].sort().join(',');
+    if (_lastFilterKey !== filterKey) {
+        _shuffledAdsCache = shuffleArray(ads);
+        _lastFilterKey = filterKey;
+    }
+
+    return _shuffledAdsCache;
+}
+
+function pickAdForContext(index, activeFieldFilters) {
+    const ads = getFilteredAds(activeFieldFilters);
+    if (ads.length === 0) return null;
+    return ads[index % ads.length];
+}
+
+function renderAdSkillTags(ad) {
+    return (ad.skillTags || []).map(tag => `<span class="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-slate-700/70 text-xs font-medium text-slate-600 dark:text-slate-300">${tag}</span>`).join('');
+}
+
+function renderAdDiscountBadge(ad) {
+    if (!ad.discountRate) return '';
+    return `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(239,68,68,0.15);color:#ef4444">${ad.discountRate}%</span>`;
+}
+
+function renderAdMinimal_Desktop(ad) {
+    return `
+    <tr class="bg-slate-50/30 dark:bg-slate-800/20 inflearn-ad" data-ad-title="${ad.title.replace(/"/g, '&quot;')}" data-ad-link="${ad.link}" data-ad-categories="${(ad.categories || []).join(',')}" data-ad-view="desktop">
+        <td colspan="7" class="px-4 py-2.5">
+            <a href="${ad.link}" target="_blank" rel="noopener" class="inflearn-ad-link flex items-center justify-between gap-4 group">
+                <div class="flex items-center gap-3">
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
+                    ${renderAdDiscountBadge(ad)}
+                    <span class="text-sm text-slate-500 dark:text-slate-400">
+                        <span class="font-medium text-slate-700 dark:text-slate-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">${ad.hookText}</span>
+                        ${ad.hookSub}
+                    </span>
+                    <div class="flex gap-1.5">${renderAdSkillTags(ad)}</div>
+                </div>
+                <span class="text-xs font-medium shrink-0 group-hover:underline" style="color:#00c471">강의 보기 →</span>
+            </a>
+        </td>
+    </tr>`;
+}
+
+function renderAdMinimal_Mobile(ad) {
+    return `
+    <a href="${ad.link}" target="_blank" rel="noopener" class="inflearn-ad inflearn-ad-link flex items-center gap-3 px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl" data-ad-title="${ad.title.replace(/"/g, '&quot;')}" data-ad-link="${ad.link}" data-ad-categories="${(ad.categories || []).join(',')}" data-ad-view="mobile">
+        <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none shrink-0" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
+        ${renderAdDiscountBadge(ad)}
+        <div class="flex-1 min-w-0">
+            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">${ad.hookText}</span>
+            <span class="text-xs text-slate-400 block">${ad.hookSub}</span>
+        </div>
+        <span class="text-xs shrink-0" style="color:#00c471">→</span>
+    </a>`;
+}
+
 const NON_DEV_FIELDS = new Set([
     Field.MARKETING.name, Field.MANAGEMENT.name,
     Field.PM.name, Field.DESIGN.name, Field.UX.name
@@ -445,7 +600,7 @@ function renderDeadlines() {
     }).join('');
 }
 
-function renderTable(clubs = getAllClubs()) {
+function renderTable(clubs = getAllClubs(), activeFieldFilters = new Set()) {
     const tbody = document.getElementById('club-list');
     if (!tbody) return;
 
@@ -456,9 +611,11 @@ function renderTable(clubs = getAllClubs()) {
         return;
     }
 
-    tbody.innerHTML = clubs.map((club, index) => {
+    let adIndex = 0;
+    const result = [];
+    clubs.forEach((club, index) => {
         const nameContent = club.link ? `<a href="${club.link}" target="_blank" class="hover:text-primary hover:underline decoration-2 underline-offset-4">${club.name}</a>` : club.name;
-        const row = `
+        result.push(`
         <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
             <td class="px-4 py-5 text-sm font-bold"><span class="block">${club.recruitStart}</span><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
@@ -467,12 +624,17 @@ function renderTable(clubs = getAllClubs()) {
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
             ${window.isHackathonPage ? '' : `<td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>`}
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
-        </tr>`;
-        return row;
-    }).join('');
+        </tr>`);
+        if ((index + 1) % AD_INTERVAL === 0) {
+            const ad = pickAdForContext(adIndex++, activeFieldFilters);
+            if (ad) result.push(renderAdMinimal_Desktop(ad));
+        }
+    });
+
+    tbody.innerHTML = result.join('');
 }
 
-function renderMobileCards(clubs = getAllClubs()) {
+function renderMobileCards(clubs = getAllClubs(), activeFieldFilters = new Set()) {
     const container = document.getElementById('club-list-mobile');
     if (!container) return;
 
@@ -482,10 +644,12 @@ function renderMobileCards(clubs = getAllClubs()) {
         return;
     }
 
-    container.innerHTML = clubs.map(club => {
+    let adIndex = 0;
+    const result = [];
+    clubs.forEach((club, index) => {
         const Tag = club.link ? 'a' : 'div';
         const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
-        return `
+        result.push(`
         <${Tag} ${hrefAttr} class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg">
             <div class="flex items-start justify-between mb-3">
                 <div class="flex items-center gap-2 min-w-0">
@@ -513,8 +677,14 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <div class="flex flex-wrap gap-1">${club.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
                 </div>
             </div>
-        </${Tag}>
-    `}).join('');
+        </${Tag}>`);
+        if ((index + 1) % AD_INTERVAL === 0) {
+            const ad = pickAdForContext(adIndex++, activeFieldFilters);
+            if (ad) result.push(renderAdMinimal_Mobile(ad));
+        }
+    });
+
+    container.innerHTML = result.join('');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -549,9 +719,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const fieldsContainer = document.getElementById('filter-fields');
         const pageName = getPageName();
         const pageCategories = PAGE_CATEGORIES[pageName];
-        const categories = pageCategories
-            ? Object.keys(FilterCategory).filter(c => pageCategories.includes(c))
-            : Object.keys(FilterCategory);
+        const allItems = getAllClubs();
+        const allFieldNames = new Set(allItems.flatMap(item => item.fields.map(f => f.name)));
+        const DISPLAY_ORDER = [Category.PM, Category.DESIGN, Category.WEB, Category.ANDROID, Category.IOS, Category.FLUTTER, Category.REACT_NATIVE, Category.BACKEND, Category.CLOUD, Category.AI, Category.ANY, Category.MARKETING, Category.ALGORITHM, Category.CS];
+        const categorySet = new Set(
+            (pageCategories
+                ? Object.keys(FilterCategory).filter(c => pageCategories.includes(c))
+                : Object.keys(FilterCategory)
+            ).filter(category => FilterCategory[category].some(field => allFieldNames.has(field)))
+        );
+        const categories = DISPLAY_ORDER.filter(c => categorySet.has(c));
         fieldsContainer.innerHTML = categories.map(category => `
             <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" value="${category}" data-filter-key="fields" class="form-checkbox rounded text-primary focus:ring-primary/50">
@@ -670,8 +847,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        renderTable(filteredClubs);
-        renderMobileCards(filteredClubs);
+        renderTable(filteredClubs, activeFilters.fields);
+        renderMobileCards(filteredClubs, activeFilters.fields);
     }
 
     const filterButton = document.getElementById('filter-button');
@@ -702,12 +879,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeFilters[key].delete(value);
             }
             applyFilters();
-            trackEvent('filter_apply', {
-                filter_type: key,
-                filter_value: value,
-                action: e.target.checked ? 'add' : 'remove',
-                page: getPageName()
-            });
         }
     });
 
@@ -730,10 +901,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentSortOrder = e.target.value;
                 applyFilters();
                 sortDropdown.classList.add('hidden');
-                trackEvent('sort_change', {
-                    sort_order: e.target.value,
-                    page: getPageName()
-                });
             }
         });
     }
@@ -751,84 +918,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMobileCards();
     renderDeadlines();
 
-    // Analytics: page_view
-    const pageName = getPageName();
-    const pageLabels = { it: 'IT 동아리', marketing: '마케팅/경영', bootcamp: '부트캠프', hackathon: '해커톤/대회' };
-    trackEvent('page_view', {
-        page: pageName,
-        page_title: pageLabels[pageName] || pageName
-    });
-
-    // Analytics: link_click (desktop table)
-    const clubList = document.getElementById('club-list');
-    if (clubList) {
-        clubList.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (link) {
-                const row = link.closest('tr');
-                const clubName = row ? row.querySelector('.font-bold')?.textContent : link.textContent;
-                trackEvent('link_click', {
-                    club_name: (clubName || '').trim(),
-                    link_url: link.href,
-                    section: 'table',
-                    view: 'desktop',
-                    page: getPageName()
-                });
-            }
-        });
-    }
-
-    // Analytics: link_click (mobile cards)
-    const clubListMobile = document.getElementById('club-list-mobile');
-    if (clubListMobile) {
-        clubListMobile.addEventListener('click', (e) => {
-            const card = e.target.closest('a');
-            if (card) {
-                const clubName = card.querySelector('.font-bold')?.textContent || '';
-                trackEvent('link_click', {
-                    club_name: clubName.trim(),
-                    link_url: card.href,
-                    section: 'card',
-                    view: 'mobile',
-                    page: getPageName()
-                });
-            }
-        });
-    }
-
-    // Analytics: link_click (deadline cards)
-    const deadlineContainer = document.getElementById('upcoming-deadlines');
-    if (deadlineContainer) {
-        deadlineContainer.addEventListener('click', (e) => {
-            const card = e.target.closest('a');
-            if (card) {
-                const clubName = card.querySelector('h4')?.textContent || '';
-                trackEvent('link_click', {
-                    club_name: clubName.trim(),
-                    link_url: card.href,
-                    section: 'deadline',
-                    page: getPageName()
-                });
-            }
-        });
-    }
-
     // Search logic
     const searchInput = document.querySelector('input');
-    let searchDebounceTimer;
     if (searchInput) {
         searchInput.addEventListener('input', () => {
             applyFilters();
-            clearTimeout(searchDebounceTimer);
-            searchDebounceTimer = setTimeout(() => {
-                const term = searchInput.value.trim();
-                if (term) {
-                    trackEvent('search', {
-                        search_term: term,
-                        page: getPageName()
-                    });
-                }
-            }, 1000);
         });
     }
 });
