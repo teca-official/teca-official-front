@@ -277,6 +277,9 @@ const ReviewData = {
         { cohort: "4기", content: "전국 대학생들과 함께 해커톤을 준비하며 성장할 수 있었습니다. 네트워킹이 특히 좋았어요.", anonymous: true, date: "2025-08-20" },
         { cohort: "3기", content: "카카오 현직자 멘토링이 큰 도움이 됐습니다. 다만 일정이 빡빡한 편이에요.", anonymous: false, author: "이○○", date: "2025-02-15" },
     ],
+    "코테이토 (1학기)": [
+        { cohort: "5기", content: "기획부터 출시까지 전 과정을 경험할 수 있어서 좋았습니다. 스터디도 알차요.", anonymous: false, author: "임○○", date: "2025-07-20" },
+    ],
     "SOPT (1학기)": [
         { cohort: "35기", content: "앱잼을 통해 실제 앱을 출시하는 경험이 매우 유익했습니다. 동아리 분위기도 좋고 열정적인 사람들이 많아요.", anonymous: false, author: "박○○", date: "2025-07-10" },
         { cohort: "34기", content: "세미나 퀄리티가 높고 팀 프로젝트를 통해 실력이 많이 늘었습니다.", anonymous: true, date: "2025-01-20" },
@@ -288,6 +291,24 @@ const ReviewData = {
     ],
     "UMC (1학기)": [
         { cohort: "7기", content: "전국 규모라 다양한 학교 학생들을 만날 수 있어 좋았습니다. 프로젝트 경험이 취업에 많이 도움됐어요.", anonymous: false, author: "정○○", date: "2025-06-30" },
+    ],
+    "디프만 (1학기)": [
+        { cohort: "16기", content: "디자이너와 개발자가 긴밀하게 협업하는 구조라 실무 감각을 키우기 좋았습니다.", anonymous: false, author: "조○○", date: "2025-07-10" },
+        { cohort: "15기", content: "사용자 중심 프로덕트를 만드는 경험이 인상 깊었어요. 팀 분위기도 좋습니다.", anonymous: true, date: "2025-01-15" },
+    ],
+    "CEOS (1학기)": [
+        { cohort: "20기", content: "신촌 5개 대학 학생들과 네트워킹이 좋았고, 실제 서비스를 런칭하는 경험이 값졌습니다.", anonymous: false, author: "서○○", date: "2025-07-05" },
+    ],
+    "프로그래피 Prography": [
+        { cohort: "10기", content: "다양한 직군이 모여 하나의 프로덕트를 만드는 과정이 재미있었어요.", anonymous: true, date: "2025-08-10" },
+        { cohort: "9기", content: "현직자분들도 계셔서 실무적인 피드백을 많이 받을 수 있었습니다.", anonymous: false, author: "문○○", date: "2025-02-20" },
+    ],
+    "큐시즘 (1학기)": [
+        { cohort: "31기", content: "IT 서비스 기획부터 개발까지 체계적으로 진행되어 만족스러웠습니다.", anonymous: false, author: "양○○", date: "2025-07-30" },
+        { cohort: "30기", content: "밋업과 데모데이 등 다양한 행사가 있어서 동기부여가 잘 돼요.", anonymous: true, date: "2025-01-25" },
+    ],
+    "MASH-UP": [
+        { cohort: "15기", content: "웹/앱 서비스를 실제로 출시하는 경험이 좋았어요. 열정적인 사람들이 많습니다.", anonymous: false, author: "배○○", date: "2025-08-15" },
     ],
     "카카오 테크 부트캠프 (풀스택)": [
         { cohort: "2기", content: "6개월간의 집중 교육이 정말 알찼습니다. 현직 카카오 개발자분의 코드 리뷰가 특히 도움됐어요.", anonymous: false, author: "한○○", date: "2025-11-20" },
@@ -301,6 +322,12 @@ const ReviewData = {
     ],
     "YAPP (1학기)": [
         { cohort: "26기", content: "서비스 기획부터 런칭까지 전 과정을 경험할 수 있어서 좋았습니다. 현직자 분들도 계셔서 배울 점이 많아요.", anonymous: false, author: "강○○", date: "2025-07-25" },
+    ],
+    "TAVE (1학기)": [
+        { cohort: "14기", content: "AI, 빅데이터 등 다양한 분야를 공부할 수 있어서 시야가 넓어졌어요.", anonymous: true, date: "2025-07-20" },
+    ],
+    "잇타 (1학기)": [
+        { cohort: "6기", content: "소규모 팀으로 진행되어 팀원들과 깊이 있게 프로젝트할 수 있었습니다.", anonymous: false, author: "신○○", date: "2025-07-01" },
     ],
 };
 
@@ -557,6 +584,10 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0 pt-0.5">모집 분야</span>
                     <div class="flex flex-wrap gap-1">${club.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
                 </div>
+                ${reviewCount > 0 ? `<div class="flex items-center gap-2">
+                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">후기</span>
+                    <span class="inline-flex items-center gap-1 text-amber-500 font-medium"><span class="material-symbols-outlined text-sm">rate_review</span>${reviewCount}건</span>
+                </div>` : ''}
             </div>
         </${Tag}>
     `}).join('');
