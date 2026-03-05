@@ -459,24 +459,25 @@ function renderTable(clubs = getAllClubs()) {
     if (!tbody) return;
 
     if (clubs.length === 0) {
-        const cols = window.isHackathonPage ? 7 : 8;
+        const cols = window.isHackathonPage ? 6 : window.isBootcampPage ? 7 : 8;
         const emptyLabel = window.isHackathonPage ? 'IT 대회' : '동아리';
         tbody.innerHTML = `<tr><td colspan="${cols}" class="text-center py-12 text-slate-500">조건에 맞는 ${emptyLabel}가 없습니다.</td></tr>`;
         return;
     }
 
+    const hasPanel = !window.isHackathonPage && !window.isBootcampPage;
     tbody.innerHTML = clubs.map((club, index) => {
         const nameContent = club.link ? `<a href="${club.link}" target="_blank" class="hover:text-primary hover:underline decoration-2 underline-offset-4">${club.name}</a>` : club.name;
         const reviewCount = getReviews(club.name).length;
         const row = `
-        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group cursor-pointer" data-club-name="${club.name.replace(/"/g, '&quot;')}">
+        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group ${hasPanel ? 'cursor-pointer' : ''}" data-club-name="${club.name.replace(/"/g, '&quot;')}">
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
             <td class="px-4 py-5 text-sm font-bold"><span class="block">${club.recruitStart}</span><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
             <td class="px-4 py-5"><div class="flex gap-1 flex-wrap">${club.activity.map(m => `<span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">${m}</span>`).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-col gap-1">${window.isHackathonPage ? club.prize.map(p => getPrizeBadge(p)).join('') : window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
             ${window.isHackathonPage ? '' : `<td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>`}
-            <td class="px-4 py-5 text-center"><span class="inline-flex items-center gap-1 text-sm ${reviewCount > 0 ? 'text-amber-500' : 'text-slate-300 dark:text-slate-600'}"><span class="material-symbols-outlined text-base">rate_review</span>${reviewCount}</span></td>
+            ${hasPanel ? `<td class="px-4 py-5 text-center"><span class="inline-flex items-center gap-1 text-sm ${reviewCount > 0 ? 'text-amber-500' : 'text-slate-300 dark:text-slate-600'}"><span class="material-symbols-outlined text-base">rate_review</span>${reviewCount}</span></td>` : ''}
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
         </tr>`;
         return row;
@@ -493,6 +494,7 @@ function renderMobileCards(clubs = getAllClubs()) {
         return;
     }
 
+    const hasPanel = !window.isHackathonPage && !window.isBootcampPage;
     container.innerHTML = clubs.map(club => {
         const Tag = club.link ? 'a' : 'div';
         const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
@@ -505,7 +507,7 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <span class="font-bold text-lg">${club.name}</span>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
-                    ${reviewCount > 0 ? `<span class="inline-flex items-center gap-0.5 text-xs text-amber-500"><span class="material-symbols-outlined text-sm">rate_review</span>${reviewCount}</span>` : ''}
+                    ${hasPanel && reviewCount > 0 ? `<span class="inline-flex items-center gap-0.5 text-xs text-amber-500"><span class="material-symbols-outlined text-sm">rate_review</span>${reviewCount}</span>` : ''}
                     ${window.isHackathonPage ? '' : `<span class="flex gap-0.5 text-sm">${club.dots}</span>`}
                 </div>
             </div>
@@ -527,7 +529,7 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0 pt-0.5">모집 분야</span>
                     <div class="flex flex-wrap gap-1">${club.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
                 </div>
-                ${reviewCount > 0 ? `<div class="flex items-center gap-2">
+                ${hasPanel && reviewCount > 0 ? `<div class="flex items-center gap-2">
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">후기</span>
                     <span class="inline-flex items-center gap-1 text-amber-500 font-medium"><span class="material-symbols-outlined text-sm">rate_review</span>${reviewCount}건</span>
                 </div>` : ''}
@@ -765,14 +767,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     populateFilters();
 
-    // 후기 컬럼 헤더 동적 추가
-    const theadRow = document.querySelector('thead tr');
-    if (theadRow) {
-        const lastTh = theadRow.querySelector('th:last-child');
-        const reviewTh = document.createElement('th');
-        reviewTh.className = 'px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-20 text-center';
-        reviewTh.textContent = '후기';
-        theadRow.insertBefore(reviewTh, lastTh);
+    // 후기 컬럼 헤더 동적 추가 (동아리/마케팅 페이지만)
+    if (!window.isHackathonPage && !window.isBootcampPage) {
+        const theadRow = document.querySelector('thead tr');
+        if (theadRow) {
+            const lastTh = theadRow.querySelector('th:last-child');
+            const reviewTh = document.createElement('th');
+            reviewTh.className = 'px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-20 text-center';
+            reviewTh.textContent = '후기';
+            theadRow.insertBefore(reviewTh, lastTh);
+        }
     }
 
     // Initial render
@@ -1003,21 +1007,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closePanel();
     });
 
-    // 데스크톱 테이블 행 클릭
-    document.getElementById('club-list')?.addEventListener('click', (e) => {
-        if (e.target.closest('a')) return;
-        const row = e.target.closest('tr[data-club-name]');
-        if (!row) return;
-        const club = findClubByName(row.dataset.clubName);
-        if (club) openPanel(club);
-    });
+    // 데스크톱 테이블 행 클릭 (동아리/마케팅 페이지만)
+    if (!window.isHackathonPage && !window.isBootcampPage) {
+        document.getElementById('club-list')?.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return;
+            const row = e.target.closest('tr[data-club-name]');
+            if (!row) return;
+            const club = findClubByName(row.dataset.clubName);
+            if (club) openPanel(club);
+        });
 
-    // 모바일 카드 클릭
-    document.getElementById('club-list-mobile')?.addEventListener('click', (e) => {
-        const card = e.target.closest('[data-club-name]');
-        if (!card) return;
-        e.preventDefault();
-        const club = findClubByName(card.dataset.clubName);
-        if (club) openPanel(club);
-    });
+        // 모바일 카드 클릭
+        document.getElementById('club-list-mobile')?.addEventListener('click', (e) => {
+            const card = e.target.closest('[data-club-name]');
+            if (!card) return;
+            e.preventDefault();
+            const club = findClubByName(card.dataset.clubName);
+            if (club) openPanel(club);
+        });
+    }
 });
