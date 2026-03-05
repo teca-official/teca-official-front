@@ -902,9 +902,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// 🦕 Easter Egg (IT 연합동아리 페이지에서만 동작)
+// 🦕 Easter Egg (IT 연합동아리 메인 페이지에서만 동작, 추천 페이지 제외)
 (function() {
     if (getPageName() !== 'it') return;
+    if (window.isRecommendPage) return;
 
     const logo = document.querySelector('header img[alt="Logo"]');
     if (!logo) return;
