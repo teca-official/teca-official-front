@@ -1029,7 +1029,14 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.classList.add('translate-x-0');
         overlay.classList.remove('opacity-0', 'pointer-events-none');
         overlay.classList.add('opacity-100');
-        document.body.style.overflow = 'hidden';
+
+        // iOS Safari scroll chaining 방지
+        const scrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.dataset.scrollY = scrollY;
     }
 
     function closePanel() {
@@ -1037,7 +1044,14 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.classList.add('translate-x-full');
         overlay.classList.remove('opacity-100');
         overlay.classList.add('opacity-0', 'pointer-events-none');
-        document.body.style.overflow = '';
+
+        // 스크롤 위치 복원
+        const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        window.scrollTo(0, scrollY);
     }
 
     document.getElementById('panel-close').addEventListener('click', closePanel);
