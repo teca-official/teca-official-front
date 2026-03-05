@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>나에게 맞는 동아리 찾기 | IT 연합동아리 추천</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/catturtle123/og-image/favicon.ico" rel="icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<script>
+    const darkModeMatcher = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function updateDarkMode(e) {
+        if (e.matches) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }
+
+    updateDarkMode(darkModeMatcher);
+    darkModeMatcher.addEventListener('change', updateDarkMode);
+
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    primary: "#3b82f6",
+                    "background-light": "#ffffff",
+                    "background-dark": "#0f172a",
+                    "card-dark": "rgba(30, 41, 59, 0.7)",
+                    "border-dark": "rgba(255, 255, 255, 0.1)",
+                    "neon-pink": "#ff2d55",
+                    "neon-blue": "#00f3ff",
+                    "neon-green": "#39ff14",
+                },
+                fontFamily: {
+                    display: ["Inter", "Noto Sans KR", "sans-serif"],
+                    body: ["Inter", "Noto Sans KR", "sans-serif"],
+                },
+                borderRadius: {
+                    DEFAULT: "0.5rem",
+                },
+            },
+        },
+    };
+</script>
+<link href="style.css" rel="stylesheet"/>
+<style>
+    @media (hover: hover) {
+        .quiz-option-multi:hover {
+            border-color: #3b82f6;
+            background-color: rgb(239 246 255 / 1);
+        }
+        .dark .quiz-option-multi:hover {
+            background-color: rgb(30 58 138 / 0.2);
+        }
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="flex flex-col">
+<header class="pt-8 md:pt-12 pb-4 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full">
+<div class="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
+<a href="/">
+<img src="logo.png" alt="Logo" class="h-8 sm:h-10 md:h-12 w-auto" />
+</a>
+<a href="/" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100 hover:opacity-80 transition-opacity">
+    IT 연합동아리 추천
+</a>
+<a class="ml-auto shrink-0 inline-flex items-center gap-1 sm:gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-purple-400/30 bg-purple-500/10 text-purple-500 dark:text-purple-400 font-medium text-xs sm:text-sm hover:bg-purple-500/20 hover:border-purple-400/50 transition-all" href="https://docs.google.com/forms/d/1A7zV5F8fGpHuC7NPs3juTnIlfEuo8hlMfpoo_aKC7rs/edit" target="_blank">
+    <span class="material-symbols-outlined text-sm sm:text-base">feedback</span>
+    <span class="sm:hidden">피드백</span><span class="hidden sm:inline">피드백 보내기</span>
+</a>
+</div>
+</header>
+
+<main class="md:flex-1 px-4 sm:px-6 md:px-12 pb-8 md:pb-12">
+<div class="max-w-2xl md:max-w-3xl mx-auto">
+
+<!-- Progress Bar -->
+<div class="mb-6 md:mb-8" id="progress-section">
+    <div class="flex justify-between items-center mb-2">
+        <span class="text-sm font-medium text-slate-500 dark:text-slate-400" id="progress-label">질문 1/4</span>
+        <span class="text-sm font-medium text-primary" id="progress-percent">25%</span>
+    </div>
+    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+        <div class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500" id="progress-bar" style="width: 25%"></div>
+    </div>
+</div>
+
+<!-- Quiz Container -->
+<div id="quiz-container">
+
+    <!-- Step 1: 현재 상태 -->
+    <div class="quiz-step" data-step="1">
+        <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl p-6 sm:p-8 shadow-lg">
+            <h2 class="text-xl sm:text-2xl font-bold mb-2">현재 상태가 어떻게 되시나요?</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">지원 자격에 맞는 동아리를 추천해 드릴게요</p>
+            <div class="space-y-2 sm:space-y-3" id="step1-options">
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="대학생">
+                    <span class="text-base sm:text-lg font-medium">🎓 대학생</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">재학생, 휴학생 포함</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="현직자">
+                    <span class="text-base sm:text-lg font-medium">💼 현직자</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">직장인, 프리랜서, 취준생 등</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="신촌지역대학생">
+                    <span class="text-base sm:text-lg font-medium">🏫 신촌지역 대학생</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">서강대, 숙명여대, 연세대, 이화여대, 홍익대</p>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 2: 관심 분야 -->
+    <div class="quiz-step hidden" data-step="2">
+        <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl p-6 sm:p-8 shadow-lg">
+            <h2 class="text-xl sm:text-2xl font-bold mb-2">어떤 분야에 관심이 있으신가요?</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">여러 개 선택할 수 있어요<br/>(선택 후 하단의 다음으로를 눌러주세요)</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="step2-options">
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="PM">
+                    <span class="text-2xl block mb-1">📋</span>
+                    <span class="text-sm font-medium">PM</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="디자인">
+                    <span class="text-2xl block mb-1">🎨</span>
+                    <span class="text-sm font-medium">디자인</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="AI">
+                    <span class="text-2xl block mb-1">🤖</span>
+                    <span class="text-sm font-medium">AI</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="웹">
+                    <span class="text-2xl block mb-1">🌐</span>
+                    <span class="text-sm font-medium">웹</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="Android">
+                    <span class="text-2xl block mb-1">🤖</span>
+                    <span class="text-sm font-medium">Android</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="iOS">
+                    <span class="text-2xl block mb-1">🍎</span>
+                    <span class="text-sm font-medium">iOS</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="Flutter">
+                    <span class="text-2xl block mb-1">💙</span>
+                    <span class="text-sm font-medium">Flutter</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="ReactNative">
+                    <span class="text-2xl block mb-1">⚛️</span>
+                    <span class="text-sm font-medium">React Native</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="백엔드">
+                    <span class="text-2xl block mb-1">🗄️</span>
+                    <span class="text-sm font-medium">백엔드</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="클라우드">
+                    <span class="text-2xl block mb-1">☁️</span>
+                    <span class="text-sm font-medium">클라우드</span>
+                </button>
+                <button class="quiz-option-multi px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 transition-all text-center" data-value="상관없어요">
+                    <span class="text-2xl block mb-1">✨</span>
+                    <span class="text-sm font-medium">상관없어요</span>
+                </button>
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button class="quiz-back flex items-center gap-1 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-sm">
+                    <span class="material-symbols-outlined text-base">arrow_back</span>
+                    이전으로
+                </button>
+                <button class="quiz-next flex-1 px-4 py-2.5 rounded-xl bg-primary text-white font-medium hover:bg-blue-600 transition-all text-sm disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                    다음으로
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 3: 경험 수준 -->
+    <div class="quiz-step hidden" data-step="3">
+        <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl p-6 sm:p-8 shadow-lg">
+            <h2 class="text-xl sm:text-2xl font-bold mb-2">경험 수준은 어느 정도인가요?</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">티어에 맞는 동아리를 매칭해 드릴게요</p>
+            <div class="space-y-2 sm:space-y-3 md:grid md:grid-cols-2 md:gap-3 md:space-y-0" id="step3-options">
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="1">
+                    <span class="text-base sm:text-lg font-medium">🌕 초보</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">비전공자, 신입생 - 프로젝트 경험을 시작하기 좋은 곳</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="2">
+                    <span class="text-base sm:text-lg font-medium">🌕🌕 중급</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">심도 있는 프로젝트를 경험하고 싶은 분</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="3">
+                    <span class="text-base sm:text-lg font-medium">🌕🌕🌕 고급</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">인지도 높은 동아리, 끝판왕을 찾는 분</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="any">
+                    <span class="text-base sm:text-lg font-medium">✨ 상관없어요</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">티어 상관없이 모두 보여주세요</p>
+                </button>
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button class="quiz-back flex items-center gap-1 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-sm">
+                    <span class="material-symbols-outlined text-base">arrow_back</span>
+                    이전으로
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 4: 활동 시기 -->
+    <div class="quiz-step hidden" data-step="4">
+        <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl p-6 sm:p-8 shadow-lg">
+            <h2 class="text-xl sm:text-2xl font-bold mb-2">언제 활동하고 싶으신가요?</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">원하는 활동 시기에 맞춰 추천해 드릴게요</p>
+            <div class="space-y-2 sm:space-y-3 md:grid md:grid-cols-2 md:gap-3 md:space-y-0" id="step4-options">
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q1">
+                    <span class="text-base sm:text-lg font-medium">❄️ 1~3월</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">겨울방학 ~ 1학기 초</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q2">
+                    <span class="text-base sm:text-lg font-medium">🌸 4~6월</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">1학기</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q3">
+                    <span class="text-base sm:text-lg font-medium">☀️ 7~9월</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">여름방학 ~ 2학기 초</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="Q4">
+                    <span class="text-base sm:text-lg font-medium">🍂 10~12월</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">2학기</p>
+                </button>
+                <button class="quiz-option w-full text-left px-4 py-3 sm:px-5 sm:py-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-primary hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all" data-value="any">
+                    <span class="text-base sm:text-lg font-medium">✨ 상관없어요</span>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">시기 상관없이 모두 보여주세요</p>
+                </button>
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button class="quiz-back flex items-center gap-1 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-sm">
+                    <span class="material-symbols-outlined text-base">arrow_back</span>
+                    이전으로
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Results Container -->
+<div id="results-container" class="hidden">
+    <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2">추천 결과</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm">당신에게 딱 맞는 동아리를 찾았어요!</p>
+    </div>
+
+    <div id="best-matches" class="mb-6"></div>
+    <div id="good-matches" class="mb-8"></div>
+
+    <div id="no-results" class="hidden text-center py-12">
+        <span class="material-symbols-outlined text-5xl text-slate-300 dark:text-slate-600 mb-4 block">search_off</span>
+        <p class="text-slate-500 dark:text-slate-400">조건에 맞는 동아리가 없습니다.</p>
+        <p class="text-slate-400 dark:text-slate-500 text-sm mt-1">조건을 바꿔서 다시 시도해 보세요!</p>
+    </div>
+
+    <div id="ad-matches" class="mb-8"></div>
+
+    <div class="flex flex-col sm:flex-row gap-3">
+        <button id="retry-btn" class="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white font-medium hover:bg-blue-600 transition-all">
+            <span class="material-symbols-outlined text-base">refresh</span>
+            다시 해보기
+        </button>
+        <a href="/" class="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all font-medium">
+            <span class="material-symbols-outlined text-base">list</span>
+            전체 동아리 보기
+        </a>
+    </div>
+</div>
+
+</div>
+</main>
+
+<footer class="py-4 flex flex-col justify-center items-center text-slate-500 dark:text-slate-500 text-xs sm:text-sm max-w-7xl mx-auto gap-1 px-4">
+    <p>&copy; IT Club DB. All information updated daily.</p>
+    <a href="https://dazzling-myth-cd2.notion.site/3097c67ff1e68022a012f2c5e0389e9b" target="_blank" class="hover:text-slate-700 dark:hover:text-slate-300 underline transition-colors">개인정보 처리방침</a>
+</footer>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAnalytics, logEvent, setDefaultEventParameters } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBuvBZ3EZAE5GjdVVggGEa21wgTf6DAwqs",
+    authDomain: "teca-analytics.firebaseapp.com",
+    projectId: "teca-analytics",
+    storageBucket: "teca-analytics.firebasestorage.app",
+    messagingSenderId: "51789117987",
+    appId: "1:51789117987:web:aba99b0a76708c402f4f96",
+    measurementId: "G-H8PR0KJ2QX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  setDefaultEventParameters({ page: 'recommend' });
+
+  const isDebug = new URLSearchParams(window.location.search).has('debug_mode');
+
+  window._firebaseLogEvent = function(name, params) {
+    if (isDebug) {
+      params = { ...params, debug_mode: true };
+      console.log('[Analytics]', name, params);
+    }
+    logEvent(analytics, name, params);
+  };
+</script>
+<script>window.isRecommendPage = true;</script>
+<script src="script.js"></script>
+<script>
+(function() {
+    // --- Quiz State ---
+    let currentStep = 1;
+    const answers = {
+        eligibility: null,   // "대학생" | "현직자" | "신촌지역대학생"
+        fields: [],          // ["PM", "디자인", ...] or ["상관없어요"]
+        tier: null,          // "1" | "2" | "3" | "any"
+        timing: null         // "Q1" | "Q2" | "Q3" | "Q4" | "any"
+    };
+
+    const TOTAL_STEPS = 4;
+
+    // --- Firebase Analytics Helper ---
+    function trackEvent(name, params) {
+        if (typeof window._firebaseLogEvent === 'function') {
+            window._firebaseLogEvent(name, params);
+        }
+    }
+
+    // --- Quarter Mapping ---
+    const QUARTER_MONTHS = {
+        Q1: ["1월", "2월", "3월"],
+        Q2: ["4월", "5월", "6월"],
+        Q3: ["7월", "8월", "9월"],
+        Q4: ["10월", "11월", "12월"]
+    };
+
+    const QUARTER_ORDER = ["Q1", "Q2", "Q3", "Q4"];
+
+    // --- Category → Field Names Mapping (from script.js FilterCategory) ---
+    const FIELD_MAP = {
+        "PM": ["PM"],
+        "디자인": ["Design", "UX"],
+        "AI": ["AI", "머신러닝", "딥러닝", "LLM", "데이터 분석", "데이터 시각화", "데이터 엔지니어링"],
+        "웹": ["WEB", "Frontend"],
+        "Android": ["Android"],
+        "iOS": ["iOS"],
+        "Flutter": ["Flutter"],
+        "ReactNative": ["ReactNative"],
+        "백엔드": ["Backend", "SpringBoot", "Node.js", "Django"],
+        "클라우드": ["클라우드"]
+    };
+
+    // --- Tier Parsing ---
+    function parseTier(dots) {
+        return (dots.match(/🌕/g) || []).length;
+    }
+
+    // --- Date Parsing ---
+    function parseKoreanDate(str) {
+        const match = str.match(/(\d+)월\s*(\d+)일\s*(\d+)/);
+        if (!match) return null;
+        return new Date(Number(match[3]), Number(match[1]) - 1, Number(match[2]));
+    }
+
+    // --- Matching Algorithm ---
+    function calculateScore(club) {
+        // 0. Marketing 동아리 제외 (프로그래피 예외)
+        if (club.fields.some(f => f.name === "Marketing") && !club.name.includes("프로그래피")) return -1;
+
+        // 0-1. Recruit period hard filter (활동 시기를 선택한 경우에만 적용)
+        if (answers.timing !== "any") {
+            const endDate = parseKoreanDate(club.recruitEnd);
+            if (endDate && endDate < new Date()) return -1;
+        }
+
+        // 1. Eligibility hard filter
+        const userElig = answers.eligibility;
+        let eligible = false;
+        if (userElig === "대학생") {
+            eligible = club.eligibility.includes(Eligibility.UNIVERSITY);
+        } else if (userElig === "현직자") {
+            eligible = club.eligibility.includes(Eligibility.WORKER);
+        } else if (userElig === "신촌지역대학생") {
+            eligible = club.eligibility.includes(Eligibility.SINCHON) || club.eligibility.includes(Eligibility.UNIVERSITY);
+        }
+        if (!eligible) return -1;
+
+        let score = 0;
+
+        // 2. Field hard filter + scoring (40 points)
+        if (answers.fields.includes("상관없어요") || answers.fields.length === 0) {
+            score += 40;
+        } else {
+            const clubFieldNames = club.fields.map(f => f.name);
+            const userFieldNames = [];
+            answers.fields.forEach(cat => {
+                if (FIELD_MAP[cat]) userFieldNames.push(...FIELD_MAP[cat]);
+            });
+
+            const specificFields = clubFieldNames.filter(f => f !== "무관");
+            if (specificFields.length === 0) {
+                // 분야가 "무관"만 있는 동아리 (예: sipe) → 절반 점수
+                score += 20;
+            } else {
+                const matchCount = userFieldNames.filter(f => specificFields.includes(f)).length;
+                if (matchCount === 0) return -1; // 매칭 분야 없으면 제외
+                if (userFieldNames.length > 0) {
+                    score += Math.round((matchCount / userFieldNames.length) * 40);
+                }
+            }
+        }
+
+        // 3. Tier matching (30 points)
+        if (answers.tier === "any") {
+            score += 30;
+        } else {
+            const userTier = parseInt(answers.tier);
+            const clubTier = parseTier(club.dots);
+            const diff = Math.abs(userTier - clubTier);
+            if (diff === 0) score += 30;
+            else if (diff === 1) score += 20;
+            else score += 5;
+        }
+
+        // 4. Timing matching (30 points)
+        if (answers.timing === "any") {
+            score += 30;
+        } else {
+            const quarterMonths = QUARTER_MONTHS[answers.timing];
+            const hasExact = club.activity.some(m => quarterMonths.includes(m));
+            if (hasExact) {
+                score += 30;
+            } else {
+                const qi = QUARTER_ORDER.indexOf(answers.timing);
+                const adjQuarters = [
+                    QUARTER_ORDER[(qi + 3) % 4],
+                    QUARTER_ORDER[(qi + 1) % 4]
+                ];
+                const adjMonths = adjQuarters.flatMap(q => QUARTER_MONTHS[q]);
+                const hasAdj = club.activity.some(m => adjMonths.includes(m));
+                if (hasAdj) score += 15;
+            }
+        }
+
+        return score;
+    }
+
+    // --- UI Navigation ---
+    function showStep(step) {
+        document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
+        const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
+        if (target) target.classList.remove('hidden');
+
+        document.getElementById('progress-label').textContent = `질문 ${step}/${TOTAL_STEPS}`;
+        const pct = Math.round((step / TOTAL_STEPS) * 100);
+        document.getElementById('progress-percent').textContent = `${pct}%`;
+        document.getElementById('progress-bar').style.width = `${pct}%`;
+
+        document.getElementById('quiz-container').classList.remove('hidden');
+        document.getElementById('results-container').classList.add('hidden');
+        document.getElementById('progress-section').classList.remove('hidden');
+    }
+
+    function goNext() {
+        if (currentStep < TOTAL_STEPS) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    }
+
+    function goBack() {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+            restoreSelections();
+        }
+    }
+
+    function restoreSelections() {
+        // Restore visual state for current step
+        if (currentStep === 1) {
+            document.querySelectorAll('#step1-options .quiz-option').forEach(btn => {
+                btn.classList.toggle('border-primary', btn.dataset.value === answers.eligibility);
+                btn.classList.toggle('bg-blue-50', btn.dataset.value === answers.eligibility);
+                btn.classList.toggle('dark:bg-blue-900/20', btn.dataset.value === answers.eligibility);
+            });
+        } else if (currentStep === 2) {
+            document.querySelectorAll('#step2-options .quiz-option-multi').forEach(btn => {
+                const selected = answers.fields.includes(btn.dataset.value);
+                btn.classList.toggle('border-primary', selected);
+                btn.classList.toggle('bg-blue-50', selected);
+                btn.classList.toggle('dark:bg-blue-900/20', selected);
+            });
+            updateStep2NextButton();
+        } else if (currentStep === 3) {
+            document.querySelectorAll('#step3-options .quiz-option').forEach(btn => {
+                btn.classList.toggle('border-primary', btn.dataset.value === answers.tier);
+                btn.classList.toggle('bg-blue-50', btn.dataset.value === answers.tier);
+                btn.classList.toggle('dark:bg-blue-900/20', btn.dataset.value === answers.tier);
+            });
+        }
+    }
+
+    function updateStep2NextButton() {
+        const nextBtn = document.querySelector('.quiz-step[data-step="2"] .quiz-next');
+        if (nextBtn) nextBtn.disabled = answers.fields.length === 0;
+    }
+
+    // --- Results ---
+    function showResults() {
+        document.getElementById('quiz-container').classList.add('hidden');
+        document.getElementById('progress-section').classList.add('hidden');
+        document.getElementById('results-container').classList.remove('hidden');
+
+        const allResults = [];
+        Object.values(Club).forEach(club => {
+            const score = calculateScore(club);
+            if (score >= 40) {
+                allResults.push({ club, score });
+            }
+        });
+
+        allResults.sort((a, b) => b.score - a.score);
+
+        // 같은 동아리 중복 제거 (점수 높은 것만 남김)
+        const seen = new Set();
+        const results = allResults.filter(r => {
+            const baseName = r.club.name.replace(/\s*\(.*\)$/, '');
+            if (seen.has(baseName)) return false;
+            seen.add(baseName);
+            return true;
+        });
+
+        const bestMatches = results.filter(r => r.score >= 70);
+        const goodMatches = results.filter(r => r.score >= 40 && r.score < 70);
+
+        const bestContainer = document.getElementById('best-matches');
+        const goodContainer = document.getElementById('good-matches');
+        const noResults = document.getElementById('no-results');
+
+        bestContainer.innerHTML = '';
+        goodContainer.innerHTML = '';
+
+        if (results.length === 0) {
+            noResults.classList.remove('hidden');
+            return;
+        }
+        noResults.classList.add('hidden');
+
+        if (bestMatches.length > 0) {
+            bestContainer.innerHTML = `
+                <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1">star</span>
+                    추천 동아리
+                </h3>
+                <div class="flex gap-3 overflow-x-auto pb-4 notion-scroll">${bestMatches.map(r => renderCard(r)).join('')}</div>
+            `;
+        }
+
+        if (goodMatches.length > 0) {
+            goodContainer.innerHTML = `
+                <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-slate-400">thumb_up</span>
+                    이런 동아리도 있어요
+                </h3>
+                <div class="flex gap-3 overflow-x-auto pb-4 notion-scroll">${goodMatches.map(r => renderCard(r)).join('')}</div>
+            `;
+        }
+
+        // 광고 렌더링
+        renderAds();
+
+        trackEvent('quiz_complete', {
+            eligibility: answers.eligibility,
+            fields: answers.fields.join(','),
+            tier: answers.tier,
+            timing: answers.timing,
+            result_count: results.length,
+            best_count: bestMatches.length
+        });
+    }
+
+    // --- Ad Matching ---
+    const NON_DEV_FIELDS = new Set(["PM", "디자인"]);
+    const GENERAL_AD_CATEGORIES = ["CS", "Language", "AI 생산성", "Algorithm"];
+
+    function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    function getMatchingAds() {
+        if (typeof InflearnAds === 'undefined' || InflearnAds.length === 0) return [];
+
+        const userFields = answers.fields.includes("상관없어요") ? [] : answers.fields;
+        const isNonDev = userFields.length > 0 && userFields.every(f => NON_DEV_FIELDS.has(f));
+        const isGeneral = userFields.length === 0; // 상관없어요
+
+        if (isGeneral) {
+            // 상관없어요 → CS, Language, AI 생산성, Algorithm에서 랜덤
+            const generalAds = InflearnAds.filter(ad =>
+                ad.categories.some(c => GENERAL_AD_CATEGORIES.includes(c))
+            );
+            return shuffle(generalAds).slice(0, 10);
+        }
+
+        if (isNonDev) {
+            if (userFields.includes("디자인")) {
+                // 디자인 선택 → 디자인 광고 전부 + 나머지 PM으로 채우기
+                const designAds = InflearnAds.filter(ad => ad.categories.includes("디자인"));
+                const pmAds = shuffle(InflearnAds.filter(ad =>
+                    ad.categories.includes("PM") && !ad.categories.includes("디자인")
+                ));
+                return [...designAds, ...pmAds].slice(0, 10);
+            }
+            // PM만 선택 → PM 광고만 10개
+            const matched = InflearnAds.filter(ad =>
+                ad.categories.some(c => userFields.includes(c))
+            );
+            return shuffle(matched).slice(0, 10);
+        }
+
+        // 개발 분야 선택 → 분야 매칭 광고 + AI 생산성 끼워넣기
+        const fieldAds = shuffle(InflearnAds.filter(ad =>
+            ad.categories.some(c => userFields.includes(c))
+        ));
+        const aiProdAds = shuffle(InflearnAds.filter(ad =>
+            ad.categories.includes("AI 생산성")
+        ));
+
+        // 분야 광고 7개 + AI 생산성 3개 목표, 부족하면 있는 만큼
+        const mainSlice = fieldAds.slice(0, 7);
+        const aiSlice = aiProdAds.slice(0, 3);
+
+        // AI 생산성을 중간중간 끼워넣기 (3, 6, 9번째 위치)
+        const result = [...mainSlice];
+        const insertPositions = [2, 5, 8];
+        aiSlice.forEach((ad, i) => {
+            const pos = Math.min(insertPositions[i], result.length);
+            result.splice(pos, 0, ad);
+        });
+
+        return result.slice(0, 10);
+    }
+
+    function renderAds() {
+        const adContainer = document.getElementById('ad-matches');
+        const ads = getMatchingAds();
+        if (ads.length === 0) {
+            adContainer.innerHTML = '';
+            return;
+        }
+
+        adContainer.innerHTML = `
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
+                이런 강의는 어때요?
+            </h3>
+            <div class="flex gap-3 overflow-x-auto pb-4 notion-scroll">${ads.map(ad => renderAdCard(ad)).join('')}</div>
+        `;
+    }
+
+    function renderAdCard(ad) {
+        const priceText = ad.payPrice
+            ? ad.payPrice.toLocaleString('ko-KR') + '원'
+            : '무료';
+
+        return `
+            <a href="${ad.link}" target="_blank" rel="noopener" class="block w-64 sm:w-72 md:w-80 shrink-0 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden hover:shadow-md transition-all group">
+                <div class="relative">
+                    <img src="${ad.thumbnailUrl}" alt="${ad.title.replace(/"/g, '&quot;')}" class="w-full h-36 object-cover" loading="lazy" />
+                    <span class="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(0,196,113,0.15);color:#00c471">AD</span>
+                    ${ad.discountRate ? `<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[10px] font-bold leading-none" style="background:rgba(239,68,68,0.15);color:#ef4444">${ad.discountRate}%</span>` : ''}
+                </div>
+                <div class="p-4">
+                    <h4 class="font-bold text-sm truncate group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">${ad.title}</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${ad.instructor} · ⭐ ${ad.rating}</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="text-sm font-bold" style="color:#00c471">${priceText}</span>
+                        ${ad.discountRate ? `<span class="text-xs text-slate-400 line-through">${ad.regularPrice.toLocaleString('ko-KR')}원</span>` : ''}
+                    </div>
+                    <div class="flex flex-wrap gap-1 mt-2">${(ad.skillTags || []).slice(0, 3).map(tag => `<span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-[10px] text-slate-500 dark:text-slate-400">${tag}</span>`).join('')}</div>
+                </div>
+            </a>`;
+    }
+
+    function renderCard(result) {
+        const { club, score } = result;
+        const pct = score;
+        const displayName = club.name.replace(/\s*\(.*\)$/, '');
+        const tierText = club.dots;
+        const fieldTags = club.fields.map(f =>
+            `<span class="inline-block px-2 py-0.5 rounded text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">${f.name}</span>`
+        ).join(' ');
+
+        const barColor = pct >= 70 ? 'from-yellow-400 to-orange-500' : 'from-blue-400 to-blue-500';
+        const hasLink = club.link && club.link.length > 0;
+        const tag = hasLink ? 'a' : 'div';
+        const linkAttr = hasLink ? `href="${club.link}" target="_blank"` : '';
+
+        return `
+            <${tag} ${linkAttr} class="block w-64 sm:w-72 md:w-80 shrink-0 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl p-4 sm:p-5 hover:shadow-md transition-all cursor-pointer group" onclick="trackResultClick('${club.name.replace(/'/g, "\\'")}', ${pct})">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-3xl">${club.icon}</span>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-sm sm:text-base truncate">${displayName}</h4>
+                        <span class="text-xs sm:text-sm">${tierText}</span>
+                    </div>
+                    ${hasLink ? '<span class="material-symbols-outlined text-sm text-slate-400 group-hover:text-primary transition-colors">open_in_new</span>' : ''}
+                </div>
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="flex-1 bg-slate-200 dark:bg-slate-700 rounded-full h-1.5">
+                        <div class="bg-gradient-to-r ${barColor} h-1.5 rounded-full" style="width: ${pct}%"></div>
+                    </div>
+                    <span class="text-xs font-bold ${pct >= 70 ? 'text-orange-500' : 'text-blue-500'}">${pct}%</span>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 line-clamp-3">${club.description}</p>
+                <div class="flex flex-wrap gap-1 mb-2">${fieldTags}</div>
+                <p class="text-xs text-slate-400 dark:text-slate-500">모집: ${club.recruitStart} ~ ${club.recruitEnd}</p>
+            </${tag}>
+        `;
+    }
+
+    // Global function for onclick
+    window.trackResultClick = function(name, score) {
+        trackEvent('quiz_result_click', { club_name: name, match_score: score });
+    };
+
+    // --- Event Listeners ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Step 1: Single select → auto advance
+        document.querySelectorAll('#step1-options .quiz-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                answers.eligibility = btn.dataset.value;
+                document.querySelectorAll('#step1-options .quiz-option').forEach(b => {
+                    b.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                });
+                btn.classList.add('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                trackEvent('quiz_step_complete', { step: 1, value: answers.eligibility });
+                setTimeout(goNext, 300);
+            });
+        });
+
+        // Step 2: Multi select with "상관없어요" toggle
+        document.querySelectorAll('#step2-options .quiz-option-multi').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const val = btn.dataset.value;
+                if (val === "상관없어요") {
+                    // Deselect all others, toggle this
+                    answers.fields = answers.fields.includes("상관없어요") ? [] : ["상관없어요"];
+                    document.querySelectorAll('#step2-options .quiz-option-multi').forEach(b => {
+                        b.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                    });
+                    if (answers.fields.includes("상관없어요")) {
+                        btn.classList.add('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                    }
+                } else {
+                    // Remove "상관없어요" if selected
+                    answers.fields = answers.fields.filter(f => f !== "상관없어요");
+                    document.querySelector('#step2-options .quiz-option-multi[data-value="상관없어요"]')
+                        ?.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+
+                    if (answers.fields.includes(val)) {
+                        answers.fields = answers.fields.filter(f => f !== val);
+                        btn.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                    } else {
+                        answers.fields.push(val);
+                        btn.classList.add('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                    }
+                }
+                updateStep2NextButton();
+            });
+        });
+
+        // Step 2 Next button
+        document.querySelector('.quiz-step[data-step="2"] .quiz-next')?.addEventListener('click', () => {
+            trackEvent('quiz_step_complete', { step: 2, value: answers.fields.join(',') });
+            goNext();
+        });
+
+        // Step 3: Single select → auto advance
+        document.querySelectorAll('#step3-options .quiz-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                answers.tier = btn.dataset.value;
+                document.querySelectorAll('#step3-options .quiz-option').forEach(b => {
+                    b.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                });
+                btn.classList.add('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                trackEvent('quiz_step_complete', { step: 3, value: answers.tier });
+                setTimeout(goNext, 300);
+            });
+        });
+
+        // Step 4: Single select → show results
+        document.querySelectorAll('#step4-options .quiz-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                answers.timing = btn.dataset.value;
+                document.querySelectorAll('#step4-options .quiz-option').forEach(b => {
+                    b.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                });
+                btn.classList.add('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+                trackEvent('quiz_step_complete', { step: 4, value: answers.timing });
+                setTimeout(showResults, 300);
+            });
+        });
+
+        // Back buttons
+        document.querySelectorAll('.quiz-back').forEach(btn => {
+            btn.addEventListener('click', goBack);
+        });
+
+        // Retry button
+        document.getElementById('retry-btn')?.addEventListener('click', () => {
+            trackEvent('quiz_retry', {});
+            answers.eligibility = null;
+            answers.fields = [];
+            answers.tier = null;
+            answers.timing = null;
+            currentStep = 1;
+
+            // Reset all selections visually
+            document.querySelectorAll('.quiz-option, .quiz-option-multi').forEach(b => {
+                b.classList.remove('border-primary', 'bg-blue-50', 'dark:bg-blue-900/20');
+            });
+            updateStep2NextButton();
+            showStep(1);
+        });
+    });
+})();
+</script>
+</body></html>
