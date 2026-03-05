@@ -40,6 +40,10 @@
       "dest": "/recommend.html"
     },
     {
+      "src": "/partnership",
+      "dest": "/partnership.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
