@@ -269,6 +269,45 @@ const Hackathon = {
     GOORMTHON_WINTER: { name: "9oormthon in JEJU (winter)", link: "https://9oormthon.goorm.io/", dots: "🌕🌕", icon: "☁️", themeColor: "slate-500", recruitStart: "11월 4일 2025", recruitEnd: "11월 17일 2025", activity: ["11월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.PRIZE], description: "카카오 주관 제주도 3박 4일 해커톤. 프론트엔드, 백엔드, 디자인, 기획 분야 참가 가능", fields: [Field.FRONTEND, Field.BACKEND, Field.DESIGN, Field.PM] },
 };
 
+// ── 리뷰 데이터 (목업) ──
+const REVIEW_FORM_URL = "https://forms.gle/PLACEHOLDER";
+
+const ReviewData = {
+    "구름톤 유니브": [
+        { cohort: "4기", content: "전국 대학생들과 함께 해커톤을 준비하며 성장할 수 있었습니다. 네트워킹이 특히 좋았어요.", anonymous: true, date: "2025-08-20" },
+        { cohort: "3기", content: "카카오 현직자 멘토링이 큰 도움이 됐습니다. 다만 일정이 빡빡한 편이에요.", anonymous: false, author: "이○○", date: "2025-02-15" },
+    ],
+    "SOPT (1학기)": [
+        { cohort: "35기", content: "앱잼을 통해 실제 앱을 출시하는 경험이 매우 유익했습니다. 동아리 분위기도 좋고 열정적인 사람들이 많아요.", anonymous: false, author: "박○○", date: "2025-07-10" },
+        { cohort: "34기", content: "세미나 퀄리티가 높고 팀 프로젝트를 통해 실력이 많이 늘었습니다.", anonymous: true, date: "2025-01-20" },
+        { cohort: "33기", content: "네트워킹 기회가 정말 많아요. 수료 후에도 커뮤니티가 계속 유지됩니다.", anonymous: false, author: "김○○", date: "2024-07-15" },
+    ],
+    "SOPT (2학기)": [
+        { cohort: "36기", content: "합주에서 iOS 파트를 담당했는데 멘토분들이 정말 친절하게 알려주셨어요.", anonymous: false, author: "최○○", date: "2025-12-20" },
+        { cohort: "35기", content: "솝커톤, 앱잼 등 다양한 행사가 있어서 지루할 틈이 없었습니다.", anonymous: true, date: "2025-07-15" },
+    ],
+    "UMC (1학기)": [
+        { cohort: "7기", content: "전국 규모라 다양한 학교 학생들을 만날 수 있어 좋았습니다. 프로젝트 경험이 취업에 많이 도움됐어요.", anonymous: false, author: "정○○", date: "2025-06-30" },
+    ],
+    "카카오 테크 부트캠프 (풀스택)": [
+        { cohort: "2기", content: "6개월간의 집중 교육이 정말 알찼습니다. 현직 카카오 개발자분의 코드 리뷰가 특히 도움됐어요.", anonymous: false, author: "한○○", date: "2025-11-20" },
+        { cohort: "1기", content: "국비지원이라 부담 없이 참여할 수 있었고, 수료 후 취업 연계도 잘 되는 편입니다.", anonymous: true, date: "2025-05-15" },
+        { cohort: "2기", content: "풀스택 과정이라 프론트와 백엔드를 균형 있게 배울 수 있었습니다.", anonymous: false, author: "윤○○", date: "2025-11-25" },
+        { cohort: "1기", content: "동기들과 함께 프로젝트를 진행하며 실무 경험을 쌓을 수 있어 좋았습니다.", anonymous: true, date: "2025-05-20" },
+    ],
+    "넥스터즈 (여름방학)": [
+        { cohort: "25기", content: "8주 안에 실제 서비스를 런칭하는 경험이 인상적이었습니다. 팀원들 모두 열정적이에요.", anonymous: false, author: "송○○", date: "2025-09-15" },
+        { cohort: "24기", content: "디자이너와 개발자가 협업하는 구조라 실무와 비슷한 환경에서 프로젝트를 진행할 수 있었어요.", anonymous: true, date: "2025-03-20" },
+    ],
+    "YAPP (1학기)": [
+        { cohort: "26기", content: "서비스 기획부터 런칭까지 전 과정을 경험할 수 있어서 좋았습니다. 현직자 분들도 계셔서 배울 점이 많아요.", anonymous: false, author: "강○○", date: "2025-07-25" },
+    ],
+};
+
+function getReviews(clubName) {
+    return ReviewData[clubName] || [];
+}
+
 // Firebase Analytics helper
 function trackEvent(name, params) {
     if (typeof window._firebaseLogEvent === 'function') {
@@ -450,7 +489,7 @@ function renderTable(clubs = getAllClubs()) {
     if (!tbody) return;
 
     if (clubs.length === 0) {
-        const cols = window.isHackathonPage ? 6 : 7;
+        const cols = window.isHackathonPage ? 7 : 8;
         const emptyLabel = window.isHackathonPage ? 'IT 대회' : '동아리';
         tbody.innerHTML = `<tr><td colspan="${cols}" class="text-center py-12 text-slate-500">조건에 맞는 ${emptyLabel}가 없습니다.</td></tr>`;
         return;
@@ -458,6 +497,7 @@ function renderTable(clubs = getAllClubs()) {
 
     tbody.innerHTML = clubs.map((club, index) => {
         const nameContent = club.link ? `<a href="${club.link}" target="_blank" class="hover:text-primary hover:underline decoration-2 underline-offset-4">${club.name}</a>` : club.name;
+        const reviewCount = getReviews(club.name).length;
         const row = `
         <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group cursor-pointer" data-club-name="${club.name.replace(/"/g, '&quot;')}">
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
@@ -466,6 +506,7 @@ function renderTable(clubs = getAllClubs()) {
             <td class="px-4 py-5"><div class="flex flex-col gap-1">${window.isHackathonPage ? club.prize.map(p => getPrizeBadge(p)).join('') : window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
             ${window.isHackathonPage ? '' : `<td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>`}
+            <td class="px-4 py-5 text-center"><span class="inline-flex items-center gap-1 text-sm ${reviewCount > 0 ? 'text-amber-500' : 'text-slate-300 dark:text-slate-600'}"><span class="material-symbols-outlined text-base">rate_review</span>${reviewCount}</span></td>
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
         </tr>`;
         return row;
@@ -485,6 +526,7 @@ function renderMobileCards(clubs = getAllClubs()) {
     container.innerHTML = clubs.map(club => {
         const Tag = club.link ? 'a' : 'div';
         const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
+        const reviewCount = getReviews(club.name).length;
         return `
         <${Tag} ${hrefAttr} class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg" data-club-name="${club.name.replace(/"/g, '&quot;')}">
             <div class="flex items-start justify-between mb-3">
@@ -492,7 +534,10 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <span class="text-2xl shrink-0">${club.icon}</span>
                     <span class="font-bold text-lg">${club.name}</span>
                 </div>
-                ${window.isHackathonPage ? '' : `<span class="flex gap-0.5 text-sm shrink-0">${club.dots}</span>`}
+                <div class="flex items-center gap-2 shrink-0">
+                    ${reviewCount > 0 ? `<span class="inline-flex items-center gap-0.5 text-xs text-amber-500"><span class="material-symbols-outlined text-sm">rate_review</span>${reviewCount}</span>` : ''}
+                    ${window.isHackathonPage ? '' : `<span class="flex gap-0.5 text-sm">${club.dots}</span>`}
+                </div>
             </div>
             <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">${club.description}</p>
             <div class="space-y-2 text-sm">
@@ -746,6 +791,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     populateFilters();
 
+    // 후기 컬럼 헤더 동적 추가
+    const theadRow = document.querySelector('thead tr');
+    if (theadRow) {
+        const lastTh = theadRow.querySelector('th:last-child');
+        const reviewTh = document.createElement('th');
+        reviewTh.className = 'px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-20 text-center';
+        reviewTh.textContent = '후기';
+        theadRow.insertBefore(reviewTh, lastTh);
+    }
+
     // Initial render
     renderTable();
     renderMobileCards();
@@ -863,6 +918,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openPanel(club) {
         if (!club) return;
+        const reviews = getReviews(club.name);
         document.getElementById('panel-title').textContent = club.name;
         document.getElementById('panel-body').innerHTML = `
             <div class="flex items-center gap-3 mb-6">
@@ -907,6 +963,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 지원하러 가기
                 <span class="material-symbols-outlined text-base">open_in_new</span>
             </a>` : ''}
+            <div class="mt-8 border-t border-slate-200 dark:border-slate-700 pt-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base text-amber-500">rate_review</span>
+                        후기 <span class="text-amber-500">${reviews.length}</span>
+                    </h3>
+                </div>
+                ${reviews.length > 0 ? `
+                    <div class="space-y-3 mb-4">
+                        ${reviews.map(r => `
+                            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-300 text-xs font-medium">${r.cohort}</span>
+                                    <span class="text-xs text-slate-400">${r.anonymous ? '익명' : r.author}</span>
+                                    <span class="text-xs text-slate-300 dark:text-slate-600">&middot;</span>
+                                    <span class="text-xs text-slate-400">${r.date.slice(0, 7).replace('-', '.')}</span>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${r.content}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : `
+                    <p class="text-sm text-slate-400 mb-4">아직 등록된 후기가 없습니다.</p>
+                `}
+                <a href="${REVIEW_FORM_URL}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400 text-sm font-medium hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-base">edit_note</span>
+                    구글폼으로 후기 제출
+                </a>
+            </div>
         `;
 
         panel.classList.remove('translate-x-full');
