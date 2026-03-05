@@ -269,67 +269,10 @@ const Hackathon = {
     GOORMTHON_WINTER: { name: "9oormthon in JEJU (winter)", link: "https://9oormthon.goorm.io/", dots: "🌕🌕", icon: "☁️", themeColor: "slate-500", recruitStart: "11월 4일 2025", recruitEnd: "11월 17일 2025", activity: ["11월"], eligibility: [Eligibility.UNIVERSITY], prize: [HackathonPrize.PRIZE], description: "카카오 주관 제주도 3박 4일 해커톤. 프론트엔드, 백엔드, 디자인, 기획 분야 참가 가능", fields: [Field.FRONTEND, Field.BACKEND, Field.DESIGN, Field.PM] },
 };
 
-// ── 리뷰 데이터 (목업) ──
-const REVIEW_FORM_URL = "https://forms.gle/PLACEHOLDER";
+// ── 리뷰 데이터 ──
+const REVIEW_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfms2odn-YeFNjFg2clwSWZeoxA3C_UwGYs5hnkEh4pybxjAA/viewform?usp=sharing&ouid=117181654823215253990";
 
-const ReviewData = {
-    "구름톤 유니브": [
-        { cohort: "4기", content: "전국 대학생들과 함께 해커톤을 준비하며 성장할 수 있었습니다. 네트워킹이 특히 좋았어요.", anonymous: true, date: "2025-08-20" },
-        { cohort: "3기", content: "카카오 현직자 멘토링이 큰 도움이 됐습니다. 다만 일정이 빡빡한 편이에요.", anonymous: false, author: "이○○", date: "2025-02-15" },
-    ],
-    "코테이토 (1학기)": [
-        { cohort: "5기", content: "기획부터 출시까지 전 과정을 경험할 수 있어서 좋았습니다. 스터디도 알차요.", anonymous: false, author: "임○○", date: "2025-07-20" },
-    ],
-    "SOPT (1학기)": [
-        { cohort: "35기", content: "앱잼을 통해 실제 앱을 출시하는 경험이 매우 유익했습니다. 동아리 분위기도 좋고 열정적인 사람들이 많아요.", anonymous: false, author: "박○○", date: "2025-07-10" },
-        { cohort: "34기", content: "세미나 퀄리티가 높고 팀 프로젝트를 통해 실력이 많이 늘었습니다.", anonymous: true, date: "2025-01-20" },
-        { cohort: "33기", content: "네트워킹 기회가 정말 많아요. 수료 후에도 커뮤니티가 계속 유지됩니다.", anonymous: false, author: "김○○", date: "2024-07-15" },
-    ],
-    "SOPT (2학기)": [
-        { cohort: "36기", content: "합주에서 iOS 파트를 담당했는데 멘토분들이 정말 친절하게 알려주셨어요.", anonymous: false, author: "최○○", date: "2025-12-20" },
-        { cohort: "35기", content: "솝커톤, 앱잼 등 다양한 행사가 있어서 지루할 틈이 없었습니다.", anonymous: true, date: "2025-07-15" },
-    ],
-    "UMC (1학기)": [
-        { cohort: "7기", content: "전국 규모라 다양한 학교 학생들을 만날 수 있어 좋았습니다. 프로젝트 경험이 취업에 많이 도움됐어요.", anonymous: false, author: "정○○", date: "2025-06-30" },
-    ],
-    "디프만 (1학기)": [
-        { cohort: "16기", content: "디자이너와 개발자가 긴밀하게 협업하는 구조라 실무 감각을 키우기 좋았습니다.", anonymous: false, author: "조○○", date: "2025-07-10" },
-        { cohort: "15기", content: "사용자 중심 프로덕트를 만드는 경험이 인상 깊었어요. 팀 분위기도 좋습니다.", anonymous: true, date: "2025-01-15" },
-    ],
-    "CEOS (1학기)": [
-        { cohort: "20기", content: "신촌 5개 대학 학생들과 네트워킹이 좋았고, 실제 서비스를 런칭하는 경험이 값졌습니다.", anonymous: false, author: "서○○", date: "2025-07-05" },
-    ],
-    "프로그래피 Prography": [
-        { cohort: "10기", content: "다양한 직군이 모여 하나의 프로덕트를 만드는 과정이 재미있었어요.", anonymous: true, date: "2025-08-10" },
-        { cohort: "9기", content: "현직자분들도 계셔서 실무적인 피드백을 많이 받을 수 있었습니다.", anonymous: false, author: "문○○", date: "2025-02-20" },
-    ],
-    "큐시즘 (1학기)": [
-        { cohort: "31기", content: "IT 서비스 기획부터 개발까지 체계적으로 진행되어 만족스러웠습니다.", anonymous: false, author: "양○○", date: "2025-07-30" },
-        { cohort: "30기", content: "밋업과 데모데이 등 다양한 행사가 있어서 동기부여가 잘 돼요.", anonymous: true, date: "2025-01-25" },
-    ],
-    "MASH-UP": [
-        { cohort: "15기", content: "웹/앱 서비스를 실제로 출시하는 경험이 좋았어요. 열정적인 사람들이 많습니다.", anonymous: false, author: "배○○", date: "2025-08-15" },
-    ],
-    "카카오 테크 부트캠프 (풀스택)": [
-        { cohort: "2기", content: "6개월간의 집중 교육이 정말 알찼습니다. 현직 카카오 개발자분의 코드 리뷰가 특히 도움됐어요.", anonymous: false, author: "한○○", date: "2025-11-20" },
-        { cohort: "1기", content: "국비지원이라 부담 없이 참여할 수 있었고, 수료 후 취업 연계도 잘 되는 편입니다.", anonymous: true, date: "2025-05-15" },
-        { cohort: "2기", content: "풀스택 과정이라 프론트와 백엔드를 균형 있게 배울 수 있었습니다.", anonymous: false, author: "윤○○", date: "2025-11-25" },
-        { cohort: "1기", content: "동기들과 함께 프로젝트를 진행하며 실무 경험을 쌓을 수 있어 좋았습니다.", anonymous: true, date: "2025-05-20" },
-    ],
-    "넥스터즈 (여름방학)": [
-        { cohort: "25기", content: "8주 안에 실제 서비스를 런칭하는 경험이 인상적이었습니다. 팀원들 모두 열정적이에요.", anonymous: false, author: "송○○", date: "2025-09-15" },
-        { cohort: "24기", content: "디자이너와 개발자가 협업하는 구조라 실무와 비슷한 환경에서 프로젝트를 진행할 수 있었어요.", anonymous: true, date: "2025-03-20" },
-    ],
-    "YAPP (1학기)": [
-        { cohort: "26기", content: "서비스 기획부터 런칭까지 전 과정을 경험할 수 있어서 좋았습니다. 현직자 분들도 계셔서 배울 점이 많아요.", anonymous: false, author: "강○○", date: "2025-07-25" },
-    ],
-    "TAVE (1학기)": [
-        { cohort: "14기", content: "AI, 빅데이터 등 다양한 분야를 공부할 수 있어서 시야가 넓어졌어요.", anonymous: true, date: "2025-07-20" },
-    ],
-    "잇타 (1학기)": [
-        { cohort: "6기", content: "소규모 팀으로 진행되어 팀원들과 깊이 있게 프로젝트할 수 있었습니다.", anonymous: false, author: "신○○", date: "2025-07-01" },
-    ],
-};
+const ReviewData = {};
 
 function getReviews(clubName) {
     return ReviewData[clubName] || [];
