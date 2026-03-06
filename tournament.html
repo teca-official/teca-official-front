@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>수상작 토너먼트 | IT 연합동아리 수상작 월드컵</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/catturtle123/og-image/favicon.ico" rel="icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<script>
+    const darkModeMatcher = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function updateDarkMode(e) {
+        if (e.matches) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }
+
+    updateDarkMode(darkModeMatcher);
+    darkModeMatcher.addEventListener('change', updateDarkMode);
+
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    primary: "#f59e0b",
+                    "background-light": "#ffffff",
+                    "background-dark": "#0f172a",
+                    "card-dark": "rgba(30, 41, 59, 0.7)",
+                    "border-dark": "rgba(255, 255, 255, 0.1)",
+                    "neon-pink": "#ff2d55",
+                    "neon-blue": "#00f3ff",
+                    "neon-green": "#39ff14",
+                },
+                fontFamily: {
+                    display: ["Inter", "Noto Sans KR", "sans-serif"],
+                    body: ["Inter", "Noto Sans KR", "sans-serif"],
+                },
+                borderRadius: {
+                    DEFAULT: "0.5rem",
+                },
+            },
+        },
+    };
+</script>
+<link href="style.css" rel="stylesheet"/>
+<style>
+    .card-enter {
+        animation: cardEnter 0.4s ease-out;
+    }
+    @keyframes cardEnter {
+        from { opacity: 0; transform: scale(0.9) translateY(20px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .card-winner {
+        animation: cardWinner 0.5s ease-out;
+    }
+    @keyframes cardWinner {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .card-loser {
+        animation: cardLoser 0.4s ease-out forwards;
+    }
+    @keyframes cardLoser {
+        to { opacity: 0.3; transform: scale(0.95); }
+    }
+    .vs-pulse {
+        animation: vsPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes vsPulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.1); opacity: 1; }
+    }
+    .result-enter {
+        animation: resultEnter 0.6s ease-out;
+    }
+    @keyframes resultEnter {
+        from { opacity: 0; transform: scale(0.8) translateY(30px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .trophy-bounce {
+        animation: trophyBounce 0.8s ease-out;
+    }
+    @keyframes trophyBounce {
+        0% { transform: scale(0) rotate(-20deg); }
+        60% { transform: scale(1.3) rotate(5deg); }
+        100% { transform: scale(1) rotate(0); }
+    }
+    .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        overflow: hidden;
+    }
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        top: -10px;
+        animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+        to { top: 110vh; transform: rotate(720deg); }
+    }
+    .tournament-card {
+        transition: all 0.2s ease;
+    }
+    .tournament-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(245, 158, 11, 0.15);
+    }
+    .tournament-card:active {
+        transform: scale(0.98);
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="min-h-screen flex flex-col">
+<header class="pt-8 md:pt-12 pb-4 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full">
+<div class="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
+<a href="/">
+<img src="logo.png" alt="Logo" class="h-8 sm:h-10 md:h-12 w-auto" />
+</a>
+<a href="/" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100 hover:opacity-80 transition-opacity">
+    수상작 토너먼트
+</a>
+<a class="ml-auto shrink-0 inline-flex items-center gap-1 sm:gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-purple-400/30 bg-purple-500/10 text-purple-500 dark:text-purple-400 font-medium text-xs sm:text-sm hover:bg-purple-500/20 hover:border-purple-400/50 transition-all" href="https://docs.google.com/forms/d/1A7zV5F8fGpHuC7NPs3juTnIlfEuo8hlMfpoo_aKC7rs/edit" target="_blank">
+    <span class="material-symbols-outlined text-sm sm:text-base">feedback</span>
+    <span class="sm:hidden">피드백</span><span class="hidden sm:inline">피드백 보내기</span>
+</a>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base md:text-lg">
+    연합 동아리 수상작들의 이상형 월드컵! 마음에 드는 프로젝트를 골라보세요.
+</p>
+
+<div class="flex items-center gap-2 mt-6">
+    <!-- 모바일 드롭다운 -->
+    <select onchange="window.location.href=this.value" class="category-select md:hidden px-4 py-2 rounded-full bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 font-bold text-sm transition-all appearance-none cursor-pointer pr-8">
+        <option value="/">IT</option>
+        <option value="/marketing">마케팅/경영</option>
+        <option value="/bootcamp">부트캠프</option>
+        <option value="/hackathon">해커톤/대회</option>
+        <option value="/tournament" selected>토너먼트</option>
+    </select>
+    <!-- 데스크톱 카테고리 버튼 -->
+    <a href="/" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">IT</a>
+    <a href="/marketing" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">마케팅/경영</a>
+    <a href="/bootcamp" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">부트캠프</a>
+    <a href="/hackathon" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">해커톤/대회</a>
+    <a href="/tournament" class="hidden md:inline-block px-4 py-2 rounded-full bg-amber-500 text-white font-bold text-sm transition-all">토너먼트</a>
+    <a class="ml-auto shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-blue-400/30 bg-blue-500/10 text-blue-500 dark:text-blue-400 font-medium text-sm hover:bg-blue-500/20 hover:border-blue-400/50 transition-all" href="https://docs.google.com/forms/d/e/1FAIpQLSck-SUA47ybqzMpW6tWSV_iUrPmEU2TH6emzOeg5Sa6jC-b8Q/viewform?usp=dialog" target="_blank">
+        <span class="material-symbols-outlined text-base">handshake</span>
+        제휴 문의
+    </a>
+    <a class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-purple-400/30 bg-purple-500/10 text-purple-500 dark:text-purple-400 font-medium text-sm hover:bg-purple-500/20 hover:border-purple-400/50 transition-all" href="https://docs.google.com/forms/d/1A7zV5F8fGpHuC7NPs3juTnIlfEuo8hlMfpoo_aKC7rs/edit" target="_blank">
+        <span class="material-symbols-outlined text-base">feedback</span>
+        <span class="md:hidden">피드백</span><span class="hidden md:inline">피드백 보내기</span>
+    </a>
+</div>
+</header>
+
+<main class="flex-1 px-4 sm:px-6 md:px-12 pb-8 md:pb-12">
+<div class="max-w-5xl mx-auto">
+
+<!-- 시작 화면 -->
+<div id="start-screen">
+    <div class="text-center py-8 md:py-16">
+        <div class="text-6xl md:text-8xl mb-6">🏆</div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">수상작 이상형 월드컵</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base mb-8 max-w-lg mx-auto">
+            IT 연합 동아리의 역대 수상작들 중 가장 마음에 드는 프로젝트를 골라보세요!
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+            <button onclick="startTournament(16)" class="px-8 py-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:shadow-amber-500/20">
+                16강 시작
+            </button>
+            <button onclick="startTournament(8)" class="px-8 py-4 rounded-2xl bg-white dark:bg-card-dark border-2 border-amber-500 text-amber-600 dark:text-amber-400 font-bold text-lg hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-all">
+                8강 시작
+            </button>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
+            <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl p-4 text-center">
+                <div class="text-2xl mb-1">🎯</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">총 수상작</div>
+                <div class="font-bold text-lg" id="total-projects">16</div>
+            </div>
+            <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl p-4 text-center">
+                <div class="text-2xl mb-1">🏅</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">대상</div>
+                <div class="font-bold text-lg" id="grand-count">0</div>
+            </div>
+            <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl p-4 text-center">
+                <div class="text-2xl mb-1">🥇</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">최우수상</div>
+                <div class="font-bold text-lg" id="gold-count">0</div>
+            </div>
+            <div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl p-4 text-center">
+                <div class="text-2xl mb-1">🥈</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">우수상</div>
+                <div class="font-bold text-lg" id="silver-count">0</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 대결 화면 -->
+<div id="battle-screen" class="hidden">
+    <!-- 진행 상황 -->
+    <div class="mb-6">
+        <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-bold text-amber-600 dark:text-amber-400" id="round-label">16강 1/8</span>
+            <span class="text-sm font-medium text-slate-500 dark:text-slate-400" id="round-progress">12.5%</span>
+        </div>
+        <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+            <div class="bg-gradient-to-r from-amber-400 to-orange-500 h-2 rounded-full transition-all duration-500" id="progress-bar" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <!-- 대결 카드 -->
+    <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6" id="battle-area">
+        <!-- 왼쪽(위) 카드 -->
+        <div class="w-full md:flex-1 cursor-pointer" id="card-left" onclick="selectWinner(0)">
+        </div>
+
+        <!-- VS -->
+        <div class="flex-shrink-0 flex items-center justify-center">
+            <div class="vs-pulse w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">
+                <span class="text-white font-bold text-lg md:text-xl">VS</span>
+            </div>
+        </div>
+
+        <!-- 오른쪽(아래) 카드 -->
+        <div class="w-full md:flex-1 cursor-pointer" id="card-right" onclick="selectWinner(1)">
+        </div>
+    </div>
+</div>
+
+<!-- 결과 화면 -->
+<div id="result-screen" class="hidden">
+    <div class="text-center result-enter">
+        <div class="confetti-container" id="confetti-container"></div>
+
+        <div class="text-6xl md:text-8xl mb-4 trophy-bounce">🏆</div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">우승!</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm mb-8">당신이 선택한 최고의 수상작</p>
+
+        <div class="max-w-md mx-auto mb-8" id="winner-card"></div>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+            <button onclick="resetTournament()" class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold transition-all">
+                <span class="material-symbols-outlined text-base">refresh</span>
+                다시 하기
+            </button>
+            <button onclick="shareTournament()" class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-amber-500 text-amber-600 dark:text-amber-400 font-bold hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-all">
+                <span class="material-symbols-outlined text-base">share</span>
+                결과 공유
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+</main>
+
+<footer class="py-4 flex flex-col justify-center items-center text-slate-500 dark:text-slate-500 text-xs sm:text-sm max-w-7xl mx-auto gap-1 px-4">
+    <p>&copy; IT Club DB. All information updated daily.</p>
+    <a href="https://dazzling-myth-cd2.notion.site/3097c67ff1e68022a012f2c5e0389e9b" target="_blank" class="hover:text-slate-700 dark:hover:text-slate-300 underline transition-colors">개인정보 처리방침</a>
+</footer>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAnalytics, logEvent, setDefaultEventParameters } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBuvBZ3EZAE5GjdVVggGEa21wgTf6DAwqs",
+    authDomain: "teca-analytics.firebaseapp.com",
+    projectId: "teca-analytics",
+    storageBucket: "teca-analytics.firebasestorage.app",
+    messagingSenderId: "51789117987",
+    appId: "1:51789117987:web:aba99b0a76708c402f4f96",
+    measurementId: "G-H8PR0KJ2QX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  setDefaultEventParameters({ page: 'tournament' });
+
+  const isDebug = new URLSearchParams(window.location.search).has('debug_mode');
+
+  window._firebaseLogEvent = function(name, params) {
+    if (isDebug) {
+      params = { ...params, debug_mode: true };
+      console.log('[Analytics]', name, params);
+    }
+    logEvent(analytics, name, params);
+  };
+</script>
+<script>
+window.isTournamentPage = true;
+
+(function() {
+    // --- 수상작 목업 데이터 ---
+    const projects = [
+        {
+            id: 1,
+            name: "MOCO",
+            club: "SOPT",
+            cohort: "35기",
+            description: "모두의 코디, AI 기반 날씨별 코디 추천 서비스",
+            image: "https://placehold.co/400x240/f59e0b/ffffff?text=MOCO",
+            link: "",
+            award: "대상"
+        },
+        {
+            id: 2,
+            name: "Peekabook",
+            club: "SOPT",
+            cohort: "31기",
+            description: "친구의 책장을 구경하고 책을 추천해주는 독서 소셜 서비스",
+            image: "https://placehold.co/400x240/3b82f6/ffffff?text=Peekabook",
+            link: "",
+            award: "대상"
+        },
+        {
+            id: 3,
+            name: "Growthon",
+            club: "UMC",
+            cohort: "6기",
+            description: "지역 소상공인과 대학생을 연결하는 성장 플랫폼",
+            image: "https://placehold.co/400x240/10b981/ffffff?text=Growthon",
+            link: "",
+            award: "대상"
+        },
+        {
+            id: 4,
+            name: "DND",
+            club: "DND",
+            cohort: "10기",
+            description: "사이드 프로젝트를 통해 개발자와 디자이너가 함께 성장하는 커뮤니티",
+            image: "https://placehold.co/400x240/8b5cf6/ffffff?text=DND",
+            link: "",
+            award: "최우수상"
+        },
+        {
+            id: 5,
+            name: "Sopkathon",
+            club: "SOPT",
+            cohort: "34기",
+            description: "24시간 내에 기획부터 개발까지 완성하는 해커톤 프로젝트",
+            image: "https://placehold.co/400x240/ec4899/ffffff?text=Sopkathon",
+            link: "",
+            award: "최우수상"
+        },
+        {
+            id: 6,
+            name: "CatchMe",
+            club: "DEPROMEET",
+            cohort: "14기",
+            description: "나만의 캐릭터로 습관을 기록하고 관리하는 셀프케어 서비스",
+            image: "https://placehold.co/400x240/f43f5e/ffffff?text=CatchMe",
+            link: "",
+            award: "대상"
+        },
+        {
+            id: 7,
+            name: "TICLEMOA",
+            club: "DEPROMEET",
+            cohort: "15기",
+            description: "아티클을 스크랩하고 분류하여 지식을 쌓아가는 서비스",
+            image: "https://placehold.co/400x240/06b6d4/ffffff?text=TICLEMOA",
+            link: "",
+            award: "최우수상"
+        },
+        {
+            id: 8,
+            name: "Hacker Ground",
+            club: "구름톤 유니브",
+            cohort: "3기",
+            description: "지역 문제를 해결하는 해커톤 프로젝트 우승작",
+            image: "https://placehold.co/400x240/6366f1/ffffff?text=HackerGround",
+            link: "",
+            award: "대상"
+        },
+        {
+            id: 9,
+            name: "KeepGoing",
+            club: "CMC",
+            cohort: "15기",
+            description: "매일 작은 목표를 달성하며 성장하는 습관 트래커 앱",
+            image: "https://placehold.co/400x240/84cc16/ffffff?text=KeepGoing",
+            link: "",
+            award: "우수상"
+        },
+        {
+            id: 10,
+            name: "Moyeora",
+            club: "DDD",
+            cohort: "11기",
+            description: "스터디와 프로젝트 팀원을 찾아주는 매칭 플랫폼",
+            image: "https://placehold.co/400x240/f97316/ffffff?text=Moyeora",
+            link: "",
+            award: "최우수상"
+        },
+        {
+            id: 11,
+            name: "FitTogether",
+            club: "YAPP",
+            cohort: "24기",
+            description: "함께 운동하며 동기부여를 주고받는 피트니스 소셜 앱",
+            image: "https://placehold.co/400x240/14b8a6/ffffff?text=FitTogether",
+            link: "",
+            award: "대상"
+        },
+        {
+            id: 12,
+            name: "Recco",
+            club: "Mash-Up",
+            cohort: "15기",
+            description: "장소 기반 추억 기록 및 공유 서비스",
+            image: "https://placehold.co/400x240/a855f7/ffffff?text=Recco",
+            link: "",
+            award: "우수상"
+        },
+        {
+            id: 13,
+            name: "StudyLog",
+            club: "넥스터즈",
+            cohort: "25기",
+            description: "개발 학습 기록을 체계적으로 관리하는 TIL 서비스",
+            image: "https://placehold.co/400x240/0ea5e9/ffffff?text=StudyLog",
+            link: "",
+            award: "최우수상"
+        },
+        {
+            id: 14,
+            name: "PlanBee",
+            club: "프로그래피",
+            cohort: "9기",
+            description: "할 일을 꿀벌처럼 알차게 관리하는 투두 & 타이머 앱",
+            image: "https://placehold.co/400x240/eab308/ffffff?text=PlanBee",
+            link: "",
+            award: "대상"
+        },
+        {
+            id: 15,
+            name: "Waved",
+            club: "SOPT",
+            cohort: "35기",
+            description: "30일 챌린지를 통해 좋은 습관을 만들어가는 서비스",
+            image: "https://placehold.co/400x240/22c55e/ffffff?text=Waved",
+            link: "",
+            award: "우수상"
+        },
+        {
+            id: 16,
+            name: "ClubHub",
+            club: "YAPP",
+            cohort: "25기",
+            description: "대학 동아리 정보를 한 곳에 모아 비교할 수 있는 플랫폼",
+            image: "https://placehold.co/400x240/e11d48/ffffff?text=ClubHub",
+            link: "",
+            award: "최우수상"
+        }
+    ];
+
+    // --- 토너먼트 상태 ---
+    let currentRound = [];
+    let nextRound = [];
+    let matchIndex = 0;
+    let totalRounds = 0;
+    let completedMatches = 0;
+    let roundSize = 16;
+    let isAnimating = false;
+
+    // --- 통계 업데이트 ---
+    function updateStats() {
+        document.getElementById('total-projects').textContent = projects.length;
+        document.getElementById('grand-count').textContent = projects.filter(p => p.award === '대상').length;
+        document.getElementById('gold-count').textContent = projects.filter(p => p.award === '최우수상').length;
+        document.getElementById('silver-count').textContent = projects.filter(p => p.award === '우수상').length;
+    }
+
+    // --- 셔플 ---
+    function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    // --- 수상 배지 ---
+    function getAwardBadge(award) {
+        const colors = {
+            '대상': 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-700',
+            '최우수상': 'bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 border-sky-300 dark:border-sky-700',
+            '우수상': 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-700'
+        };
+        const icons = { '대상': '🏆', '최우수상': '🥇', '우수상': '🥈' };
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold border ${colors[award] || ''}">${icons[award] || ''} ${award}</span>`;
+    }
+
+    // --- 카드 렌더링 ---
+    function renderBattleCard(project) {
+        return `
+            <div class="tournament-card bg-white dark:bg-card-dark border-2 border-slate-200 dark:border-border-dark rounded-2xl overflow-hidden card-enter hover:border-amber-400 dark:hover:border-amber-500">
+                <div class="relative">
+                    <img src="${project.image}" alt="${project.name}" class="w-full h-36 sm:h-44 md:h-48 object-cover" loading="lazy" />
+                    <div class="absolute top-3 left-3">${getAwardBadge(project.award)}</div>
+                </div>
+                <div class="p-4 sm:p-5">
+                    <h3 class="font-bold text-base sm:text-lg mb-1">${project.name}</h3>
+                    <p class="text-sm text-amber-600 dark:text-amber-400 font-medium mb-2">${project.club} ${project.cohort}</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">${project.description}</p>
+                </div>
+            </div>
+        `;
+    }
+
+    // --- 라운드 이름 ---
+    function getRoundName(size) {
+        if (size === 2) return '결승';
+        if (size === 4) return '준결승';
+        return `${size}강`;
+    }
+
+    // --- 진행 상황 업데이트 ---
+    function updateProgress() {
+        const currentRoundMatches = currentRound.length / 2;
+        const currentMatchNum = matchIndex / 2 + 1;
+        const roundName = getRoundName(currentRound.length);
+
+        document.getElementById('round-label').textContent = `${roundName} ${currentMatchNum}/${currentRoundMatches}`;
+
+        // 전체 진행률 계산
+        const pct = Math.round((completedMatches / totalRounds) * 100);
+        document.getElementById('round-progress').textContent = `${pct}%`;
+        document.getElementById('progress-bar').style.width = `${pct}%`;
+    }
+
+    // --- 현재 매치 표시 ---
+    function showCurrentMatch() {
+        if (matchIndex >= currentRound.length) {
+            // 라운드 종료 → 다음 라운드로
+            if (nextRound.length === 1) {
+                showResult(nextRound[0]);
+                return;
+            }
+            currentRound = nextRound;
+            nextRound = [];
+            matchIndex = 0;
+        }
+
+        const left = currentRound[matchIndex];
+        const right = currentRound[matchIndex + 1];
+
+        document.getElementById('card-left').innerHTML = renderBattleCard(left);
+        document.getElementById('card-right').innerHTML = renderBattleCard(right);
+
+        updateProgress();
+    }
+
+    // --- 토너먼트 시작 ---
+    window.startTournament = function(size) {
+        roundSize = size;
+        const shuffled = shuffle(projects).slice(0, size);
+        currentRound = shuffled;
+        nextRound = [];
+        matchIndex = 0;
+        completedMatches = 0;
+        isAnimating = false;
+
+        // 총 매치 수 계산 (예: 16강 = 8+4+2+1 = 15)
+        totalRounds = 0;
+        let s = size;
+        while (s > 1) {
+            totalRounds += s / 2;
+            s /= 2;
+        }
+
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('battle-screen').classList.remove('hidden');
+        document.getElementById('result-screen').classList.add('hidden');
+
+        showCurrentMatch();
+
+        trackEvent('tournament_start', { round_size: size });
+    };
+
+    // --- 승자 선택 ---
+    window.selectWinner = function(index) {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const winnerIdx = matchIndex + index;
+        const loserIdx = matchIndex + (index === 0 ? 1 : 0);
+        const winner = currentRound[winnerIdx];
+        const loser = currentRound[loserIdx];
+
+        // 애니메이션
+        const winnerCard = index === 0 ? document.getElementById('card-left') : document.getElementById('card-right');
+        const loserCard = index === 0 ? document.getElementById('card-right') : document.getElementById('card-left');
+
+        winnerCard.querySelector('.tournament-card').classList.add('card-winner');
+        winnerCard.querySelector('.tournament-card').style.borderColor = '#f59e0b';
+        loserCard.querySelector('.tournament-card').classList.add('card-loser');
+
+        nextRound.push(winner);
+        matchIndex += 2;
+        completedMatches++;
+
+        trackEvent('tournament_pick', {
+            winner: winner.name,
+            loser: loser.name,
+            round: getRoundName(currentRound.length)
+        });
+
+        setTimeout(() => {
+            isAnimating = false;
+            showCurrentMatch();
+        }, 600);
+    };
+
+    // --- 결과 표시 ---
+    function showResult(winner) {
+        document.getElementById('battle-screen').classList.add('hidden');
+        document.getElementById('result-screen').classList.remove('hidden');
+
+        document.getElementById('winner-card').innerHTML = `
+            <div class="bg-white dark:bg-card-dark border-2 border-amber-400 rounded-2xl overflow-hidden shadow-xl shadow-amber-500/10">
+                <div class="relative">
+                    <img src="${winner.image}" alt="${winner.name}" class="w-full h-48 sm:h-56 object-cover" loading="lazy" />
+                    <div class="absolute top-3 left-3">${getAwardBadge(winner.award)}</div>
+                    <div class="absolute top-3 right-3 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        1st
+                    </div>
+                </div>
+                <div class="p-5 sm:p-6">
+                    <h3 class="font-bold text-xl sm:text-2xl mb-1">${winner.name}</h3>
+                    <p class="text-amber-600 dark:text-amber-400 font-medium mb-3">${winner.club} ${winner.cohort}</p>
+                    <p class="text-slate-500 dark:text-slate-400">${winner.description}</p>
+                    ${winner.link ? `<a href="${winner.link}" target="_blank" class="inline-flex items-center gap-1 mt-4 text-amber-600 dark:text-amber-400 font-medium text-sm hover:underline">서비스 바로가기 <span class="material-symbols-outlined text-sm">open_in_new</span></a>` : ''}
+                </div>
+            </div>
+        `;
+
+        // 🎊 Confetti
+        spawnConfetti();
+
+        trackEvent('tournament_complete', {
+            winner: winner.name,
+            winner_club: winner.club,
+            round_size: roundSize
+        });
+
+        // 결과를 로컬 스토리지에 저장
+        const results = JSON.parse(localStorage.getItem('tournament_results') || '[]');
+        results.push({ name: winner.name, club: winner.club, date: new Date().toISOString() });
+        localStorage.setItem('tournament_results', JSON.stringify(results.slice(-20)));
+    }
+
+    // --- Confetti ---
+    function spawnConfetti() {
+        const container = document.getElementById('confetti-container');
+        container.innerHTML = '';
+        const colors = ['#f59e0b', '#ef4444', '#3b82f6', '#10b981', '#8b5cf6', '#ec4899'];
+
+        for (let i = 0; i < 60; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+            confetti.style.animationDelay = Math.random() * 1 + 's';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            confetti.style.width = (6 + Math.random() * 8) + 'px';
+            confetti.style.height = (6 + Math.random() * 8) + 'px';
+            container.appendChild(confetti);
+        }
+
+        setTimeout(() => { container.innerHTML = ''; }, 5000);
+    }
+
+    // --- 리셋 ---
+    window.resetTournament = function() {
+        document.getElementById('start-screen').classList.remove('hidden');
+        document.getElementById('battle-screen').classList.add('hidden');
+        document.getElementById('result-screen').classList.add('hidden');
+    };
+
+    // --- 공유 ---
+    window.shareTournament = function() {
+        const winnerCard = document.getElementById('winner-card');
+        const winnerName = winnerCard.querySelector('h3')?.textContent || '';
+        const text = `🏆 수상작 토너먼트에서 "${winnerName}"을(를) 우승으로 뽑았어요!\n\n나도 해보기 👉 ${window.location.origin}/tournament`;
+
+        if (navigator.share) {
+            navigator.share({ title: '수상작 토너먼트 결과', text: text }).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('#result-screen button:last-of-type');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<span class="material-symbols-outlined text-base">check</span> 복사됨!';
+                setTimeout(() => { btn.innerHTML = original; }, 2000);
+            }).catch(() => {});
+        }
+    };
+
+    // --- Analytics Helper ---
+    function trackEvent(name, params) {
+        if (typeof window._firebaseLogEvent === 'function') {
+            window._firebaseLogEvent(name, params);
+        }
+    }
+
+    // --- Init ---
+    document.addEventListener('DOMContentLoaded', updateStats);
+})();
+</script>
+</body></html>

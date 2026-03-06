@@ -44,6 +44,10 @@
       "dest": "/partnership.html"
     },
     {
+      "src": "/tournament",
+      "dest": "/tournament.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
