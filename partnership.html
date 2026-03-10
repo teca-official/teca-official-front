@@ -88,8 +88,10 @@
         justify-content: center;
     }
     .mobile-frame-inner {
-        width: 390px;
+        width: 360px;
         max-width: 100%;
+        max-height: 740px;
+        overflow-y: auto;
     }
 </style>
 </head>
@@ -668,6 +670,182 @@
 </div>
 </div>
 
+<!-- ======================================================================== -->
+<!-- 옵션 5: 상단 배너 광고 -->
+<!-- ======================================================================== -->
+<section class="mx-4 sm:mx-6 md:mx-12 lg:mx-auto lg:max-w-7xl">
+    <div class="flex items-center gap-3 mt-12 mb-2 pl-2">
+        <div>
+            <h2 class="text-xl sm:text-2xl font-bold">상단 배너 테스트 (이미지를 넣어주세요)</h2>
+        </div>
+        <div class="ml-auto flex items-center gap-1 bg-slate-100 dark:bg-slate-800 rounded-full p-1">
+            <button class="view-toggle-btn active" onclick="switchView(5,'pc')">PC</button>
+            <button class="view-toggle-btn" onclick="switchView(5,'mobile')">Mobile</button>
+        </div>
+    </div>
+</section>
+
+<!-- PC 버전 -->
+<div id="pc-5" class="page-frame border-slate-200 dark:border-slate-700 bg-white dark:bg-background-dark mx-4 sm:mx-6 md:mx-12 lg:mx-auto lg:max-w-7xl">
+    <!-- 헤더 -->
+    <div class="pt-8 md:pt-12 pb-4 px-4 sm:px-6 md:px-12">
+        <div class="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
+            <img src="logo.png" alt="Logo" class="h-8 sm:h-10 md:h-12 w-auto" />
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">IT 연합 동아리 모음</h2>
+            <span class="ml-auto shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-neon-pink/30 bg-neon-pink/10 text-neon-pink font-medium text-sm">
+                <span class="material-symbols-outlined text-base">quiz</span>
+                <span class="hidden sm:inline">동아리 추천 받기</span><span class="sm:hidden">추천</span>
+            </span>
+        </div>
+        <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base md:text-lg">국내 주요 연합 IT 동아리 모집 일정 및 정보를 한눈에 비교하세요.</p>
+        <div class="flex items-center gap-2 mt-6">
+            <span class="px-4 py-2 rounded-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm">IT</span>
+            <span class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm">마케팅/경영</span>
+            <span class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm">부트캠프</span>
+            <span class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm">해커톤/대회</span>
+            <span class="ml-auto shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-blue-400/30 bg-blue-500/10 text-blue-500 dark:text-blue-400 font-medium text-sm"><span class="material-symbols-outlined text-base">handshake</span>제휴 문의</span>
+            <span class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-purple-400/30 bg-purple-500/10 text-purple-500 dark:text-purple-400 font-medium text-sm"><span class="material-symbols-outlined text-base">feedback</span><span class="hidden md:inline">피드백 보내기</span><span class="md:hidden">피드백</span></span>
+        </div>
+    </div>
+    <!-- ★ PC 이미지 배너 (권장: 1200 × 120 px) — 클릭하여 업로드 -->
+    <div class="px-4 sm:px-6 md:px-12 mb-4 md:mb-6">
+        <label class="block rounded-2xl overflow-hidden relative cursor-pointer">
+            <input type="file" accept="image/*" class="hidden" onchange="previewBanner(this, 'pc')" />
+            <div class="absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full bg-white/20 text-white text-xs font-medium backdrop-blur-sm">AD</div>
+            <img id="pc-banner-img" alt="PC 광고 배너" class="w-full hidden" style="height:120px; object-fit:cover;" />
+            <div id="pc-banner-placeholder" class="flex flex-col items-center justify-center bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 hover:from-slate-200 hover:to-slate-300 dark:hover:from-slate-700 dark:hover:to-slate-600 transition-all" style="height:120px;">
+                <span class="material-symbols-outlined text-4xl text-slate-300 dark:text-slate-500">add_photo_alternate</span>
+                <span class="text-sm text-slate-400 dark:text-slate-500 mt-1">클릭하여 PC 배너 업로드 (1200 × 120 px)</span>
+            </div>
+        </label>
+    </div>
+    <!-- 다가오는 일정 -->
+    <div class="px-4 sm:px-6 md:px-12 mb-4 md:mb-6">
+        <h3 class="text-xl sm:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2 flex-wrap">
+            <span class="material-symbols-outlined text-neon-pink">alarm</span>다가오는 동아리 일정
+            <span class="text-sm font-normal text-slate-400">아직 업데이트가 안 된 곳은 작년으로 남아있습니다</span>
+        </h3>
+        <div class="flex gap-4 overflow-x-auto pb-4 notion-scroll">
+            <div class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-4"><span class="text-2xl">🦁</span></div><h4 class="text-lg font-bold mb-1">멋쟁이사자처럼</h4><p class="text-sm font-bold text-slate-500">2월 26일 2026 ~ 3월 7일 2026</p></div>
+            <div class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-4"><span class="text-2xl">🪐</span></div><h4 class="text-lg font-bold mb-1">UMC</h4><p class="text-sm font-bold text-slate-500">2월 16일 2026 ~ 3월 8일 2026</p></div>
+            <div class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-4"><span class="text-2xl">☁️</span></div><h4 class="text-lg font-bold mb-1">구름톤</h4><p class="text-sm font-bold text-slate-500">2월 26일 2026 ~ 3월 23일 2026</p></div>
+            <div class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-4"><span class="text-2xl">📣</span></div><h4 class="text-lg font-bold mb-1">SOPT</h4><p class="text-sm font-bold text-slate-500">3월 8일 2025 ~ 3월 14일 2025</p></div>
+        </div>
+    </div>
+    <!-- 검색 + 테이블 일부 -->
+    <div class="px-4 sm:px-6 md:px-12 mb-4 md:mb-6">
+        <div class="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center">
+            <div class="relative w-full md:flex-1">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                <input class="w-full pl-12 pr-4 py-2.5 sm:py-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl outline-none text-sm sm:text-base" placeholder="동아리명, 기술 스택, 또는 모집 분야 검색..." type="text" />
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto">
+                <button class="flex items-center justify-center gap-2 px-4 py-2.5 sm:py-3 w-full md:w-auto bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl text-sm sm:text-base"><span class="material-symbols-outlined text-sm">filter_list</span><span>필터링</span></button>
+                <button class="flex items-center justify-center gap-2 px-4 py-2.5 sm:py-3 w-full md:w-auto bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl text-sm sm:text-base"><span class="material-symbols-outlined text-sm">sort</span><span>정렬</span></button>
+            </div>
+        </div>
+    </div>
+    <div class="px-4 sm:px-6 md:px-12 pb-8">
+        <div class="hidden md:block overflow-x-auto notion-scroll"><div class="min-w-[1000px]"><div class="bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl overflow-hidden backdrop-blur-xl bg-opacity-70 shadow-2xl">
+            <table class="w-full text-left border-collapse"><thead><tr class="border-b border-slate-200 dark:border-border-dark bg-slate-50/50 dark:bg-slate-900/50">
+                <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-48">이름</th>
+                <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-44">서류 접수 기간</th>
+                <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-32">활동 기간</th>
+                <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-32">신청 자격</th>
+                <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-64">모집 분야</th>
+                <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-24 text-center">티어</th>
+                <th class="px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm">한 줄 설명</th>
+            </tr></thead><tbody class="divide-y divide-slate-200 dark:divide-border-dark">
+                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"><td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">☘️</span><span class="font-bold">sipe (1학기)</span></div></td><td class="px-4 py-5 text-sm font-bold"><span class="block">1월 3일 2026</span><span class="text-slate-400">→ 1월 5일 2026</span></td><td class="px-4 py-5"><div class="flex gap-1 flex-wrap"><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">2월</span><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">3월</span><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">4월</span><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">5월</span><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">6월</span></div></td><td class="px-4 py-5"><span class="px-2 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-medium">현직자</span></td><td class="px-4 py-5"><div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded tag-neutral text-xs font-medium">무관</span></div></td><td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">🌕🌗</span></td><td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">Side Project Enthusiasts의 약자로, 사이드 프로젝트에 대한 열정을 가진 사람들이 모여 함께 성장하는 동아리</td></tr>
+                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"><td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">🎯</span><span class="font-bold">큐시즘 (1학기)</span></div></td><td class="px-4 py-5 text-sm font-bold"><span class="block">1월 17일 2026</span><span class="text-slate-400">→ 1월 24일 2026</span></td><td class="px-4 py-5"><div class="flex gap-1 flex-wrap"><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">3월</span><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">4월</span><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">5월</span><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">6월</span></div></td><td class="px-4 py-5"><span class="px-2 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-medium">대학생</span></td><td class="px-4 py-5"><div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded tag-pm text-xs font-medium">PM</span><span class="px-2 py-0.5 rounded tag-design text-xs font-medium">Design</span><span class="px-2 py-0.5 rounded tag-frontend text-xs font-medium">Frontend</span><span class="px-2 py-0.5 rounded tag-backend text-xs font-medium">Backend</span></div></td><td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">🌕🌕🌗</span></td><td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">기획자, 디자이너, 개발자가 함께 모여 IT 서비스를 기획하고 개발하는 대학생 연합 IT 동아리</td></tr>
+                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"><td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">🧩</span><span class="font-bold">MASH-UP</span></div></td><td class="px-4 py-5 text-sm font-bold"><span class="block">1월 28일 2026</span><span class="text-slate-400">→ 2월 15일 2026</span></td><td class="px-4 py-5"><div class="flex gap-1 flex-wrap"><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">1월</span><span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">2월</span></div></td><td class="px-4 py-5"><span class="px-2 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-medium">대학생</span> <span class="px-2 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-medium">현직자</span></td><td class="px-4 py-5"><div class="flex flex-wrap gap-1.5"><span class="px-2 py-0.5 rounded tag-pm text-xs font-medium">PM</span><span class="px-2 py-0.5 rounded tag-design text-xs font-medium">Design</span><span class="px-2 py-0.5 rounded tag-android text-xs font-medium">Android</span><span class="px-2 py-0.5 rounded tag-ios text-xs font-medium">iOS</span><span class="px-2 py-0.5 rounded tag-frontend text-xs font-medium">WEB</span></div></td><td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">🌕🌕🌕</span></td><td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">개발과 디자인에 진심인 사람들이 모여 웹/앱 서비스 출시를 목표로 하는 IT 연합동아리</td></tr>
+            </tbody></table>
+        </div></div></div>
+    </div>
+</div>
+<!-- 모바일 뷰 5 -->
+<div id="mobile-5" class="hidden mobile-frame-wrapper mx-4 sm:mx-6 md:mx-12 lg:mx-auto lg:max-w-7xl">
+<div class="mobile-frame-inner page-frame border-slate-200 dark:border-slate-700 bg-white dark:bg-background-dark">
+    <div class="pt-6 pb-3 px-4">
+        <div class="flex items-center gap-2 mb-2">
+            <img src="logo.png" alt="Logo" class="h-7 w-auto" />
+            <span class="text-xl font-bold tracking-tight">IT 연합 동아리 모음</span>
+            <span class="ml-auto shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-neon-pink/30 bg-neon-pink/10 text-neon-pink font-medium text-xs">
+                <span class="material-symbols-outlined text-sm">quiz</span>추천
+            </span>
+        </div>
+        <p class="text-slate-500 dark:text-slate-400 text-xs">국내 주요 연합 IT 동아리 모집 일정 및 정보를 한눈에 비교하세요.</p>
+        <div class="flex items-center gap-1.5 mt-3">
+            <select class="px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-bold text-xs appearance-none pr-6" disabled>
+                <option>IT</option>
+            </select>
+            <span class="ml-auto shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-blue-400/30 bg-blue-500/10 text-blue-500 font-medium text-xs"><span class="material-symbols-outlined text-sm">handshake</span>제휴 문의</span>
+            <span class="shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-purple-400/30 bg-purple-500/10 text-purple-500 font-medium text-xs"><span class="material-symbols-outlined text-sm">feedback</span>피드백</span>
+        </div>
+    </div>
+    <!-- ★ 모바일 이미지 배너 (권장: 320 × 50 px) — 클릭하여 업로드 -->
+    <div class="px-4 mb-3">
+        <label class="block rounded-xl overflow-hidden relative cursor-pointer">
+            <input type="file" accept="image/*" class="hidden" onchange="previewBanner(this, 'mobile')" />
+            <div class="absolute top-2 right-2 z-10 px-2 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-medium backdrop-blur-sm">AD</div>
+            <img id="mobile-banner-img" alt="모바일 광고 배너" class="w-full hidden" style="height:50px; object-fit:cover;" />
+            <div id="mobile-banner-placeholder" class="flex flex-col items-center justify-center bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 hover:from-slate-200 hover:to-slate-300 dark:hover:from-slate-700 dark:hover:to-slate-600 transition-all" style="height:50px;">
+                <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-lg text-slate-300 dark:text-slate-500">add_photo_alternate</span><span class="text-[11px] text-slate-400 dark:text-slate-500">320 × 50</span></div>
+                <span class="text-[9px] text-slate-400 dark:text-slate-500">클릭하여 이미지 업로드</span>
+            </div>
+        </label>
+    </div>
+    <!-- 다가오는 동아리 일정 -->
+    <div class="px-4 mb-3">
+        <h3 class="text-base font-bold mb-1 flex items-center gap-1.5"><span class="material-symbols-outlined text-neon-pink text-lg">alarm</span>다가오는 동아리 일정</h3>
+        <p class="text-[10px] text-slate-400 mb-3">아직 업데이트가 안 된 곳은 작년으로 남아있습니다</p>
+        <div class="flex gap-3 overflow-x-auto pb-3 notion-scroll">
+            <div class="flex-shrink-0 w-56 p-3 rounded-xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-2"><span class="text-xl">📣</span></div><h4 class="text-sm font-bold mb-0.5">SOPT</h4><p class="text-xs font-bold text-slate-500">3월 7일 2026 ~ 3월 13일 2026 18:00</p></div>
+            <div class="flex-shrink-0 w-56 p-3 rounded-xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-2"><span class="text-xl">🦁</span></div><h4 class="text-sm font-bold mb-0.5">멋쟁이사자처럼</h4><p class="text-xs font-bold text-slate-500">2월 26일 ~ 3월 7일</p></div>
+        </div>
+    </div>
+    <!-- 검색 -->
+    <div class="px-4 mb-3">
+        <div class="relative"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span><input class="w-full pl-10 pr-3 py-2 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl outline-none text-xs" placeholder="동아리명, 기술 스택, 또는 모집 분야 검색..." type="text" /></div>
+    </div>
+    <!-- 필터링/정렬 -->
+    <div class="px-4 mb-3 flex items-center gap-2">
+        <button class="flex items-center justify-center gap-1.5 px-3 py-2 w-1/2 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl text-xs"><span class="material-symbols-outlined text-xs">filter_list</span>필터링</button>
+        <button class="flex items-center justify-center gap-1.5 px-3 py-2 w-1/2 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-xl text-xs"><span class="material-symbols-outlined text-xs">sort</span>정렬</button>
+    </div>
+    <!-- 모바일 카드 -->
+    <div class="px-4 pb-6 space-y-3">
+        <div class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl shadow-lg">
+            <div class="flex items-start justify-between mb-3"><div class="flex items-center gap-2"><span class="text-2xl">☘️</span><span class="font-bold text-lg">sipe (1학기)</span></div><span class="flex gap-0.5 text-sm">🌕🌗</span></div>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">사이드 프로젝트에 대한 열정을 가진 사람들이 모여 함께 성장하는 동아리</p>
+            <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2"><span class="text-slate-500 w-16 shrink-0">모집 기간</span><span class="font-medium">1월 3일 → 1월 5일</span></div>
+                <div class="flex items-center gap-2"><span class="text-slate-500 w-16 shrink-0">신청 자격</span><span class="px-2 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-medium">현직자</span></div>
+                <div class="flex items-start gap-2"><span class="text-slate-500 w-16 shrink-0 pt-0.5">모집 분야</span><div class="flex flex-wrap gap-1"><span class="px-1.5 py-0.5 rounded tag-neutral text-xs font-medium">무관</span></div></div>
+            </div>
+        </div>
+        <div class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl shadow-lg">
+            <div class="flex items-start justify-between mb-3"><div class="flex items-center gap-2"><span class="text-2xl">🎯</span><span class="font-bold text-lg">큐시즘 (1학기)</span></div><span class="flex gap-0.5 text-sm">🌕🌕🌗</span></div>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">기획자, 디자이너, 개발자가 함께 모여 IT 서비스를 기획하고 개발하는 대학생 연합 IT 동아리</p>
+            <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2"><span class="text-slate-500 w-16 shrink-0">모집 기간</span><span class="font-medium">1월 17일 → 1월 24일</span></div>
+                <div class="flex items-center gap-2"><span class="text-slate-500 w-16 shrink-0">신청 자격</span><span class="px-2 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-medium">대학생</span></div>
+                <div class="flex items-start gap-2"><span class="text-slate-500 w-16 shrink-0 pt-0.5">모집 분야</span><div class="flex flex-wrap gap-1"><span class="px-1.5 py-0.5 rounded tag-pm text-xs font-medium">PM</span><span class="px-1.5 py-0.5 rounded tag-design text-xs font-medium">Design</span><span class="px-1.5 py-0.5 rounded tag-frontend text-xs font-medium">Frontend</span><span class="px-1.5 py-0.5 rounded tag-backend text-xs font-medium">Backend</span></div></div>
+            </div>
+        </div>
+        <div class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl shadow-lg">
+            <div class="flex items-start justify-between mb-3"><div class="flex items-center gap-2"><span class="text-2xl">🧩</span><span class="font-bold text-lg">MASH-UP</span></div><span class="flex gap-0.5 text-sm">🌕🌕🌕</span></div>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">개발과 디자인에 진심인 사람들이 모여 웹/앱 서비스 출시를 목표로 하는 IT 연합동아리</p>
+            <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2"><span class="text-slate-500 w-16 shrink-0">모집 기간</span><span class="font-medium">1월 28일 → 2월 15일</span></div>
+                <div class="flex items-center gap-2"><span class="text-slate-500 w-16 shrink-0">신청 자격</span><div class="flex gap-1"><span class="px-2 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-medium">대학생</span><span class="px-2 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-medium">현직자</span></div></div>
+                <div class="flex items-start gap-2"><span class="text-slate-500 w-16 shrink-0 pt-0.5">모집 분야</span><div class="flex flex-wrap gap-1"><span class="px-1.5 py-0.5 rounded tag-pm text-xs font-medium">PM</span><span class="px-1.5 py-0.5 rounded tag-design text-xs font-medium">Design</span><span class="px-1.5 py-0.5 rounded tag-android text-xs font-medium">Android</span></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 <!-- CTA -->
 <section class="text-center px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full pb-8">
     <div class="p-8 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-slate-200 dark:border-slate-700">
@@ -690,27 +868,20 @@
 function switchView(section, view) {
     const pc = document.getElementById('pc-' + section);
     const mobile = document.getElementById('mobile-' + section);
-    const buttons = pc.previousElementSibling.querySelectorAll('.view-toggle-btn');
-    if (!buttons.length) {
-        // Find buttons from section element
+    // Find the section element that contains the toggle buttons
+    let sectionEl = pc.previousElementSibling;
+    if (!sectionEl || !sectionEl.matches('section')) {
         let sec = pc;
         while (sec.previousElementSibling && !sec.previousElementSibling.matches('section')) {
             sec = sec.previousElementSibling;
         }
-        if (sec.previousElementSibling) {
-            const btns = sec.previousElementSibling.querySelectorAll('.view-toggle-btn');
-            btns.forEach(b => b.classList.toggle('active', b.textContent === (view === 'pc' ? 'PC' : 'Mobile')));
-        }
+        sectionEl = sec.previousElementSibling;
     }
-    // Find the section element that contains the toggle buttons for this section number
-    document.querySelectorAll('section').forEach(sec => {
-        const numEl = sec.querySelector('.flex.items-center.justify-center');
-        if (numEl && numEl.textContent.trim() === String(section)) {
-            sec.querySelectorAll('.view-toggle-btn').forEach(b => {
-                b.classList.toggle('active', b.textContent === (view === 'pc' ? 'PC' : 'Mobile'));
-            });
-        }
-    });
+    if (sectionEl) {
+        sectionEl.querySelectorAll('.view-toggle-btn').forEach(b => {
+            b.classList.toggle('active', b.textContent === (view === 'pc' ? 'PC' : 'Mobile'));
+        });
+    }
     if (view === 'pc') {
         pc.classList.remove('hidden');
         mobile.classList.add('hidden');
@@ -718,6 +889,21 @@ function switchView(section, view) {
         pc.classList.add('hidden');
         mobile.classList.remove('hidden');
     }
+}
+
+function previewBanner(input, type) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = document.getElementById(type + '-banner-img');
+        const placeholder = document.getElementById(type + '-banner-placeholder');
+        img.src = e.target.result;
+        img.classList.remove('hidden');
+        img.classList.add('block');
+        placeholder.classList.add('hidden');
+    };
+    reader.readAsDataURL(file);
 }
 </script>
 </body></html>
