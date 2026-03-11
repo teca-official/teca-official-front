@@ -846,6 +846,169 @@
 </div>
 </div>
 
+<!-- ======================================================================== -->
+<!-- 옵션 6: 배너 광고 커스텀 편집 -->
+<!-- ======================================================================== -->
+<section class="mx-4 sm:mx-6 md:mx-12 lg:mx-auto lg:max-w-7xl">
+    <div class="flex items-center gap-3 mt-12 mb-2 pl-2">
+        <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500 text-white font-bold text-lg shrink-0">6</span>
+        <div>
+            <h2 class="text-xl sm:text-2xl font-bold">배너 광고 커스텀 편집</h2>
+            <p class="text-sm text-slate-500 dark:text-slate-400">배너의 이모지/이미지, 제목, 내용, 배경색을 자유롭게 편집할 수 있습니다</p>
+        </div>
+    </div>
+</section>
+
+<!-- 편집 패널 + 미리보기 -->
+<div class="mx-4 sm:mx-6 md:mx-12 lg:mx-auto lg:max-w-7xl">
+    <div class="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6">
+        <!-- 편집 패널 -->
+        <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-card-dark space-y-5">
+            <h3 class="font-bold text-lg flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500">edit</span>배너 편집</h3>
+
+            <!-- 이모지 / 이미지 선택 -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-2">아이콘</label>
+                <div class="flex items-center gap-2 mb-2">
+                    <button id="icon-mode-emoji" onclick="setIconMode('emoji')" class="view-toggle-btn active text-xs">이모지</button>
+                    <button id="icon-mode-image" onclick="setIconMode('image')" class="view-toggle-btn text-xs">이미지 (60×60)</button>
+                </div>
+                <div id="icon-emoji-input">
+                    <input id="custom-emoji" type="text" value="🏆" maxlength="4" class="w-20 h-12 text-center text-3xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none" oninput="updateBannerPreview()" />
+                </div>
+                <div id="icon-image-input" class="hidden">
+                    <label class="flex items-center justify-center w-[60px] h-[60px] rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 cursor-pointer hover:border-emerald-400 transition-colors overflow-hidden bg-slate-50 dark:bg-slate-800">
+                        <input type="file" accept="image/*" class="hidden" onchange="previewIconImage(this)" />
+                        <img id="custom-icon-img" class="w-full h-full object-cover hidden" />
+                        <span id="custom-icon-placeholder" class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-2xl">add_photo_alternate</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 제목 -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-2">제목</label>
+                <input id="custom-title" type="text" value="테카 - 2026 상반기 모집 중!" class="w-full px-3 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none text-sm focus:border-emerald-400 transition-colors" oninput="updateBannerPreview()" />
+            </div>
+
+            <!-- 내용 -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-2">내용</label>
+                <input id="custom-desc" type="text" value="데이터 사이언스 & AI 해커톤 동아리 | 서류 마감 3월 15일" class="w-full px-3 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none text-sm focus:border-emerald-400 transition-colors" oninput="updateBannerPreview()" />
+            </div>
+
+            <!-- 배경 그라데이션 -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-600 dark:text-slate-300 mb-2">배경 그라데이션</label>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div>
+                        <span class="text-[11px] text-slate-400 block mb-1">시작</span>
+                        <input id="grad-from" type="color" value="#2563eb" class="w-full h-9 rounded-lg border border-slate-200 dark:border-slate-700 cursor-pointer" oninput="updateBannerPreview()" />
+                    </div>
+                    <div>
+                        <span class="text-[11px] text-slate-400 block mb-1">중간</span>
+                        <input id="grad-via" type="color" value="#4f46e5" class="w-full h-9 rounded-lg border border-slate-200 dark:border-slate-700 cursor-pointer" oninput="updateBannerPreview()" />
+                    </div>
+                    <div>
+                        <span class="text-[11px] text-slate-400 block mb-1">끝</span>
+                        <input id="grad-to" type="color" value="#7c3aed" class="w-full h-9 rounded-lg border border-slate-200 dark:border-slate-700 cursor-pointer" oninput="updateBannerPreview()" />
+                    </div>
+                </div>
+                <!-- 프리셋 -->
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="applyGradientPreset('#2563eb','#4f46e5','#7c3aed')" class="w-8 h-8 rounded-lg border-2 border-transparent hover:border-slate-400 transition-colors" style="background:linear-gradient(135deg,#2563eb,#4f46e5,#7c3aed)" title="블루-인디고-퍼플"></button>
+                    <button onclick="applyGradientPreset('#ec4899','#f43f5e','#f97316')" class="w-8 h-8 rounded-lg border-2 border-transparent hover:border-slate-400 transition-colors" style="background:linear-gradient(135deg,#ec4899,#f43f5e,#f97316)" title="핑크-로즈-오렌지"></button>
+                    <button onclick="applyGradientPreset('#059669','#0d9488','#0891b2')" class="w-8 h-8 rounded-lg border-2 border-transparent hover:border-slate-400 transition-colors" style="background:linear-gradient(135deg,#059669,#0d9488,#0891b2)" title="에메랄드-틸-시안"></button>
+                    <button onclick="applyGradientPreset('#7c3aed','#a855f7','#ec4899')" class="w-8 h-8 rounded-lg border-2 border-transparent hover:border-slate-400 transition-colors" style="background:linear-gradient(135deg,#7c3aed,#a855f7,#ec4899)" title="바이올렛-퍼플-핑크"></button>
+                    <button onclick="applyGradientPreset('#1e293b','#334155','#475569')" class="w-8 h-8 rounded-lg border-2 border-transparent hover:border-slate-400 transition-colors" style="background:linear-gradient(135deg,#1e293b,#334155,#475569)" title="다크 슬레이트"></button>
+                    <button onclick="applyGradientPreset('#f59e0b','#ef4444','#ec4899')" class="w-8 h-8 rounded-lg border-2 border-transparent hover:border-slate-400 transition-colors" style="background:linear-gradient(135deg,#f59e0b,#ef4444,#ec4899)" title="앰버-레드-핑크"></button>
+                </div>
+            </div>
+
+            <!-- 클립보드 복사 -->
+            <button onclick="copyBannerToClipboard()" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm transition-colors">
+                <span class="material-symbols-outlined text-base">content_copy</span>클립보드에 복사
+            </button>
+            <p id="copy-success" class="text-center text-xs text-emerald-500 font-medium hidden">복사되었습니다!</p>
+        </div>
+
+        <!-- 미리보기 영역 -->
+        <div class="space-y-4">
+            <!-- PC 미리보기 -->
+            <div>
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 block">PC 미리보기</span>
+                <div class="page-frame border-slate-200 dark:border-slate-700 bg-white dark:bg-background-dark">
+                    <div class="pt-8 pb-4 px-4 sm:px-6 md:px-12">
+                        <div class="flex items-center gap-2 sm:gap-3 mb-3">
+                            <img src="logo.png" alt="Logo" class="h-8 sm:h-10 md:h-12 w-auto" />
+                            <span class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">IT 연합 동아리 모음</span>
+                        </div>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm">국내 주요 연합 IT 동아리 모집 일정 및 정보를 한눈에 비교하세요.</p>
+                    </div>
+                    <!-- ★ PC 배너 미리보기 -->
+                    <div class="px-4 sm:px-6 md:px-12 mb-4 md:mb-6">
+                        <div id="preview-banner-pc" class="rounded-2xl overflow-hidden p-5 sm:p-6 relative" style="background:linear-gradient(to right,#2563eb,#4f46e5,#7c3aed)">
+                            <div class="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-white/20 text-white text-xs font-medium backdrop-blur-sm">AD</div>
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                                <div class="flex items-center gap-3">
+                                    <span id="preview-icon-pc" class="text-4xl">🏆</span>
+                                    <div>
+                                        <h3 id="preview-title-pc" class="text-white font-bold text-lg sm:text-xl">테카 - 2026 상반기 모집 중!</h3>
+                                        <p id="preview-desc-pc" class="text-white/70 text-sm sm:text-base">데이터 사이언스 & AI 해커톤 동아리 | 서류 마감 3월 15일</p>
+                                    </div>
+                                </div>
+                                <span class="sm:ml-auto shrink-0 px-5 py-2.5 rounded-full bg-white text-indigo-600 font-bold text-sm">지원하기 →</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 다가오는 일정 -->
+                    <div class="px-4 sm:px-6 md:px-12 mb-4 md:mb-6">
+                        <h3 class="text-lg font-bold mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-neon-pink">alarm</span>다가오는 동아리 일정</h3>
+                        <div class="flex gap-4 overflow-x-auto pb-4 notion-scroll">
+                            <div class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-4"><span class="text-2xl">🦁</span></div><h4 class="text-lg font-bold mb-1">멋쟁이사자처럼</h4><p class="text-sm font-bold text-slate-500">2월 26일 2026 ~ 3월 7일 2026</p></div>
+                            <div class="block flex-shrink-0 w-72 p-5 rounded-2xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-4"><span class="text-2xl">🪐</span></div><h4 class="text-lg font-bold mb-1">UMC</h4><p class="text-sm font-bold text-slate-500">2월 16일 2026 ~ 3월 8일 2026</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 모바일 미리보기 -->
+            <div>
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 block">Mobile 미리보기</span>
+                <div class="mobile-frame-wrapper">
+                    <div class="mobile-frame-inner page-frame border-slate-200 dark:border-slate-700 bg-white dark:bg-background-dark">
+                        <div class="pt-6 pb-3 px-4">
+                            <div class="flex items-center gap-2 mb-2"><img src="logo.png" alt="Logo" class="h-7 w-auto" /><span class="text-xl font-bold tracking-tight">IT 연합 동아리 모음</span></div>
+                            <p class="text-slate-500 dark:text-slate-400 text-xs">국내 주요 연합 IT 동아리 모집 일정 및 정보를 한눈에 비교하세요.</p>
+                        </div>
+                        <!-- ★ 모바일 배너 미리보기 -->
+                        <div class="px-4 mb-3">
+                            <div id="preview-banner-mobile" class="rounded-xl overflow-hidden relative" style="background:linear-gradient(to right,#2563eb,#4f46e5,#7c3aed); height:50px;">
+                                <div class="absolute top-1.5 right-2 px-1.5 py-0.5 rounded-full bg-white/20 text-white text-[9px] font-medium backdrop-blur-sm">AD</div>
+                                <div class="flex items-center gap-2 h-full px-3">
+                                    <span id="preview-icon-mobile" class="text-lg">🏆</span>
+                                    <div>
+                                        <h3 id="preview-title-mobile" class="text-white font-bold text-[11px] leading-tight">테카 - 2026 상반기 모집 중!</h3>
+                                        <p id="preview-desc-mobile" class="text-white/70 text-[9px]">데이터 사이언스 & AI 해커톤 동아리</p>
+                                    </div>
+                                    <span class="ml-auto shrink-0 px-2.5 py-1 rounded-full bg-white text-indigo-600 font-bold text-[10px]">지원하기 →</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 다가오는 일정 -->
+                        <div class="px-4 mb-3">
+                            <h3 class="text-base font-bold mb-3 flex items-center gap-1.5"><span class="material-symbols-outlined text-neon-pink text-lg">alarm</span>다가오는 동아리 일정</h3>
+                            <div class="flex gap-3 overflow-x-auto pb-3 notion-scroll">
+                                <div class="flex-shrink-0 w-56 p-3 rounded-xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-2"><span class="text-xl">🦁</span></div><h4 class="text-sm font-bold mb-0.5">멋쟁이사자처럼</h4><p class="text-xs font-bold text-slate-500">2월 26일 ~ 3월 7일</p></div>
+                                <div class="flex-shrink-0 w-56 p-3 rounded-xl border border-slate-200 dark:border-border-dark bg-blue-50 dark:bg-slate-900/40"><div class="mb-2"><span class="text-xl">🪐</span></div><h4 class="text-sm font-bold mb-0.5">UMC</h4><p class="text-xs font-bold text-slate-500">2월 16일 ~ 3월 8일</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- CTA -->
 <section class="text-center px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full pb-8">
     <div class="p-8 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-slate-200 dark:border-slate-700">
@@ -904,6 +1067,108 @@ function previewBanner(input, type) {
         placeholder.classList.add('hidden');
     };
     reader.readAsDataURL(file);
+}
+
+// --- 옵션 6: 배너 커스텀 편집 ---
+let iconMode = 'emoji';
+
+function setIconMode(mode) {
+    iconMode = mode;
+    document.getElementById('icon-mode-emoji').classList.toggle('active', mode === 'emoji');
+    document.getElementById('icon-mode-image').classList.toggle('active', mode === 'image');
+    document.getElementById('icon-emoji-input').classList.toggle('hidden', mode !== 'emoji');
+    document.getElementById('icon-image-input').classList.toggle('hidden', mode !== 'image');
+    updateBannerPreview();
+}
+
+function previewIconImage(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = document.getElementById('custom-icon-img');
+        const placeholder = document.getElementById('custom-icon-placeholder');
+        img.src = e.target.result;
+        img.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+        updateBannerPreview();
+    };
+    reader.readAsDataURL(file);
+}
+
+function updateBannerPreview() {
+    const title = document.getElementById('custom-title').value;
+    const desc = document.getElementById('custom-desc').value;
+    const from = document.getElementById('grad-from').value;
+    const via = document.getElementById('grad-via').value;
+    const to = document.getElementById('grad-to').value;
+    const gradient = 'linear-gradient(to right,' + from + ',' + via + ',' + to + ')';
+
+    // 아이콘 처리
+    let pcIconHTML, mobileIconHTML;
+    if (iconMode === 'emoji') {
+        const emoji = document.getElementById('custom-emoji').value || '🏆';
+        pcIconHTML = '<span class="text-4xl">' + emoji + '</span>';
+        mobileIconHTML = '<span class="text-lg">' + emoji + '</span>';
+    } else {
+        const imgSrc = document.getElementById('custom-icon-img').src;
+        if (imgSrc && !document.getElementById('custom-icon-img').classList.contains('hidden')) {
+            pcIconHTML = '<img src="' + imgSrc + '" class="w-[60px] h-[60px] rounded-xl object-cover" />';
+            mobileIconHTML = '<img src="' + imgSrc + '" class="w-7 h-7 rounded-lg object-cover" />';
+        } else {
+            pcIconHTML = '<span class="text-4xl">🏆</span>';
+            mobileIconHTML = '<span class="text-lg">🏆</span>';
+        }
+    }
+
+    // PC 미리보기
+    document.getElementById('preview-banner-pc').style.background = gradient;
+    document.getElementById('preview-icon-pc').outerHTML = '<span id="preview-icon-pc">' + pcIconHTML + '</span>';
+    document.getElementById('preview-title-pc').textContent = title;
+    document.getElementById('preview-desc-pc').textContent = desc;
+
+    // 모바일 미리보기
+    document.getElementById('preview-banner-mobile').style.background = gradient;
+    document.getElementById('preview-icon-mobile').outerHTML = '<span id="preview-icon-mobile">' + mobileIconHTML + '</span>';
+    document.getElementById('preview-title-mobile').textContent = title;
+    document.getElementById('preview-desc-mobile').textContent = desc;
+}
+
+function copyBannerToClipboard() {
+    const emoji = document.getElementById('custom-emoji').value || '🏆';
+    const title = document.getElementById('custom-title').value;
+    const desc = document.getElementById('custom-desc').value;
+    const from = document.getElementById('grad-from').value;
+    const via = document.getElementById('grad-via').value;
+    const to = document.getElementById('grad-to').value;
+
+    const text = [
+        '=== TeCA 배너 광고 설정 ===',
+        '',
+        '아이콘 모드: ' + (iconMode === 'emoji' ? '이모지' : '이미지'),
+        (iconMode === 'emoji' ? '이모지: ' + emoji : '이미지: (업로드된 파일)'),
+        '제목: ' + title,
+        '내용: ' + desc,
+        '',
+        '--- 배경 그라데이션 ---',
+        '시작: ' + from,
+        '중간: ' + via,
+        '끝: ' + to,
+        'CSS: background: linear-gradient(to right, ' + from + ', ' + via + ', ' + to + ');',
+    ].join('\n');
+
+    navigator.clipboard.writeText(text).then(function() {
+        const msg = document.getElementById('copy-success');
+        msg.classList.remove('hidden');
+        setTimeout(function() { msg.classList.add('hidden'); }, 2000);
+    });
+}
+
+function applyGradientPreset(from, via, to) {
+    document.getElementById('grad-from').value = from;
+    document.getElementById('grad-via').value = via;
+    document.getElementById('grad-to').value = to;
+    updateBannerPreview();
 }
 </script>
 </body></html>
