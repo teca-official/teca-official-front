@@ -48,6 +48,10 @@
       "dest": "/tournament.html"
     },
     {
+      "src": "/tournament/top10",
+      "dest": "/tournament-top10.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>프로젝트 월드컵 Top 10 | IT 연합동아리 프로젝트 랭킹</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/catturtle123/og-image/favicon.ico" rel="icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<script>
+    const darkModeMatcher = window.matchMedia('(prefers-color-scheme: dark)');
+    function updateDarkMode(e) {
+        if (e.matches) { document.documentElement.classList.add('dark'); }
+        else { document.documentElement.classList.remove('dark'); }
+    }
+    updateDarkMode(darkModeMatcher);
+    darkModeMatcher.addEventListener('change', updateDarkMode);
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    primary: "#3b82f6",
+                    "background-light": "#ffffff",
+                    "background-dark": "#0f172a",
+                    "card-dark": "rgba(30, 41, 59, 0.7)",
+                    "border-dark": "rgba(255, 255, 255, 0.1)",
+                    "neon-pink": "#ff2d55",
+                },
+                fontFamily: {
+                    display: ["Inter", "Noto Sans KR", "sans-serif"],
+                    body: ["Inter", "Noto Sans KR", "sans-serif"],
+                },
+            },
+        },
+    };
+</script>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="min-h-screen flex flex-col">
+
+<!-- 헤더 -->
+<header class="pt-8 md:pt-12 pb-4 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full">
+    <div class="flex items-center gap-2 sm:gap-3 mb-3 md:mb-4">
+        <img src="logo.png" alt="Logo" class="h-8 sm:h-10 md:h-12 w-auto"/>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+            IT 연합 동아리 모음
+        </h1>
+        <a href="/recommend" class="ml-auto shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-neon-pink/30 bg-neon-pink/10 text-neon-pink font-medium text-sm hover:bg-neon-pink/20 hover:border-neon-pink/50 transition-all">
+            <span class="material-symbols-outlined text-base">quiz</span>
+            <span class="hidden sm:inline">동아리 추천 받기</span>
+            <span class="sm:hidden">추천</span>
+        </a>
+    </div>
+    <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base md:text-lg">
+        국내 주요 연합 IT 동아리 모집 일정 및 정보를 한눈에 비교하세요.
+    </p>
+    <div class="flex items-center gap-2 mt-6">
+        <select onchange="window.location.href=this.value" class="category-select md:hidden px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-bold text-sm transition-all appearance-none cursor-pointer pr-8">
+            <option value="/">IT</option>
+            <option value="/marketing">마케팅/경영</option>
+            <option value="/bootcamp">부트캠프</option>
+            <option value="/hackathon">해커톤/대회</option>
+            <option value="/tournament" selected>토너먼트</option>
+        </select>
+        <a href="/" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">IT</a>
+        <a href="/marketing" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">마케팅/경영</a>
+        <a href="/bootcamp" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">부트캠프</a>
+        <a href="/hackathon" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">해커톤/대회</a>
+        <a href="/tournament" class="hidden md:inline-block px-4 py-2 rounded-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm transition-all">토너먼트</a>
+        <a class="ml-auto shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-blue-400/30 bg-blue-500/10 text-blue-500 dark:text-blue-400 font-medium text-sm hover:bg-blue-500/20 hover:border-blue-400/50 transition-all" href="https://docs.google.com/forms/d/e/1FAIpQLSck-SUA47ybqzMpW6tWSV_iUrPmEU2TH6emzOeg5Sa6jC-b8Q/viewform?usp=dialog" target="_blank">
+            <span class="material-symbols-outlined text-base">handshake</span>
+            제휴 문의
+        </a>
+        <a class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-purple-400/30 bg-purple-500/10 text-purple-500 dark:text-purple-400 font-medium text-sm hover:bg-purple-500/20 hover:border-purple-400/50 transition-all" href="https://docs.google.com/forms/d/1A7zV5F8fGpHuC7NPs3juTnIlfEuo8hlMfpoo_aKC7rs/edit" target="_blank">
+            <span class="material-symbols-outlined text-base">feedback</span>
+            <span class="md:hidden">피드백</span><span class="hidden md:inline">피드백 보내기</span>
+        </a>
+    </div>
+</header>
+
+<main class="flex-1 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto w-full pb-12">
+
+    <!-- 페이지 타이틀 -->
+    <div class="flex items-center justify-between mb-8 mt-4">
+        <div>
+            <div class="flex items-center gap-2 mb-1">
+                <span class="text-2xl">🏆</span>
+                <h2 class="text-2xl sm:text-3xl font-bold">프로젝트 월드컵 Top 10</h2>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-sm">이상형 월드컵에서 가장 많이 우승한 프로젝트</p>
+        </div>
+        <a href="/tournament" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm transition-all">
+            <span class="material-symbols-outlined text-base">trophy</span>
+            월드컵 하기
+        </a>
+    </div>
+
+    <!-- 랭킹 리스트 -->
+    <div id="ranking-list" class="space-y-3">
+        <!-- 로딩 스켈레톤 -->
+        <div class="animate-pulse" id="loading-skeleton">
+            <div class="flex items-center gap-4 p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl mb-3">
+                <div class="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full shrink-0"></div>
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-slate-200 dark:bg-slate-700 rounded-xl shrink-0"></div>
+                <div class="flex-1 space-y-2">
+                    <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/3"></div>
+                    <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded w-1/4"></div>
+                    <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded w-2/3"></div>
+                </div>
+                <div class="w-16 h-8 bg-slate-200 dark:bg-slate-700 rounded-full shrink-0"></div>
+            </div>
+            <div class="flex items-center gap-4 p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl mb-3">
+                <div class="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full shrink-0"></div>
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-slate-200 dark:bg-slate-700 rounded-xl shrink-0"></div>
+                <div class="flex-1 space-y-2">
+                    <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
+                    <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded w-1/4"></div>
+                    <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded w-3/4"></div>
+                </div>
+                <div class="w-16 h-8 bg-slate-200 dark:bg-slate-700 rounded-full shrink-0"></div>
+            </div>
+            <div class="flex items-center gap-4 p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl mb-3">
+                <div class="w-10 h-10 bg-slate-200 dark:bg-slate-700 rounded-full shrink-0"></div>
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-slate-200 dark:bg-slate-700 rounded-xl shrink-0"></div>
+                <div class="flex-1 space-y-2">
+                    <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-2/5"></div>
+                    <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded w-1/4"></div>
+                    <div class="h-3 bg-slate-200 dark:bg-slate-700 rounded w-1/2"></div>
+                </div>
+                <div class="w-16 h-8 bg-slate-200 dark:bg-slate-700 rounded-full shrink-0"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 빈 상태 -->
+    <div id="empty-state" class="hidden text-center py-20">
+        <div class="text-5xl mb-4">🗳️</div>
+        <p class="text-slate-500 dark:text-slate-400 text-lg font-medium mb-2">아직 데이터가 없어요</p>
+        <p class="text-slate-400 dark:text-slate-500 text-sm mb-6">월드컵을 완주하면 결과가 여기에 쌓여요!</p>
+        <a href="/tournament" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold transition-all">
+            <span class="material-symbols-outlined text-base">trophy</span>
+            월드컵 하러 가기
+        </a>
+    </div>
+
+</main>
+
+<footer class="py-4 flex flex-col justify-center items-center text-slate-500 dark:text-slate-500 text-xs sm:text-sm max-w-7xl mx-auto gap-1 px-4">
+    <p>&copy; IT Club DB. All information updated daily.</p>
+    <a href="https://dazzling-myth-cd2.notion.site/3097c67ff1e68022a012f2c5e0389e9b" target="_blank" class="hover:text-slate-700 dark:hover:text-slate-300 underline transition-colors">개인정보 처리방침</a>
+</footer>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBuvBZ3EZAE5GjdVVggGEa21wgTf6DAwqs",
+    authDomain: "teca-analytics.firebaseapp.com",
+    projectId: "teca-analytics",
+    storageBucket: "teca-analytics.firebasestorage.app",
+    messagingSenderId: "51789117987",
+    appId: "1:51789117987:web:aba99b0a76708c402f4f96",
+    measurementId: "G-H8PR0KJ2QX"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const RANK_BADGES = ['🥇', '🥈', '🥉'];
+  const RANK_COLORS = [
+    'border-amber-400 bg-amber-50 dark:bg-amber-900/10',
+    'border-slate-300 bg-slate-50 dark:bg-slate-800/50',
+    'border-amber-600/50 bg-orange-50 dark:bg-orange-900/10',
+  ];
+
+  async function loadTop10() {
+    const skeleton = document.getElementById('loading-skeleton');
+    const list = document.getElementById('ranking-list');
+    const empty = document.getElementById('empty-state');
+
+    try {
+      const q = query(collection(db, 'tournament_wins'), orderBy('wins', 'desc'), limit(10));
+      const snap = await getDocs(q);
+
+      skeleton.remove();
+
+      if (snap.empty) {
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      snap.docs.forEach((doc, i) => {
+        const d = doc.data();
+        const rank = i + 1;
+        const borderClass = RANK_COLORS[i] || 'border-slate-200 dark:border-border-dark';
+        const badgeHtml = rank <= 3
+          ? `<span class="text-2xl">${RANK_BADGES[i]}</span>`
+          : `<span class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 font-bold text-sm shrink-0">${rank}</span>`;
+
+        const card = document.createElement('div');
+        card.className = `flex items-center gap-4 p-4 bg-white dark:bg-card-dark border-2 ${borderClass} rounded-2xl transition-all hover:shadow-md`;
+        card.innerHTML = `
+          <div class="shrink-0 w-10 flex justify-center">${badgeHtml}</div>
+          <img src="${d.image || ''}" alt="${d.name}" class="w-16 h-16 sm:w-20 sm:h-20 object-cover object-center rounded-xl shrink-0 bg-slate-100 dark:bg-slate-800" loading="lazy" onerror="this.style.display='none'"/>
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-base sm:text-lg truncate">${d.name}</p>
+            <p class="text-amber-600 dark:text-amber-400 text-xs sm:text-sm font-medium mb-1">${d.club} ${d.cohort}</p>
+          </div>
+          <div class="shrink-0 text-right">
+            <p class="text-xl sm:text-2xl font-bold text-amber-500">${d.wins}</p>
+            <p class="text-xs text-slate-400">우승</p>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+    } catch (e) {
+      console.error('[Firestore] load failed:', e);
+      skeleton.remove();
+      empty.classList.remove('hidden');
+    }
+  }
+
+  loadTop10();
+</script>
+</body></html>

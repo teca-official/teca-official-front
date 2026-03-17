@@ -760,6 +760,10 @@ function showResult(winner) {
         round_size: roundSize
     });
 
+    if (typeof window._firebaseWriteWin === 'function') {
+        window._firebaseWriteWin(winner);
+    }
+
     const results = JSON.parse(localStorage.getItem('tournament_results') || '[]');
     results.push({ name: winner.name, club: winner.club, date: new Date().toISOString() });
     localStorage.setItem('tournament_results', JSON.stringify(results.slice(-20)));
