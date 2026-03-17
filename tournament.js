@@ -571,7 +571,7 @@ function updateStats() {
 // 프로젝트 수 이하인 2의 제곱 옵션만 표시 (예: 20개 → 16강, 8강)
 function renderTournamentButtons() {
     const container = document.getElementById('tournament-buttons');
-    const sizes = [32, 16, 8, 4];
+    const sizes = [64, 32, 16, 8, 4];
     const available = sizes.filter(s => projects.length >= s);
 
     if (available.length === 0) {
