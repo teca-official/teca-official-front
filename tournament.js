@@ -17,7 +17,7 @@ const projects = [
         club: "SOPT",
         cohort: "37기",
         description: "흩어진 메모를 빛나는 결과물로",
-        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/b800f9f0-490b-4b12-94ca-ff5e887e59c1-썸네일.png",
+        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/06e50d37-d334-451d-ba5e-c3c3bf006a5d-01.png"
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ const projects = [
         club: "SOPT",
         cohort: "37기",
         description: "외국인 유학생들을 위한 AI 기반 한국 취업•비자 길잡이",
-        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/989d49ce-65b0-4fda-9d7a-833b5f2cbf84-플그 썸네일.png",
+        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/b8695044-4758-482d-a69a-53422b40fce1-1.png"
     },
     {
         id: 6,
@@ -153,7 +153,7 @@ const projects = [
         club: "SOPT",
         cohort: "36기",
         description: "이별 극복을 위한 단 하나의 가이드",
-        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/ce567bbe-0361-46e2-b4a6-7cd8dfaeea2a-썸네일.png",
+        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/9f33ce81-6799-48ab-b18b-a9bbd68544ed-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80_1.png",
     },
     {
         id: 30,
@@ -209,7 +209,7 @@ const projects = [
         club: "SOPT",
         cohort: "35기",
         description: "한 입 떠먹으며 완성하는 나만의 찐 맛집 지도",
-        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/1f432282-5f1d-44e7-a418-0f59a67c2a42-스푸니플그장표.png",
+        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/6ee28b54-6489-468d-bccd-419c563e902d-%E1%84%89%E1%85%B3%E1%84%91%E1%85%AE%E1%84%82%E1%85%B5%E1%84%91%E1%85%B3%E1%86%AF%E1%84%80%E1%85%B3%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%91%E1%85%AD.png",
     },
     {
         id: 37,
@@ -217,7 +217,7 @@ const projects = [
         club: "SOPT",
         cohort: "35기",
         description: "당신에게 춤을 더 가까이, 꿈꾸던 댄스 클래스를 만나다",
-        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/2baf17c5-f2f7-4bae-af72-ad455fc5bd46-썸네일 14.png",
+        image: "https://s3.ap-northeast-2.amazonaws.com/sopt-makers-internal//prod/image/project/d64f20c7-cbf0-4741-8a07-8176c2c56c5d-1.png"
     },
     {
         id: 38,
