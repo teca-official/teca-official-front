@@ -575,7 +575,7 @@ function renderTournamentButtons() {
     const available = sizes.filter(s => projects.length >= s);
 
     if (available.length === 0) {
-        container.innerHTML = '<p class="text-slate-400 dark:text-slate-500 text-sm">수상작 데이터가 준비 중입니다.</p>';
+        container.innerHTML = '<p class="text-slate-400 dark:text-slate-500 text-sm">프로젝트 데이터가 준비 중입니다.</p>';
         return;
     }
 
@@ -797,10 +797,10 @@ window.resetTournament = function() {
 // --- 공유 ---
 window.shareTournament = function() {
     const winnerName = document.getElementById('winner-card').querySelector('h3')?.textContent || '';
-    const text = `🏆 수상작 토너먼트에서 "${winnerName}"을(를) 우승으로 뽑았어요!\n\n나도 해보기 👉 ${window.location.origin}/tournament`;
+    const text = `🏆 프로젝트 이상형 월드컵에서 "${winnerName}"을(를) 1위로 뽑았어요!\n\n나도 해보기 👉 ${window.location.origin}/tournament`;
 
     if (navigator.share) {
-        navigator.share({ title: '수상작 토너먼트 결과', text }).catch(() => {});
+        navigator.share({ title: '프로젝트 이상형 월드컵 결과', text }).catch(() => {});
     } else {
         navigator.clipboard.writeText(text).then(() => {
             const btn = document.querySelector('#result-screen button:last-of-type');
