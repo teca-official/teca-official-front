@@ -15,96 +15,84 @@
 // PM, 디자인, AI, 웹, Android, iOS, Flutter, ReactNative, 백엔드, 클라우드
 const PARTNER_LINKS = [
     // PM
-    { link: "https://inf.run/sb7Rc", categories: ["PM"] },
-    { link: "https://inf.run/pvSun", categories: ["PM"] },
-    { link: "https://inf.run/13JYP", categories: ["PM"] },
-    { link: "https://inf.run/9P8oE", categories: ["PM"] },
-    { link: "https://inf.run/nEnxv", categories: ["PM"] },
-    { link: "https://inf.run/hQQ1Z", categories: ["PM"] },
-    { link: "https://inf.run/MPybe", categories: ["PM"] },
-    { link: "https://inf.run/TF313", categories: ["PM"] },
+    { link: "https://inf.run/y9BM3", categories: ["PM"] },
+    { link: "https://inf.run/f1HFo", categories: ["PM"] },
+    { link: "https://inf.run/APAZW", categories: ["PM"] },
+    { link: "https://inf.run/QiBnf", categories: ["PM"] },
+    { link: "https://inf.run/egdcK", categories: ["PM"] },
+    { link: "https://inf.run/hGEwF", categories: ["PM"] },
 
     // 디자인
-    { link: "https://inf.run/9C8D3", categories: ["디자인"] },
-    { link: "https://inf.run/vAQqk", categories: ["디자인"] },
-    { link: "https://inf.run/qAQUA", categories: ["디자인"] },
+    { link: "https://inf.run/C93VR", categories: ["디자인"] },
+    { link: "https://inf.run/BEVMN", categories: ["디자인"] },
+    { link: "https://inf.run/LQQEP", categories: ["디자인"] },
 
     // AI
-    { link: "https://inf.run/iXpfe", categories: ["AI"] },
-    { link: "https://inf.run/CpGYe", categories: ["AI"] },
-    { link: "https://inf.run/rStDC", categories: ["AI"] },
-    { link: "https://inf.run/bYLFq", categories: ["AI"] },
-    { link: "https://inf.run/JzTa5", categories: ["AI"] },
-    { link: "https://inf.run/DZdzk", categories: ["AI"] },
-    { link: "https://inf.run/cfMJF", categories: ["AI"] },
+    { link: "https://inf.run/iEPo3", categories: ["AI"] },
+    { link: "https://inf.run/eg8VP", categories: ["AI"] },
+    { link: "https://inf.run/rNdMX", categories: ["AI"] },
+    { link: "https://inf.run/AdZgi", categories: ["AI"] },
+    { link: "https://inf.run/UKR26", categories: ["AI"] },
 
     // 웹
-    { link: "https://inf.run/ZfCoZ", categories: ["웹"] },
-    { link: "https://inf.run/YNTjk", categories: ["웹"] },
-    { link: "https://inf.run/2Mhb9", categories: ["웹"] },
-    { link: "https://inf.run/pU8ib", categories: ["웹"] },
+    { link: "https://inf.run/m5aJY", categories: ["웹"] },
+    { link: "https://inf.run/GKK7Q", categories: ["웹"] },
+    { link: "https://inf.run/5b1os", categories: ["웹"] },
+    { link: "https://inf.run/nCGe8", categories: ["웹"] },
 
     // iOS
-    { link: "https://inf.run/xDG94", categories: ["iOS"] },
-    { link: "https://inf.run/L17du", categories: ["iOS"] },
-    { link: "https://inf.run/hFK5d", categories: ["iOS"] },
-    { link: "https://inf.run/qkbkT", categories: ["iOS"] },
-    { link: "https://inf.run/JonM7", categories: ["iOS"] },
-    { link: "https://inf.run/FdpRN", categories: ["iOS"] },
+    { link: "https://inf.run/uXxSA", categories: ["iOS"] },
+    { link: "https://inf.run/DFwXH", categories: ["iOS"] },
+    { link: "https://inf.run/g2QTi", categories: ["iOS"] },
+    { link: "https://inf.run/epZmS", categories: ["iOS"] },
 
     // Android
-    { link: "https://inf.run/7uspX", categories: ["Android"] },
-    { link: "https://inf.run/xz1Qt", categories: ["Android"] },
-    { link: "https://inf.run/AKrUS", categories: ["Android"] },
+    { link: "https://inf.run/1HqU5", categories: ["Android"] },
+    { link: "https://inf.run/HFBE1", categories: ["Android"] },
+    { link: "https://inf.run/eJDqW", categories: ["Android"] },
 
     // Flutter
-    { link: "https://inf.run/LgetC", categories: ["Flutter"] },
-    { link: "https://inf.run/LWvPj", categories: ["Flutter"] },
-    { link: "https://inf.run/mhU3P", categories: ["Flutter"] },
-    { link: "https://inf.run/jyrKK", categories: ["Flutter"] },
-    { link: "https://inf.run/h6Dh2", categories: ["Flutter"] },
-    { link: "https://inf.run/pfmMm", categories: ["Flutter"] },
+    { link: "https://inf.run/6ZzJC", categories: ["Flutter"] },
+    { link: "https://inf.run/Nt29h", categories: ["Flutter"] },
+    { link: "https://inf.run/Hfrmk", categories: ["Flutter"] },
+    { link: "https://inf.run/iAmvz", categories: ["Flutter"] },
+    { link: "https://inf.run/Y6tHA", categories: ["Flutter"] },
 
     // ReactNative
-    { link: "https://inf.run/fYy4A", categories: ["ReactNative"] },
+    { link: "https://inf.run/dp2dL", categories: ["ReactNative"] },
 
     // 백엔드 (Java/Spring + Node.js)
-    { link: "https://inf.run/FCqpv", categories: ["백엔드"] },
-    { link: "https://inf.run/CPvNA", categories: ["백엔드"] },
-    { link: "https://inf.run/A5CBW", categories: ["백엔드"] },
-    { link: "https://inf.run/a9My3", categories: ["백엔드"] },
-    { link: "https://inf.run/LFn3p", categories: ["백엔드"] },
-    { link: "https://inf.run/rr6bz", categories: ["백엔드"] },
-    { link: "https://inf.run/7z8R8", categories: ["백엔드"] },
+    { link: "https://inf.run/4P87d", categories: ["백엔드"] },
+    { link: "https://inf.run/rDnKs", categories: ["백엔드"] },
+    { link: "https://inf.run/Gnveo", categories: ["백엔드"] },
+    { link: "https://inf.run/CqXii", categories: ["백엔드"] },
+    { link: "https://inf.run/3H1HE", categories: ["백엔드"] },
 
     // 클라우드
-    { link: "https://inf.run/ozWML", categories: ["클라우드"] },
-    { link: "https://inf.run/Ae8oZ", categories: ["클라우드"] },
-    { link: "https://inf.run/DA4GB", categories: ["클라우드"] },
-    { link: "https://inf.run/uyGTH", categories: ["클라우드"] },
+    { link: "https://inf.run/D1FkC", categories: ["클라우드"] },
+    { link: "https://inf.run/AHNpk", categories: ["클라우드"] },
+    { link: "https://inf.run/DBMf2", categories: ["클라우드"] },
 
     // Language
-    { link: "https://inf.run/9efRW", categories: ["Language"] },
+    { link: "https://inf.run/oHTRq", categories: ["Language"] },
+    { link: "https://inf.run/7Bnxs", categories: ["Language"] },
+    { link: "https://inf.run/hYRvk", categories: ["Language"] },
 
     // CS
-    { link: "https://inf.run/PaMxM", categories: ["CS"] },
-    { link: "https://inf.run/BBy39", categories: ["CS"] },
-    { link: "https://inf.run/wid86", categories: ["CS"] },
-    { link: "https://inf.run/DAXoZ", categories: ["CS"] },
+    { link: "https://inf.run/2a5yE", categories: ["CS"] },
+    { link: "https://inf.run/RiKRF", categories: ["CS"] },
+    { link: "https://inf.run/rqWUz", categories: ["CS"] },
 
     // Algorithm
-    { link: "https://inf.run/nJU8L", categories: ["Algorithm"] },
-    { link: "https://inf.run/VgHmC", categories: ["Algorithm"] },
-    { link: "https://inf.run/6KydJ", categories: ["Algorithm"] },
+    { link: "https://inf.run/2S86Y", categories: ["Algorithm"] },
+    { link: "https://inf.run/USpNE", categories: ["Algorithm"] },
+    { link: "https://inf.run/z1zWv", categories: ["Algorithm"] },
 
     // AI 생산성
-    { link: "https://inf.run/x1D76", categories: ["AI 생산성"] },
-    { link: "https://inf.run/7dXC2", categories: ["AI 생산성"] },
-    { link: "https://inf.run/ByKNw", categories: ["AI 생산성"] },
-    { link: "https://inf.run/PYJMC", categories: ["AI 생산성"] },
-    { link: "https://inf.run/yyDgN", categories: ["AI 생산성"] },
-    { link: "https://inf.run/bZy68", categories: ["AI 생산성"] },
-    { link: "https://inf.run/uUCMv", categories: ["AI 생산성"] },
+    { link: "https://inf.run/66SYw", categories: ["AI 생산성"] },
+    { link: "https://inf.run/F44x5", categories: ["AI 생산성"] },
+    { link: "https://inf.run/vegdA", categories: ["AI 생산성"] },
+    { link: "https://inf.run/p43Kh", categories: ["AI 생산성"] },
 ];
 
 const https = require('https');
