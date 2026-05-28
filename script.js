@@ -542,6 +542,14 @@ function renderDeadlines() {
     }).join('');
 }
 
+function getYearBadge(dateStr) {
+    const match = dateStr.match(/(\d{4})$/);
+    if (!match) return '';
+    const year = match[1];
+    const colorClass = year === '2026' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300' : 'bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400';
+    return `<span class="text-xs px-1.5 py-0.5 rounded font-semibold ${colorClass}">${year}</span>`;
+}
+
 function renderTable(clubs = getAllClubs()) {
     const tbody = document.getElementById('club-list');
     if (!tbody) return;
@@ -560,7 +568,7 @@ function renderTable(clubs = getAllClubs()) {
         const row = `
         <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group ${hasPanel ? 'cursor-pointer' : ''}" data-club-name="${club.name.replace(/"/g, '&quot;')}">
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
-            <td class="px-4 py-5 text-sm font-bold"><span class="block">${club.recruitStart}</span><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
+            <td class="px-4 py-5 text-sm font-bold"><div class="flex items-center gap-1.5 mb-0.5">${getYearBadge(club.recruitStart)}<span>${club.recruitStart}</span></div><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
             <td class="px-4 py-5"><div class="flex gap-1 flex-wrap">${club.activity.map(m => `<span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">${m}</span>`).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-col gap-1">${window.isHackathonPage ? club.prize.map(p => getPrizeBadge(p)).join('') : window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
@@ -603,7 +611,7 @@ function renderMobileCards(clubs = getAllClubs()) {
             <div class="space-y-2 text-sm">
                 <div class="flex items-center gap-2">
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">모집 기간</span>
-                    <span class="font-medium">${club.recruitStart} → ${club.recruitEnd}</span>
+                    <span class="font-medium inline-flex items-center gap-1.5 flex-wrap">${getYearBadge(club.recruitStart)}${club.recruitStart} → ${club.recruitEnd}</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">활동 기간</span>
