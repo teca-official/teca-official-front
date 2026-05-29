@@ -1,0 +1,74 @@
+# TECA — Korean IT Club & Bootcamp Directory
+
+> TECA is a Korean web directory that aggregates recruitment schedules, descriptions, and field information for university IT clubs, bootcamps, and hackathons in South Korea. It helps students and workers find and compare programs at a glance.
+
+## About This Site
+
+TECA provides structured, up-to-date data on:
+
+- **IT Clubs** (`/`): Korean university joint IT clubs that run project-based activities (e.g., PM, design, frontend, backend, iOS, Android, AI roles).
+- **Marketing & Business Clubs** (`/marketing`): University clubs focused on marketing strategy, advertising, branding, and business management.
+- **Bootcamps** (`/bootcamp`): Intensive training programs — government-funded (국비지원) or free — covering web development, AI/ML, data analysis, cloud, design, and more.
+- **Hackathons & Competitions** (`/hackathon`): Domestic and international hackathons, coding contests, and idea competitions open to students or workers.
+- **Club Recommendation** (`/recommend`): An interactive quiz that recommends suitable clubs based on user preferences and goals.
+- **Club World Cup** (`/tournament`): A bracket-style tournament where visitors vote for their favorite clubs head-to-head.
+- **Top 10 Rankings** (`/tournament/top10`): Aggregated tournament results showing the most popular clubs by community vote.
+- **Partnership** (`/partnership`): Information for organizations interested in listing their program on TECA.
+
+## Data Structure
+
+Each entry (club, bootcamp, or hackathon) contains:
+
+- **name**: Program name (Korean or English)
+- **link**: Official website or social media URL
+- **recruitStart / recruitEnd**: Recruitment period (date + year)
+- **activity**: Months the program runs (e.g., March–June)
+- **eligibility**: Target audience — university students (대학생), workers (현직자), or Sinchon-area university students (신촌지역대학생)
+- **fields**: Tech/domain roles covered (see field list below)
+- **description**: One-line description of the program's purpose and format
+- **cost** (bootcamps only): Free, government-funded (국비지원), or paid
+- **prize** (hackathons only): Prize money, certificate, or gift
+
+## Field Tags
+
+PM · Design · UX · Frontend (WEB) · Backend (SpringBoot / Node.js / Django) · iOS (Swift / SwiftUI) · Android · ReactNative · Flutter · App · AI · LLM · Machine Learning · Deep Learning · Data Analysis · Data Visualization · Data Engineering · Cloud · Marketing · Management · Developer
+
+## Notable Programs Listed
+
+### IT Clubs
+- 코테이토 (COTATO): Full-cycle IT service development club for university students
+- 큐시즘 (KUSITMS): PM/design/dev joint club, semi-annual recruitment
+- 프로메테우스 (Prometheus): AI-focused club for university students
+- sipe: Side-project club open to working professionals
+- AUSG: AWS study group for university students
+- 피로그래밍: Python web programming club (Django), semester-based
+- GDSC (Google Developer Student Clubs): Google-affiliated campus developer communities
+- 멋쟁이사자처럼 (Likelion): Large-scale university developer club with campus chapters
+
+### Bootcamps
+- 멋사 (Likelion) Bootcamp: Government-funded tracks for AI, web, Python, data, UX/UI, marketing
+- 내일배움캠프 (NBC / Sparta): Government-funded backend and Java intensive programs
+- KT AIVLE School: 6-month government-funded AI specialist program by KT
+- 네이버 부스트캠프 (Naver Boostcamp AI Tech): Free, highly selective AI program by Naver Connect Foundation
+
+### Hackathons
+- Apple Swift Student Challenge: Global Swift/App Playground contest, top 50 invited to WWDC
+- shake!: Algorithm competition for Gyeongin-area universities
+- SNOWFLAKE Hackathon 2026: AI hackathon hosted by Snowflake Korea
+- Built with Opus 4.7 — Claude Code Hackathon: Online AI hackathon by Cerebral Valley & Anthropic
+
+## Eligibility Categories
+
+- **대학생 (University students)**: Currently enrolled undergraduate or graduate students in South Korea
+- **현직자 (Working professionals)**: Industry workers, open to those already employed
+- **신촌지역대학생 (Sinchon-area students)**: Students from universities near Sinchon, Seoul (Yonsei, Ewha, Sogang, Hongik)
+
+## Language & Region
+
+- Primary language: Korean (한국어)
+- Target region: South Korea
+- All recruitment dates are in Korean Standard Time (KST, UTC+9)
+
+## Update Policy
+
+Data is manually maintained and updated when new recruitment cycles open. Recruitment dates from prior cycles remain visible for historical reference. Year badges indicate whether a deadline falls in 2025 or 2026.
