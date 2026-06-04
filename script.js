@@ -290,15 +290,9 @@ const Bootcamp = {
     // 5월 — Apple Developer Academy (매년 5~12월 장기 모집, 패턴 일정)
     APPLE_ACADEMY: { name: "Apple Developer Academy", link: "https://developeracademy.postech.ac.kr/", dots: "🌕🌕🌕", icon: "🍎", themeColor: "slate-500", recruitStart: "5월 1일 2026", recruitEnd: "12월 7일 2026", activity: ["3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "Apple과 POSTECH이 운영하는 9개월 iOS 개발 교육. 장비 무상대여 + 월 110만원 장학금", fields: [Field.IOS, Field.DESIGN] },
 
-    // 5월 하순 — 부스트캠프 웹/모바일 (매년 5월 말~6월 초, 패턴 일정)
-    BOOSTCAMP_WEB: { name: "네이버 부스트캠프 (웹/모바일)", link: "https://boostcamp.connect.or.kr/", dots: "🌕🌕🌕", icon: "💚", themeColor: "slate-500", recruitStart: "5월 25일 2026", recruitEnd: "6월 8일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월", "2월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "네이버 커넥트재단 웹/모바일 과정. 웹 풀스택, iOS, Android 트랙 운영", fields: [Field.WEB, Field.IOS, Field.ANDROID] },
-
     // 6월 — KT AIVLE School 상반기 (대체로 6~7월, 패턴 대체로 일정)
     KRAFTON_JUNGLE: { name: "크래프톤 정글", link: "https://jungle.krafton.com/", dots: "🌕🌕🌗", icon: "🌿", themeColor: "slate-500", recruitStart: "6월 8일 2026", recruitEnd: "7월 5일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "크래프톤에서 운영하는 5개월 CS 집중 교육. 국비지원(내일배움카드) 또는 자비(250만원) 참여 가능", fields: [Field.BACKEND, Field.AI] },
     KT_AIVLE_1: { name: "KT AIVLE School (상반기)", link: "https://aivle.kt.co.kr/", dots: "🌕🌕", icon: "🔴", themeColor: "slate-500", recruitStart: "6월 10일 2026", recruitEnd: "7월 1일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월"], eligibility: [Eligibility.UNIVERSITY], cost: [BootcampCost.GOV_FUNDED], description: "KT에서 운영하는 AI 전문가 양성 6개월 과정. 내일배움카드 필요", fields: [Field.AI] },
-
-    // 7월 — 부스트캠프 AI Tech (최근 7~8월로 수렴, 기수마다 상이)
-    BOOSTCAMP_AI: { name: "네이버 부스트캠프 (AI Tech)", link: "https://boostcamp.connect.or.kr/", dots: "🌕🌕🌕", icon: "💚", themeColor: "slate-500", recruitStart: "7월 14일 2026", recruitEnd: "8월 14일 2026", activity: ["9월", "10월", "11월", "12월", "1월", "2월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "네이버 커넥트재단 AI 과정. CV, NLP, 추천시스템 트랙 운영", fields: [Field.AI] },
 
     // 9월 하순 — 우아한테크코스 (매년 9월 말~10월 초, 패턴 일정)
     WOOWACOURSE: { name: "우아한테크코스", link: "https://www.woowacourse.io/", dots: "🌕🌕🌕", icon: "🍊", themeColor: "slate-500", recruitStart: "9월 29일 2026", recruitEnd: "10월 10일 2026", activity: ["2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "우아한형제들에서 운영하는 10개월 실무형 개발자 교육 프로그램", fields: [Field.FRONTEND, Field.BACKEND, Field.ANDROID] },
@@ -566,16 +560,14 @@ function renderTable(clubs = getAllClubs()) {
     const hasPanel = !window.isHackathonPage && !window.isBootcampPage;
     tbody.innerHTML = clubs.map((club, index) => {
         const nameContent = club.link ? `<a href="${club.link}" target="_blank" class="hover:text-primary hover:underline decoration-2 underline-offset-4">${club.name}</a>` : club.name;
-        const reviewCount = getReviews(club.name).length;
         const row = `
         <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group ${hasPanel ? 'cursor-pointer' : ''}" data-club-name="${club.name.replace(/"/g, '&quot;')}">
             <td class="px-4 py-5"><div class="flex items-center gap-2"><span class="text-xl">${club.icon}</span><span class="font-bold">${nameContent}</span></div></td>
-            <td class="px-4 py-5 text-sm font-bold"><div class="flex items-center gap-1.5 mb-0.5">${getYearBadge(club.recruitStart)}<span>${club.recruitStart}</span></div><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
+            <td class="px-4 py-5 text-sm font-bold"><div class="flex items-center gap-1.5 mb-0.5"><span>${club.recruitStart}</span></div><span class="text-slate-400">→ ${club.recruitEnd}</span></td>
             <td class="px-4 py-5"><div class="flex gap-1 flex-wrap">${club.activity.map(m => `<span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-xs">${m}</span>`).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-col gap-1">${window.isHackathonPage ? club.prize.map(p => getPrizeBadge(p)).join('') : window.isBootcampPage ? club.cost.map(c => getCostBadge(c)).join('') : club.eligibility.map(e => getEligibilityBadge(e)).join('')}</div></td>
             <td class="px-4 py-5"><div class="flex flex-wrap gap-1.5">${club.fields.map(f => `<span class="px-2 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div></td>
             ${window.isHackathonPage ? '' : `<td class="px-4 py-5 text-center"><span class="flex justify-center gap-0.5">${club.dots}</span></td>`}
-            ${hasPanel ? `<td class="px-4 py-5 text-center"><span class="inline-flex items-center gap-1 text-sm ${reviewCount > 0 ? 'text-amber-500' : 'text-slate-300 dark:text-slate-600'}"><span class="material-symbols-outlined text-base">rate_review</span>${reviewCount}</span></td>` : ''}
             <td class="px-4 py-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-w-[300px]">${club.description}</td>
         </tr>`;
         return row;
@@ -596,7 +588,6 @@ function renderMobileCards(clubs = getAllClubs()) {
     container.innerHTML = clubs.map(club => {
         const Tag = club.link ? 'a' : 'div';
         const hrefAttr = club.link ? `href="${club.link}" target="_blank"` : '';
-        const reviewCount = getReviews(club.name).length;
         return `
         <${Tag} ${hrefAttr} class="block p-4 bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark rounded-2xl backdrop-blur-xl bg-opacity-70 shadow-lg" data-club-name="${club.name.replace(/"/g, '&quot;')}">
             <div class="flex items-start justify-between mb-3">
@@ -605,7 +596,6 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <span class="font-bold text-lg">${club.name}</span>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
-                    ${hasPanel && reviewCount > 0 ? `<span class="inline-flex items-center gap-0.5 text-xs text-amber-500"><span class="material-symbols-outlined text-sm">rate_review</span>${reviewCount}</span>` : ''}
                     ${window.isHackathonPage ? '' : `<span class="flex gap-0.5 text-sm">${club.dots}</span>`}
                 </div>
             </div>
@@ -613,7 +603,7 @@ function renderMobileCards(clubs = getAllClubs()) {
             <div class="space-y-2 text-sm">
                 <div class="flex items-center gap-2">
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">모집 기간</span>
-                    <span class="font-medium inline-flex items-center gap-1.5 flex-wrap">${getYearBadge(club.recruitStart)}${club.recruitStart} → ${club.recruitEnd}</span>
+                    <span class="font-medium inline-flex items-center gap-1.5 flex-wrap">${club.recruitStart} → ${club.recruitEnd}</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">활동 기간</span>
@@ -627,10 +617,6 @@ function renderMobileCards(clubs = getAllClubs()) {
                     <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0 pt-0.5">모집 분야</span>
                     <div class="flex flex-wrap gap-1">${club.fields.map(f => `<span class="px-1.5 py-0.5 rounded ${f.class} text-xs font-medium">${f.name}</span>`).join('')}</div>
                 </div>
-                ${hasPanel && reviewCount > 0 ? `<div class="flex items-center gap-2">
-                    <span class="text-slate-500 dark:text-slate-400 w-16 shrink-0">후기</span>
-                    <span class="inline-flex items-center gap-1 text-amber-500 font-medium"><span class="material-symbols-outlined text-sm">rate_review</span>${reviewCount}건</span>
-                </div>` : ''}
             </div>
         </${Tag}>
     `}).join('');
@@ -865,18 +851,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     populateFilters();
-
-    // 후기 컬럼 헤더 동적 추가 (동아리/마케팅 페이지만)
-    if (!window.isHackathonPage && !window.isBootcampPage) {
-        const theadRow = document.querySelector('thead tr');
-        if (theadRow) {
-            const lastTh = theadRow.querySelector('th:last-child');
-            const reviewTh = document.createElement('th');
-            reviewTh.className = 'px-4 py-4 font-semibold text-slate-500 dark:text-slate-400 text-sm w-20 text-center';
-            reviewTh.textContent = '후기';
-            theadRow.insertBefore(reviewTh, lastTh);
-        }
-    }
 
     // Initial render
     renderTable();
