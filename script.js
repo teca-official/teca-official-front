@@ -1106,25 +1106,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closePanel();
     });
 
-    // 데스크톱 테이블 행 클릭 (동아리/마케팅 페이지만)
-    if (!window.isHackathonPage && !window.isBootcampPage) {
-        document.getElementById('club-list')?.addEventListener('click', (e) => {
-            if (e.target.closest('a')) return;
-            const row = e.target.closest('tr[data-club-name]');
-            if (!row) return;
-            const club = findClubByName(row.dataset.clubName);
-            if (club) openPanel(club);
-        });
+    // 데스크톱 테이블 행 클릭 (동아리/마케팅 페이지만) - 임시 비활성화
+    // if (!window.isHackathonPage && !window.isBootcampPage) {
+    //     document.getElementById('club-list')?.addEventListener('click', (e) => {
+    //         if (e.target.closest('a')) return;
+    //         const row = e.target.closest('tr[data-club-name]');
+    //         if (!row) return;
+    //         const club = findClubByName(row.dataset.clubName);
+    //         if (club) openPanel(club);
+    //     });
 
-        // 모바일 카드 클릭
-        document.getElementById('club-list-mobile')?.addEventListener('click', (e) => {
-            const card = e.target.closest('[data-club-name]');
-            if (!card) return;
-            e.preventDefault();
-            const club = findClubByName(card.dataset.clubName);
-            if (club) openPanel(club);
-        });
-    }
+    //     // 모바일 카드 클릭
+    //     document.getElementById('club-list-mobile')?.addEventListener('click', (e) => {
+    //         const card = e.target.closest('[data-club-name]');
+    //         if (!card) return;
+    //         e.preventDefault();
+    //         const club = findClubByName(card.dataset.clubName);
+    //         if (club) openPanel(club);
+    //     });
+    // }
 });
 
 // 🦕 Easter Egg (IT 연합동아리 메인 페이지에서만 동작, 추천 페이지 제외)
