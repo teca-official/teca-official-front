@@ -54,7 +54,7 @@ const FilterCategory = {
     [Category.PM]: ["PM"],
     [Category.DESIGN]: ["Design", "UX"],
     [Category.AI]: ["AI", "머신러닝", "딥러닝", "LLM", "데이터 분석", "데이터 시각화", "데이터 엔지니어링"],
-    [Category.WEB]: ["WEB"],
+    [Category.WEB]: ["WEB", "Frontend"],
     [Category.MOBILE]: ["Android", "iOS", "ReactNative", "Flutter", "앱"],
     [Category.BACKEND]: ["Backend", "SpringBoot", "Node.js", "Django"],
     [Category.ANY]: ["무관"],
