@@ -386,12 +386,6 @@
         // 0. Marketing 동아리 제외 (프로그래피 예외)
         if (club.fields.some(f => f.name === "Marketing") && !club.name.includes("프로그래피")) return -1;
 
-        // 0-1. Recruit period hard filter (활동 시기를 선택한 경우에만 적용)
-        if (answers.timing !== "any") {
-            const endDate = parseKoreanDate(club.recruitEnd);
-            if (endDate && endDate < new Date()) return -1;
-        }
-
         // 1. Eligibility hard filter
         const userElig = answers.eligibility;
         let eligible = false;
