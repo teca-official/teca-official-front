@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://teca-official.co.kr/sitemap.xml
