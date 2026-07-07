@@ -293,6 +293,9 @@ const Bootcamp = {
     KRAFTON_JUNGLE: { name: "크래프톤 정글", link: "https://jungle.krafton.com/", dots: "🌕🌕🌗", icon: "🌿", themeColor: "slate-500", recruitStart: "6월 8일 2026", recruitEnd: "7월 5일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "크래프톤에서 운영하는 5개월 CS 집중 교육. 국비지원(내일배움카드) 또는 자비(250만원) 참여 가능", fields: [Field.BACKEND, Field.AI] },
     KT_AIVLE_1: { name: "KT AIVLE School (상반기)", link: "https://aivle.kt.co.kr/", dots: "🌕🌕", icon: "🔴", themeColor: "slate-500", recruitStart: "6월 10일 2026", recruitEnd: "7월 1일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월"], eligibility: [Eligibility.UNIVERSITY], cost: [BootcampCost.GOV_FUNDED], description: "KT에서 운영하는 AI 전문가 양성 6개월 과정. 내일배움카드 필요", fields: [Field.AI] },
 
+    // 6월 — 성균관대 KDT 의료 AI 부트캠프
+    SKKU_KDT_AI: { name: "성균관대 KDT 의료 AI", link: "https://www.skkukdt.re.kr/archive-page.html?id=ai-1779753736750", dots: "🌕🌕", icon: "🏥", themeColor: "slate-500", recruitStart: "6월 26일 2026", recruitEnd: "7월 31일 2026", activity: ["8월", "9월", "10월", "11월", "12월", "1월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.GOV_FUNDED], description: "성균관대학교 분당캠퍼스에서 진행하는 의료 AI 부트캠프. AWS 기반 AI 파이프라인 설계, 의료 도메인 프로젝트 4개 수행. 약 6개월/800시간, 훈련장려금 월 최대 40만원", fields: [Field.AI] },
+
     // 9월 하순 — 우아한테크코스 (매년 9월 말~10월 초, 패턴 일정)
     WOOWACOURSE: { name: "우아한테크코스", link: "https://www.woowacourse.io/", dots: "🌕🌕🌕", icon: "🍊", themeColor: "slate-500", recruitStart: "9월 29일 2026", recruitEnd: "10월 10일 2026", activity: ["2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월"], eligibility: [Eligibility.UNIVERSITY, Eligibility.WORKER], cost: [BootcampCost.FREE], description: "우아한형제들에서 운영하는 10개월 실무형 개발자 교육 프로그램", fields: [Field.WEB, Field.BACKEND, Field.ANDROID] },
 
